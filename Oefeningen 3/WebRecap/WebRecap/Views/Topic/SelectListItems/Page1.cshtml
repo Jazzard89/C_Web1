@@ -1,0 +1,138 @@
+﻿@{
+    string atmodel = "@model";
+    string dropList = "@Html.DropDownListFor";
+}
+<h1>Using SelectListItem in ASP.NET Core</h1>
+
+<h3>Introduction</h3>
+<p>
+    In ASP.NET Core, <code>SelectListItem</code> is a powerful tool used to create dropdown lists, radio buttons, or any other list-based UI components in your application. This page will guide you through how to populate and use <code>SelectListItem</code> in both your controller and Razor view.
+</p>
+
+<h3>1. Setting Up SelectListItem in the Controller</h3>
+<p>
+    In the controller, you can create a list of <code>SelectListItem</code> to populate a dropdown or other select-based input in your view. Below is an example of how to do this in an action method:
+</p>
+
+<code-block>
+    @@using Microsoft.AspNetCore.Mvc.Rendering;
+    <br/>
+    @@using <tw><vc:o-name vm="solutionModel2" /></tw>.Models;
+    <br/>
+    @@using System.Collections.Generic;
+    <br/>
+    @@using System.Linq;
+
+    <br/><br/>
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Controllers
+    <p>{</p>
+    <openblock>
+        public class <cyan-code>ProductController</cyan-code> : Controller
+        <p>{</p>
+        <openblock>
+            private readonly <tw><vc:o-name vm="dbModel" /></tw> _context;
+
+            <br/><br/>
+            public <cyan-code>ProductController</cyan-code>(<tw><vc:o-name vm="dbModel" /></tw> context)
+            <p>{</p>
+            <openblock>
+                _context = context;
+            </openblock>
+            <p>}</p>
+
+            <br/><br/>
+            public IActionResult Create()
+            <p>{</p>
+            <openblock>
+                <p><green-code>// Retrieve categories from the database and create a SelectList</green-code><p/>
+                var categories = _context.Categories
+                    .Select(c => new SelectListItem
+                    <p>{</p>
+                    <openblock>
+                        Value = c.Id.ToString(),
+                        Text = c.Name
+                    </openblock>
+                    <p>}</p>).ToList();
+
+                <br/><br/>
+                <p><green-code>// Pass the SelectList to the view using ViewBag or ViewData</green-code></p>
+                ViewBag.CategoryList = categories;
+
+                return View();
+            </openblock>
+            <p>}</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>
+    In this example, we are retrieving categories from the database and creating a list of <code>SelectListItem</code> objects. Each <code>SelectListItem</code> object has a <code>Value</code> (which is usually the ID) and a <code>Text</code> (which is what the user will see in the dropdown).
+</p>
+
+<h3>2. Displaying SelectListItem in the Razor View</h3>
+<p>
+    Once you have your list of <code>SelectListItem</code> objects in the controller, you can pass it to the view using <code>ViewBag</code> or <code>ViewData</code>. Then, you can use this list to create a dropdown list in your Razor view. Here's how you can do it:
+</p>
+
+<code-block>
+    @atmodel <tw><vc:o-name vm="solutionModel2" /></tw>.Models.ProductViewModel
+
+    <br/>
+    <p><green-code>// Display a dropdown list for categories </green-code></p>
+    
+    <p><blue-code>@dropList</blue-code>(model => model.CategoryId, new SelectList(ViewBag.CategoryList, <red-code>"Value"</red-code>, <red-code>"Text"</red-code>), <red-code>"Select a category"</red-code>)</p>
+</code-block>
+
+<p>
+    In this example, we are using the <code>DropDownListFor</code> helper to create a dropdown list. The first parameter is the model property to bind to, the second parameter is the <code>SelectList</code> created from the <code>ViewBag.CategoryList</code>, and the third parameter is the default option text that will appear when nothing is selected.
+</p>
+
+<h3>3. Handling Selected Value in the Controller</h3>
+<p>
+    When the form is submitted, you can retrieve the selected value in the controller by binding it to your model. Here’s an example of how you might handle the selected category:
+</p>
+
+<code-block>
+    public IActionResult Create(<cyan-code>ProductViewModel</cyan-code> model)
+    <p>{</p>
+    <openblock>
+        <blue-code>if</blue-code> (ModelState.IsValid)
+        <p>{</p>
+        <openblock>
+            <p><green-code>// The selected category ID is now available in model.CategoryId</green-code></p>
+            var selectedCategoryId = model.CategoryId;
+
+            <br/><br/>
+            <p><green-code>// You can now use this ID to create a new product, assign it to the product, etc.</green-code></p>
+            var product = new Product
+            <p>{</p>
+            <openblock>
+                Name = model.Name,
+                CategoryId = selectedCategoryId
+            </openblock>
+            <p>}</p>;
+
+            <br/><br/>
+            _context.Products.Add(product);
+            _context.SaveChanges();
+
+            return RedirectToAction(<red-code>"Index"</red-code>);
+        </openblock>
+        <p>}</p>
+
+        <br/><br/>
+        return View(model);
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>
+    In this example, when the form is submitted, the selected category ID is captured in the model and can be used to create a new product or for other business logic.
+</p>
+
+<h3>Conclusion</h3>
+<p>
+    Using <code>SelectListItem</code> in your controller and Razor views is a simple yet effective way to create dynamic dropdown lists or other selection inputs in ASP.NET Core. By following the steps outlined in this guide, you can effectively populate and handle selection lists in your application.
+</p>

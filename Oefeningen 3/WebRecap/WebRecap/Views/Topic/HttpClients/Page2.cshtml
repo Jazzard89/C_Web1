@@ -1,0 +1,144 @@
+﻿@{
+    string modelString = "@model";
+}
+<h3>Step 4: Using the API in an MVC controller</h3>
+<p>
+    Using dependency injection we will use HttpClient and IHttpClientFactory to use the API in an MVC controller.
+</p>
+
+<code-block>
+using System;<br />
+using System.Collections.Generic;<br />
+using System.Linq;<br />
+using System.Net.Http;<br />
+using System.Threading.Tasks;<br />
+using Microsoft.AspNetCore.Mvc;<br />
+using Microsoft.AspNetCore.Mvc.Rendering;<br />
+using Microsoft.EntityFrameworkCore;<br />
+using <tw><vc:o-name vm="solutionModel2" /></tw>.Data;<br />
+using <tw><vc:o-name vm="solutionModel2" /></tw>.Models;<br />
+using <tw><vc:o-name vm="solutionModel2" /></tw>.Models.ViewModels;<br />
+
+<br />
+namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Controllers<br />
+{<br />
+<openblock>
+    public class <cyan-code>FundController</cyan-code> : <cyan-code>Controller</cyan-code><br />
+    {<br />
+    <openblock>
+        private readonly <tw><vc:o-name vm="dbModel" /></tw> _context;<br />
+        private readonly HttpClient _httpClient;<br />
+
+        <br />
+        public <cyan-code>FundController</cyan-code>(<tw><vc:o-name vm="dbModel" /></tw> context, IHttpClientFactory httpClientFactory)<br />
+        {<br />
+        <openblock>
+            _context = context;<br />
+            _httpClient = httpClientFactory.CreateClient(<red-code>"FundApiClient"</red-code>);<br />
+        </openblock>
+        }<br />
+
+        <br />
+        public async Task&lt;IActionResult&gt; Index()<br />
+        {<br />
+        <openblock>
+            <p><green-code>//Old method</green-code></p>
+            <p><green-code>//var <tw><vc:o-name vm="dbmodel2" /></tw> = _context.Fondsen.Include(f => f.Bank);</green-code></p>
+                <p><green-code>//return View(await <tw><vc:o-name vm="dbmodel2" /></tw>.ToListAsync());</green-code></p>
+            HttpResponseMessage response = await _httpClient.GetAsync(<red-code>"api/FundApi/FundInfo"</red-code>);<br />
+            <blue-code>if</blue-code> (response.IsSuccessStatusCode)<br />
+            {<br />
+            <openblock>
+                var funds = await response.Content.ReadFromJsonAsync&lt;List&lt;<cyan-code>ApiViewModel</cyan-code>&gt;&gt;();<br />
+                return View(funds);<br />
+            </openblock>
+            }<br />
+            return View(new List&lt;<cyan-code>ApiViewModel</cyan-code>&gt;());<br />
+        </openblock>
+        }<br />
+
+        <br />
+        public IActionResult Create()<br />
+        {<br />
+        <openblock>
+            ViewData[<red-code>"BankId"</red-code>] = new SelectList(_context.Banken, <red-code>"BankId"</red-code>, <red-code>"BankName"</red-code>);<br />
+            return View();<br />
+        </openblock>
+        }<br />
+
+        <br />
+        [HttpPost]<br />
+        [<red-code>ValidateAntiForgeryToken</red-code>]<br />
+        public async Task&lt;IActionResult&gt; Create([<blue-code>Bind</blue-code>(<red-code>"FundId,BankId,FundName,FundValue"</red-code>)] <cyan-code>Fund</cyan-code> fund)<br />
+        {<br />
+        <openblock>
+                <p>
+                    <green-code>
+                        //if (ModelState.IsValid)<br />
+                    </green-code>
+                        //{<br />
+                            <openblock>
+                        <green-code>
+                            //    _context.Add(fund);<br />
+                            //    await _context.SaveChangesAsync();<br />
+                            //    return RedirectToAction(nameof(Index));<br /></green-code>
+                            </openblock>
+                    <green-code>
+                        //}<br />
+                        //ViewData["BankId"] = new SelectList(_context.Banken, "BankId", "BankId", fund.BankId);<br />
+                        //return View(fund);
+                    </green-code>
+                </p>
+
+            <blue-code>if</blue-code> (ModelState.IsValid)<br />
+            {<br />
+            <openblock>
+                <cyan-code>ApiViewModel</cyan-code> model = new <cyan-code>ApiViewModel</cyan-code><br />
+                {<br />
+                <openblock>
+                    BankName = _context.Banken.FirstOrDefault(b => b.BankId == fund.BankId).BankName,<br />
+                    FundName = fund.FundName,<br />
+                    FundValue = fund.FundValue.ToString(),<br />
+                </openblock>
+                };<br />
+                HttpResponseMessage response = await _httpClient.PostAsJsonAsync(<red-code>"api/FundApi/Fund"</red-code>, model);<br />
+                <blue-code>if</blue-code> (response.IsSuccessStatusCode)<br />
+                {<br />
+                <openblock>
+                    return RedirectToAction(nameof(Index));<br />
+                </openblock>
+                }<br />
+                <blue-code>else</blue-code><br />
+                {<br />
+                <openblock>
+                    ModelState.AddModelError(<red-code>string.Empty</red-code>, response.ToString());<br />
+                </openblock>
+                }<br />
+            </openblock>
+            }<br />
+            ViewData[<red-code>"BankId"</red-code>] = new SelectList(_context.Banken, <red-code>"BankId"</red-code>, <red-code>"BankName"</red-code>, fund.BankId);<br />
+            return View(fund);<br />
+        </openblock>
+        }<br />
+
+        <br />
+       private bool <cyan-code>FundExists</cyan-code>(int id)<br />
+        {<br />
+        <openblock>
+            return (_context.Fondsen?.Any(e => e.FundId == id)).GetValueOrDefault();<br />
+        </openblock>
+        }<br />
+    </openblock>
+    }<br />
+</openblock>
+}</br>
+</code-block>
+
+<h3>Step 5: Since we are now using a ViewModel instead of the normall model
+    adjust this in the View.
+</h3>
+<p>Open the correct View (index or Create)</p>
+<code-block>
+    @modelString IEnumerable&lt;<tw><vc:o-name vm="solutionModel2" /></tw>.Models.ViewModels.<cyan-code>ApiViewModel</cyan-code>&gt;
+</code-block>
+

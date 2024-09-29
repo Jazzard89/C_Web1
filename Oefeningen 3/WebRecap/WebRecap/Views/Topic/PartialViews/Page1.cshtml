@@ -1,0 +1,148 @@
+﻿@{
+    string data1 = "'@Url.Action(\"LoadPartialView\")'";
+    string awaitString = "@await";
+    string htmlString = "@Html";
+    string modelString = "@model";
+    string ModelString = "@Model";
+    string renderString = "@RenderBody()";
+}
+<h1>Working with Partial Views in ASP.NET Core</h1>
+
+<h3>Introduction</h3>
+<p>
+    Partial Views in ASP.NET Core are a powerful way to encapsulate and reuse portions of a view in your application. They allow you to create reusable components that can be included in multiple views, reducing duplication and making your code more maintainable. This page will guide you through creating and using Partial Views effectively in your project.
+</p>
+
+<h3>1. Creating a Partial View</h3>
+<p>
+    To create a Partial View, start by adding a new Razor view file to your project. Partial Views are typically placed in the <code>Views/Shared</code> folder, but they can also be placed in any specific view folder depending on their usage. The file name often begins with an underscore (<code>_</code>) to differentiate it from regular views. Here’s how to create one:
+</p>
+
+<code-block>
+    <green-code>// In the Solution Explorer</green-code>
+    <p>Right-click on the <code>Views/Shared</code> folder > <code>Add</code> > <code>New Item</code> > <code>Razor View</code> > Name it <code>_MyPartialView.cshtml</code></p>
+</code-block>
+
+<p>
+    The contents of <code>_MyPartialView.cshtml</code> might look like this:
+</p>
+
+<code-block>
+    <p><blue-code>@modelString</blue-code> <tw><vc:o-name vm="solutionModel2" /></tw>.Models.MyModel</p>
+
+    <p><green-code>&lt;!-- Partial View content here --&gt;</green-code></p>
+    <p>&lt;div&gt;</p>
+    <openblock>
+        <p>&lt;h3&gt;@(ModelString).Title&lt;/h3&gt;</p>
+        <p>&lt;p&gt;@(ModelString).Description&lt;/p&gt;</p>
+    </openblock>
+    <p>&lt;/div&gt;</p>
+</code-block>
+
+<p>
+    This Partial View expects a model of type <code>MyModel</code> and displays its <code>Title</code> and <code>Description</code> properties.
+</p>
+
+<h3>2. Rendering a Partial View in a Parent View</h3>
+<p>
+    Once you have created a Partial View, you can render it in any parent view using the <code>@htmlString .Partial()</code> or <code>@awaitString Html.PartialAsync()</code> helper methods. Here’s how you might include <code>_MyPartialView.cshtml</code> in a parent view:
+</p>
+
+<code-block>
+    <p><blue-code>@modelString</blue-code> <tw><vc:o-name vm="solutionModel2" /></tw>.Models.ParentModel</p>
+
+    <p><green-code>&lt;!-- Parent View content --&gt;</green-code></p>
+    <p>&lt;h2&gt;Parent View&lt;/h2&gt;</p>
+
+    <br/><br/>
+    <p><green-code>&lt;!-- Render the Partial View --&gt;</green-code></p>
+    <p>@(htmlString).Partial(<cyan-code>"_MyPartialView"</cyan-code>, Model.MyPartialViewModel)</p>
+</code-block>
+
+<p>
+    In this example, <code>Model.MyPartialViewModel</code> is passed to the Partial View, ensuring that it has the data it needs to render correctly.
+</p>
+
+<h3>3. Using Partial Views for Reusable UI Components</h3>
+<p>
+    Partial Views are ideal for creating reusable UI components like headers, footers, or navigation menus. By placing these components in Partial Views, you can easily include them across multiple pages in your application.
+</p>
+
+<code-block>
+    <p>@(htmlString).Partial(<red-code>"_Header"</red-code>)</p>
+    <p><blue-code>@renderString</blue-code></p>
+    <p>@(htmlString).Partial(<red-code>"_Footer"</red-code>)</p>
+</code-block>
+
+<p>
+    In this layout example, <code>_Header</code> and <code>_Footer</code> Partial Views are included before and after the main content, respectively, making it easy to maintain consistent headers and footers across your site.
+</p>
+
+<h3>4. Passing Data to Partial Views</h3>
+<p>
+    Besides passing a strongly-typed model, you can also pass additional data to a Partial View using the <code>ViewData</code> dictionary or by using a <code>ViewBag</code>. This is useful when you need to pass simple or small amounts of data.
+</p>
+
+<code-block>
+    <p><green-code>// In the parent view or controller:</green-code></p>
+    <p>@@ViewData[<red-code>"ExtraInfo"</red-code>] = <red-code>"Some additional information"</red-code>;</p>
+
+    <br/><br/>
+    <p><green-code>// In the Partial View (_MyPartialView.cshtml):</green-code></p>
+    <p>&lt;p&gt;@@ViewData[<red-code>"ExtraInfo"</red-code>]&lt;/p&gt;</p>
+</code-block>
+
+<p>
+    In this example, the <code>ViewData</code> dictionary is used to pass a string called "ExtraInfo" to the Partial View.
+</p>
+
+<h3>5. Asynchronous Rendering with Partial Views</h3>
+<p>
+    In performance-sensitive scenarios, you might want to render Partial Views asynchronously. You can do this using the <code>@awaitString Html.PartialAsync()</code> method. Here’s an example:
+</p>
+
+<code-block>
+    <p>@awaitString Html.PartialAsync(<red-code>"_MyPartialView"</red-code>, Model.MyPartialViewModel)</p>
+</code-block>
+
+<p>
+    Rendering Partial Views asynchronously can improve the responsiveness of your application by allowing other processing to continue while the Partial View is being rendered.
+</p>
+
+<h3>6. Using Partial Views with AJAX</h3>
+<p>
+    Partial Views are commonly used in combination with AJAX to load content dynamically without refreshing the entire page. You can load a Partial View via AJAX by making an HTTP request to an action method that returns the Partial View.
+</p>
+
+<code-block>
+    <p><green-code>// Controller action method</green-code></p>
+    <p>public IActionResult LoadPartialView()
+    <p>{</p>
+    <openblock>
+        return PartialView(<red-code>"_MyPartialView"</red-code>);
+    </openblock>
+    <p>}</p>
+
+    <br/><br/>
+    <p><green-code>// JavaScript AJAX call</green-code></p>
+    <p>$.ajax({</p>
+    <openblock>
+        <p>url: <blue-code>@data1</blue-code>,</p>
+        <p>type: <red-code>'GET'</red-code>,</p>
+        <p>success: function (data) {</p>
+        <openblock>
+            <p>$('#partialViewContainer').html(data);</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>});</p>
+</code-block>
+
+<p>
+    In this example, the Partial View is loaded via an AJAX call and inserted into a <code>div</code> with the ID <code>partialViewContainer</code>.
+</p>
+
+<h3>Conclusion</h3>
+<p>
+    Partial Views are a key feature in ASP.NET Core for building reusable, maintainable, and efficient user interfaces. By encapsulating common UI elements in Partial Views, you can streamline your development process and improve the overall structure of your application.
+</p>

@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\MvcGroentenEnFruit2024_2.props" />
+</Project>

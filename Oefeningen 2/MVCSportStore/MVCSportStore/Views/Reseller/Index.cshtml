@@ -1,0 +1,41 @@
+﻿@model IEnumerable<MVCSportStore.Models.Reseller>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ResellerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContentManagementGuid)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ResellerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContentManagementGuid)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ResellerId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ResellerId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ResellerId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

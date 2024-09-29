@@ -1,0 +1,78 @@
+﻿@model IEnumerable<string>
+@{
+    // Create a list of unique starting letters
+    List<char> startingLetters = Model
+        .Select(topicName => char.ToUpper(topicName[0])) // Extract the starting letter and convert to uppercase
+        .Distinct() // Remove duplicates
+        .OrderBy(letter => letter) // Sort letters
+        .ToList();
+
+    // Group the topic names by their starting letter
+    var groupedTopics = Model
+        .GroupBy(topicName => char.ToUpper(topicName[0])) // Group by starting letter
+        .OrderBy(group => group.Key) // Sort groups by starting letter
+        .ToDictionary(group => group.Key, group => group.ToList()); // Create a dictionary for easier access
+    string ActualName(string name)
+    {
+        if (name == "EndpointRoutingCustomConstraint")
+        {
+            return name.Replace("EndpointRoutingCustomConstraint", "EndpointRouting: CustomConstraint");
+        }
+        if (name == "SeedDataIdentity")
+        {
+            return name.Replace("SeedDataIdentity", "Identity: SeedData");
+        }
+        if (name == "SignInManager")
+        {
+            return name.Replace("SignInManager", "Identity: SignInManager");
+        }
+        if (name == "UserManager")
+        {
+            return name.Replace("UserManager", "Identity: UserManager");
+        }
+        if (name == "RoleManager")
+        {
+            return name.Replace("RoleManager", "Identity: RoleManager");
+        }
+        if (name == "Identitys")
+        {
+            return name.Replace("Identitys", "Identity: Identity");
+        }
+        if (name == "ViewDataMethod")
+        {
+            return name.Replace("ViewDataMethod", "ViewData");
+        }
+        if (name == "ViewBagMethod")
+        {
+            return name.Replace("ViewBagMethod", "ViewBag");
+        }
+        if (name == "Duende")
+        {
+            return name.Replace("Duende", "ExternalLogin: Duende");
+        }
+        if (name == "APIs")
+        {
+            return name.Replace("APIs", "API");
+        }
+        return name;
+    }
+}
+
+<nav class="col-md-2 navbar-dark bg-dark">
+    <ul class="nav flex-column">
+        @foreach (var letter in startingLetters)
+        {
+            <li class="nav-item">
+                <span class="text-white" style="font-weight: bold;">-  @letter</span>
+                <ul class="nav flex-column">
+                    @foreach (var topicName in groupedTopics[letter])
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-controller="Topic" asp-action="@topicName" asp-route-page="1">@ActualName(topicName)</a>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+    </ul>
+</nav>

@@ -1,0 +1,150 @@
+﻿
+
+@{
+    string numString = "-._@+ ";
+}
+<h1>Setting Up Duende Identity Services</h1>
+<h3>Step 1: Add the Duende Solution to Your Project</h3>
+<p>
+    Before we start with the implementation, you need to add the Duende IdentityServer solution to your project. This solution is located on the homepage and is named <strong>Duende</strong>. Download or clone the Duende solution and reference it in your project. This is essential for enabling the authentication services we'll be implementing.
+</p>
+<h3>Step 2: Create the `UserViewModel` Class</h3>
+<p>
+    Next, create a folder named <code>ViewModels</code> inside your existing <code>Models</code> folder. This folder will hold the view model classes used for user authentication. In this folder, create a class named <code>UserViewModel.cs</code> with the following code:
+</p>
+<code-block>
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Models.ViewModels
+    <p>{</p>
+    <openblock>
+        public class <cyan-code>UserViewModel</cyan-code>
+        <p>{</p>
+        <openblock>
+            public string? Email { get; set; }
+            <br />
+            public string Username { get; set; }
+            <br />
+            public string Password { get; set; }
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+<p>
+    The <code>UserViewModel</code> class represents the data required for user authentication, such as email, username, and password.
+</p>
+<h3>Step 2.5: Multiple startups</h3>
+<p>Do not forget to set up multiple startups in your project solution. Duende needs to start up without Debugging.</p>
+<h3>Step 3: Create the `<tw><vc:o-name vm="dbModel2" /></tw>` Class</h3>
+<p>
+    Now, create a new class named <code><tw><vc:o-name vm="dbModel2" /></tw></code> inside a folder named <code>Data</code>. This class will represent your Entity Framework Core database context and will manage user identity data. The <code><tw><vc:o-name vm="dbModel2" /></tw></code> class should inherit from <code>IdentityDbContext&lt;IdentityUser&gt;</code> as shown below:
+</p>
+<code-block>
+    using Microsoft.AspNetCore.Identity;
+    <br />
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    <br />
+    using Microsoft.EntityFrameworkCore;
+    <br /><br />
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Data
+    <p>{</p>
+    <openblock>
+        public class <tw><vc:o-name vm="dbModel" /></tw> : IdentityDbContext&lt;IdentityUser&gt;
+        <p>{</p>
+        <openblock>
+            public <tw><vc:o-name vm="dbModel2" /></tw>(<cyan-code>DbContextOptions&lt;<tw><vc:o-name vm="dbModel2" /></tw>&gt;</cyan-code> options) : base(options)
+            <p>{</p>
+
+            <p>}</p>
+
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+<p>
+    The <code><tw><vc:o-name vm="dbModel2" /></tw></code> class is configured to use the Identity framework, which handles user authentication and authorization.
+</p>
+<h3>Step 4: Configure Services in `Program.cs`</h3>
+<p>
+    Open the <code>Program.cs</code> file and add the necessary services for Entity Framework Core and Identity. It's important to add these configurations before the line <code>var app = builder.Build();</code>. Here's the code to add:
+</p>
+<code-block>
+    var connString = builder.Configuration.GetConnectionString(<red-code>"ConnString"</red-code>);
+    <br />
+    builder.Services.AddDbContext&lt;<tw><vc:o-name vm="dbModel" /></tw>&gt;(options => options.UseSqlServer(connString));
+    <br />
+    builder.Services.AddIdentity&lt;IdentityUser, IdentityRole&gt;().AddEntityFrameworkStores&lt;<tw><vc:o-name vm="dbModel" /></tw>&gt;();
+</code-block>
+<p>
+    This code retrieves the connection string from the configuration file, configures the <code><tw><vc:o-name vm="dbModel2" /></tw></code> to use SQL Server, and sets up the Identity framework with the <code><tw><vc:o-name vm="dbModel2" /></tw></code>.
+</p>
+<h3>Step 5: Add Duende IdentityServer Authentication</h3>
+<p>
+    Still in <code>Program.cs</code>, add the following code under the <strong>#region Duende</strong> section to configure Duende IdentityServer for OpenID Connect (OIDC) authentication:
+</p>
+<code-block>
+    builder.Services.Configure&lt;IdentityOptions&gt;(options =>
+        <p>{</p>
+    <openblock>
+options.User.AllowedUserNameCharacters = <br />
+            <red-code>"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 @numString"</red-code>;<br />
+            options.User.RequireUniqueEmail = true;<br />
+        </openblock>
+        <p>});</p>
+        <br/>
+<green-code>//...</green-code>
+        <br />
+        <br />
+    builder.Services.AddAuthentication().AddCookie(<red-code>"Cookies"</red-code>)
+    <p>.AddOpenIdConnect(<red-code>"oidc"</red-code>, options =></p>
+    <p>{</p>
+    <openblock>
+        options.Authority = <red-code>"https://localhost:5001"</red-code>;
+        <br />
+        options.ClientId = <red-code>"mvc"</red-code>;
+        <br />
+        options.ClientSecret = <red-code>"secret"</red-code>;
+        <br />
+        options.ResponseType = <red-code>"code"</red-code>;
+        <br />
+        options.SaveTokens = true;
+        <br />
+        options.Scope.Add(<red-code>"openid"</red-code>);
+        <br />
+        options.Scope.Add(<red-code>"profile"</red-code>);
+        <br />
+        options.Scope.Add(<red-code>"email"</red-code>);
+        <br />
+        options.GetClaimsFromUserInfoEndpoint = true;
+    </openblock>
+    <p>});</p>
+</code-block>
+<p>
+    This code configures the application to use cookie-based authentication and adds support for OIDC, connecting it to the Duende IdentityServer running at <code>https://localhost:5001</code>.
+</p>
+<h3>Step 6: Add Authentication and Authorization Middleware</h3>
+<p>
+    To enable authentication and authorization in your application, you need to add the following lines in <code>Program.cs</code> after the middleware configurations:
+</p>
+<code-block>
+    <blue-code>app</blue-code>.UseAuthentication();
+    <br />
+    <blue-code>app</blue-code>.UseAuthorization();
+</code-block>
+<p>
+    These lines ensure that the authentication and authorization middleware are added to the request pipeline.
+</p>
+<h3>Step 7: Configure the Connection String</h3>
+<p>
+    Open the <code>appsettings.json</code> file and add the connection string to the <code>ConnectionStrings</code> section as shown below:
+</p>
+<code-block>
+    <p>"ConnectionStrings": {</p>
+    <openblock>
+        <red-code>"ConnString"</red-code>: <red-code>"Server=(localdb)\\mssqllocaldb;Database=MvcAuth2;Trusted_Connection=True;MultipleActiveResultSets=true"</red-code>
+    </openblock>
+    <p>}</p>
+</code-block>
+<p>
+    This connection string connects the application to a local SQL Server database named <code>MvcAuth2</code>.
+</p>

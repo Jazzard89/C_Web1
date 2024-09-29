@@ -1,0 +1,211 @@
+﻿@{
+    string foreachString = "@foreach";
+    string modelString = "@model";
+    string HtmlString = "@Html";
+    string openCode = "@{";
+}
+
+<h1>Using the Routing Repository in MVC Views</h1>
+<h3>Step 1: Update the `_Layout.cshtml` to Pass Route Parameters</h3>
+<p>
+    In your `_Layout.cshtml` file, you can define your navigation menu and pass route parameters like the `asp-route-id` attribute. This will allow you to track and manage routing information effectively. Here is an example of how you can structure the menu:
+</p>
+<code-block>
+    <p>&lt;div id="menu" class="col-3"&gt;</p>
+    <openblock>
+        <p>&lt;ul&gt;</p>
+        <openblock>
+            <p>&lt;li&gt;</p>
+            <openblock>
+                <p>&lt;a asp-controller=<blue-code>"Home"</blue-code> asp-action=<blue-code>"Index"</blue-code>&gt;Home&lt;/a &gt;</p>
+            </openblock>
+            <p>&lt;/li&gt;</p>
+            <p>&lt;li&gt;</p>
+            <openblock>
+                <p>&lt;a asp-controller=<blue-code>"Home"</blue-code> asp-action=<blue-code>"RoutingList"</blue-code>&gt;Routing list&lt;/a &gt;</p>
+            </openblock>
+            <p>&lt;/li&gt;</p>
+
+            <p>&lt;li&gt;</p>
+            <openblock>
+                <p>&lt;a asp-controller=<blue-code>"Routing"</blue-code> asp-action=<blue-code>"RoutingInt"</blue-code>&gt;Routing int zonder parameter&lt;/a &gt;</p>
+            </openblock>
+            <p>&lt;/li&gt;</p>
+
+            <p>&lt;li&gt;</p>
+            <openblock>
+                <p>&lt;a asp-controller=<blue-code>"Routing"</blue-code> asp-action=<blue-code>"RoutingInt"</blue-code> <purple-code>asp-route-id</purple-code>=<blue-code>"10"</blue-code>&gt;Routing int - 10&lt;/a &gt;</p>
+            </openblock>
+            <p>&lt;/li&gt;</p>
+        </openblock>
+        <p>&lt;/ul&gt;</p>
+    </openblock>
+    <p>&lt;/div&gt;</p>
+</code-block>
+<p>
+    This example adds route parameters to the links, allowing the routing repository to capture and manage the navigation data.
+</p>
+
+
+
+
+<h3>Step 2: Inject and Use `IRoutingRepository` in Your Controllers</h3>
+<p>
+    You can inject the `IRoutingRepository` into your controllers to use its methods for capturing and retrieving routing data. Here’s how you can do it:
+</p>
+<h4>HomeController Example</h4>
+<code-block>
+    using <tw><vc:o-name vm="solutionModel2" /></tw>.Models.ViewModels;
+    <br />
+    using <tw><vc:o-name vm="solutionModel2" /></tw>.Services.Interfaces;
+    <br />
+    using Microsoft.AspNetCore.Mvc;
+    <br /><br />
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Controllers
+    <p>{</p>
+    <openblock>
+        public class <cyan-code>HomeController</cyan-code> : <cyan-code>Controller</cyan-code>
+        <p>{</p>
+        <openblock>
+            private readonly ILogger&lt;<cyan-code>HomeController</cyan-code>&gt; _logger;
+            <br />
+            private readonly <cyan-code>IRoutingRepository</cyan-code> _routingRepository;
+            <br /><br />
+            public <cyan-code>HomeController</cyan-code>(ILogger&lt;<cyan-code>HomeController</cyan-code>&gt; logger, <cyan-code>IRoutingRepository</cyan-code> routingRepository)
+            <p>{</p>
+            <openblock>
+                _logger = logger;
+                <br />
+                _routingRepository = routingRepository;
+            </openblock>
+            <p>}</p>
+
+            <br /><br />
+            public IActionResult Index()
+            <p>{</p>
+            <openblock>
+                _routingRepository.GetRouting(string.Empty, ControllerContext, ViewBag);
+                <br />
+                return View();
+            </openblock>
+            <p>}</p>
+
+            <br /><br />
+            public IActionResult RoutingList()
+            <p>{</p>
+            <openblock>
+                _routingRepository.GetRouting(string.Empty, ControllerContext, ViewBag);
+                <br />
+                return View(_routingRepository.RoutingModels);
+            </openblock>
+            <p>}</p>
+
+            <br /><br />
+            public IActionResult Privacy()
+            <p>{</p>
+            <openblock>
+                return View();
+            </openblock>
+            <p>}</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+
+
+<h4>RoutingController Example</h4>
+<code-block>
+    using <tw><vc:o-name vm="solutionModel2" /></tw>.Models.ViewModels;
+    <br />
+    using <tw><vc:o-name vm="solutionModel2" /></tw>.Services.Interfaces;
+    <br />
+    using Microsoft.AspNetCore.Mvc;
+    <br /><br />
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Controllers
+    <p>{</p>
+    <openblock>
+        public class <cyan-code>RoutingController</cyan-code> : <cyan-code>Controller</cyan-code>
+        <p>{</p>
+        <openblock>
+            private <cyan-code>IRoutingRepository</cyan-code> _routingRepository;
+            <br /><br />
+            public <cyan-code>RoutingController</cyan-code>(<cyan-code>IRoutingRepository</cyan-code> routingRepository)
+            <p>{</p>
+            <openblock>
+                _routingRepository = routingRepository;
+            </openblock>
+            <p>}</p>
+
+            <br /><br />
+            public IActionResult RoutingInt(string id)
+            <p>{</p>
+            <openblock>
+                _routingRepository.GetRouting(id, ControllerContext, ViewBag);
+                <br />
+                return View();
+            </openblock>
+            <p>}</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+<p>
+    These examples show how to inject the `IRoutingRepository` into your controllers and use it to capture routing data in each action method.
+</p>
+<h3>Step 3: Display Routing Data in `RoutingList.cshtml`</h3>
+<p>
+    You can create a `RoutingList.cshtml` view to display the collected routing data. Here’s an example:
+</p>
+<code-block>
+    <p>@modelString IEnumerable&lt;<tw><vc:o-name vm="solutionModel2" /></tw>.Models.ViewModels.<cyan-code>RoutingModel</cyan-code>&gt;</p>
+    <br /><br />
+<p>@openCode</p>
+<openblock>
+    <p>ViewData["Title"] = "RoutingList";</p>
+</openblock>
+<p>}</p>
+
+<br /><br />
+<p>&lt;h1&gt;Routing List&lt;/h1&gt;</p>
+
+<br /><br />
+<p>&lt;table class="table"&gt;</p>
+<openblock>
+    <p>&lt;thead&gt;</p>
+    <openblock>
+        <p>&lt;tr&gt;</p>
+        <openblock>
+            <p>&lt;th&gt;@(HtmlString).DisplayNameFor(model => model.Controller)&lt;/th&gt;</p>
+                    <p>&lt;th&gt;@(HtmlString).DisplayNameFor(model => model.ActionName)&lt;/th&gt;</p>
+                    <p>&lt;th&gt;@(HtmlString).DisplayNameFor(model => model.Date)&lt;/th&gt;</p>
+                    <p>&lt;th&gt;@(HtmlString).DisplayNameFor(model => model.Parameters)&lt;/th&gt;</p>
+            <p>&lt;th&gt;&lt;/th&gt;</p>
+        </openblock>
+        <p>&lt;/tr&gt;</p>
+    </openblock>
+    <p>&lt;/thead&gt;</p>
+
+    <p>&lt;tbody&gt;</p>
+    <openblock>
+            <p><purple-code>@foreachString</purple-code> (var item in Model)</p>
+        <openblock>
+            <p>&lt;tr&gt;</p>
+            <openblock>
+                <p>&lt;td&gt;@(HtmlString).DisplayFor(modelItem => item.Controller)&lt;/td&gt;</p>
+                    <p>&lt;td&gt;@(HtmlString).DisplayFor(modelItem => item.ActionName)&lt;/td&gt;</p>
+                    <p>&lt;td&gt;@(HtmlString).DisplayFor(modelItem => item.Date)&lt;/td&gt;</p>
+                    <p>&lt;td&gt;@(HtmlString).DisplayFor(modelItem => item.Parameters)&lt;/td&gt;</p>
+            </openblock>
+            <p>&lt;/tr&gt;</p>
+        </openblock>
+    </openblock>
+    <p>&lt;/tbody&gt;</p>
+</openblock>
+<p>&lt;/table&gt;</p>
+</code-block>
+<p>
+    This view loops through the `RoutingModel` collection and displays the collected routing data in a table format.
+</p>

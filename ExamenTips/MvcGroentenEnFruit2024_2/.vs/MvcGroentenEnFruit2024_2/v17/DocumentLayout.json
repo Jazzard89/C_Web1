@@ -1,0 +1,130 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\ExamenTips\\MvcGroentenEnFruit2024_2\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{1E766D7B-5A53-446E-B33A-C24881AED9EF}|MvcGroentenEnFruit2024_2\\MvcGroentenEnFruit2024_2.csproj|d:\\jasper\\work\\opleidingen\\pxl\\c\\web\\examentips\\mvcgroentenenfruit2024_2\\mvcgroentenenfruit2024_2\\controllers\\aankoopordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E766D7B-5A53-446E-B33A-C24881AED9EF}|MvcGroentenEnFruit2024_2\\MvcGroentenEnFruit2024_2.csproj|solutionrelative:mvcgroentenenfruit2024_2\\controllers\\aankoopordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E766D7B-5A53-446E-B33A-C24881AED9EF}|MvcGroentenEnFruit2024_2\\MvcGroentenEnFruit2024_2.csproj|d:\\jasper\\work\\opleidingen\\pxl\\c\\web\\examentips\\mvcgroentenenfruit2024_2\\mvcgroentenenfruit2024_2\\views\\aankooporder\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1E766D7B-5A53-446E-B33A-C24881AED9EF}|MvcGroentenEnFruit2024_2\\MvcGroentenEnFruit2024_2.csproj|solutionrelative:mvcgroentenenfruit2024_2\\views\\aankooporder\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E766D7B-5A53-446E-B33A-C24881AED9EF}|MvcGroentenEnFruit2024_2\\MvcGroentenEnFruit2024_2.csproj|d:\\jasper\\work\\opleidingen\\pxl\\c\\web\\examentips\\mvcgroentenenfruit2024_2\\mvcgroentenenfruit2024_2\\models\\orderlijn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E766D7B-5A53-446E-B33A-C24881AED9EF}|MvcGroentenEnFruit2024_2\\MvcGroentenEnFruit2024_2.csproj|solutionrelative:mvcgroentenenfruit2024_2\\models\\orderlijn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E766D7B-5A53-446E-B33A-C24881AED9EF}|MvcGroentenEnFruit2024_2\\MvcGroentenEnFruit2024_2.csproj|d:\\jasper\\work\\opleidingen\\pxl\\c\\web\\examentips\\mvcgroentenenfruit2024_2\\mvcgroentenenfruit2024_2\\models\\artikel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E766D7B-5A53-446E-B33A-C24881AED9EF}|MvcGroentenEnFruit2024_2\\MvcGroentenEnFruit2024_2.csproj|solutionrelative:mvcgroentenenfruit2024_2\\models\\artikel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E766D7B-5A53-446E-B33A-C24881AED9EF}|MvcGroentenEnFruit2024_2\\MvcGroentenEnFruit2024_2.csproj|d:\\jasper\\work\\opleidingen\\pxl\\c\\web\\examentips\\mvcgroentenenfruit2024_2\\mvcgroentenenfruit2024_2\\models\\aankooporder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E766D7B-5A53-446E-B33A-C24881AED9EF}|MvcGroentenEnFruit2024_2\\MvcGroentenEnFruit2024_2.csproj|solutionrelative:mvcgroentenenfruit2024_2\\models\\aankooporder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E766D7B-5A53-446E-B33A-C24881AED9EF}|MvcGroentenEnFruit2024_2\\MvcGroentenEnFruit2024_2.csproj|d:\\jasper\\work\\opleidingen\\pxl\\c\\web\\examentips\\mvcgroentenenfruit2024_2\\mvcgroentenenfruit2024_2\\models\\viewmodels\\aankooporderviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E766D7B-5A53-446E-B33A-C24881AED9EF}|MvcGroentenEnFruit2024_2\\MvcGroentenEnFruit2024_2.csproj|solutionrelative:mvcgroentenenfruit2024_2\\models\\viewmodels\\aankooporderviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{74946827-37a0-11d2-a273-00c04f8ef4ff}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Artikel.cs",
+              "DocumentMoniker": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\ExamenTips\\MvcGroentenEnFruit2024_2\\MvcGroentenEnFruit2024_2\\Models\\Artikel.cs",
+              "RelativeDocumentMoniker": "MvcGroentenEnFruit2024_2\\Models\\Artikel.cs",
+              "ToolTip": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\ExamenTips\\MvcGroentenEnFruit2024_2\\MvcGroentenEnFruit2024_2\\Models\\Artikel.cs",
+              "RelativeToolTip": "MvcGroentenEnFruit2024_2\\Models\\Artikel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-18T16:01:25.962Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\ExamenTips\\MvcGroentenEnFruit2024_2\\MvcGroentenEnFruit2024_2\\Views\\AankoopOrder\\Create.cshtml",
+              "RelativeDocumentMoniker": "MvcGroentenEnFruit2024_2\\Views\\AankoopOrder\\Create.cshtml",
+              "ToolTip": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\ExamenTips\\MvcGroentenEnFruit2024_2\\MvcGroentenEnFruit2024_2\\Views\\AankoopOrder\\Create.cshtml",
+              "RelativeToolTip": "MvcGroentenEnFruit2024_2\\Views\\AankoopOrder\\Create.cshtml",
+              "ViewState": "AQIAABsAAAAAAAAAAAAswDYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-18T15:57:13.155Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AankoopOrder.cs",
+              "DocumentMoniker": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\ExamenTips\\MvcGroentenEnFruit2024_2\\MvcGroentenEnFruit2024_2\\Models\\AankoopOrder.cs",
+              "RelativeDocumentMoniker": "MvcGroentenEnFruit2024_2\\Models\\AankoopOrder.cs",
+              "ToolTip": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\ExamenTips\\MvcGroentenEnFruit2024_2\\MvcGroentenEnFruit2024_2\\Models\\AankoopOrder.cs",
+              "RelativeToolTip": "MvcGroentenEnFruit2024_2\\Models\\AankoopOrder.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-18T15:48:42.563Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "OrderLijn.cs",
+              "DocumentMoniker": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\ExamenTips\\MvcGroentenEnFruit2024_2\\MvcGroentenEnFruit2024_2\\Models\\OrderLijn.cs",
+              "RelativeDocumentMoniker": "MvcGroentenEnFruit2024_2\\Models\\OrderLijn.cs",
+              "ToolTip": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\ExamenTips\\MvcGroentenEnFruit2024_2\\MvcGroentenEnFruit2024_2\\Models\\OrderLijn.cs",
+              "RelativeToolTip": "MvcGroentenEnFruit2024_2\\Models\\OrderLijn.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-18T15:45:31.491Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AankoopOrderViewModel.cs",
+              "DocumentMoniker": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\ExamenTips\\MvcGroentenEnFruit2024_2\\MvcGroentenEnFruit2024_2\\Models\\ViewModels\\AankoopOrderViewModel.cs",
+              "RelativeDocumentMoniker": "MvcGroentenEnFruit2024_2\\Models\\ViewModels\\AankoopOrderViewModel.cs",
+              "ToolTip": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\ExamenTips\\MvcGroentenEnFruit2024_2\\MvcGroentenEnFruit2024_2\\Models\\ViewModels\\AankoopOrderViewModel.cs",
+              "RelativeToolTip": "MvcGroentenEnFruit2024_2\\Models\\ViewModels\\AankoopOrderViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-18T15:42:54.487Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AankoopOrderController.cs",
+              "DocumentMoniker": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\ExamenTips\\MvcGroentenEnFruit2024_2\\MvcGroentenEnFruit2024_2\\Controllers\\AankoopOrderController.cs",
+              "RelativeDocumentMoniker": "MvcGroentenEnFruit2024_2\\Controllers\\AankoopOrderController.cs",
+              "ToolTip": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\ExamenTips\\MvcGroentenEnFruit2024_2\\MvcGroentenEnFruit2024_2\\Controllers\\AankoopOrderController.cs",
+              "RelativeToolTip": "MvcGroentenEnFruit2024_2\\Controllers\\AankoopOrderController.cs",
+              "ViewState": "AQIAAE0AAAAAAAAAAAAmwFMAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-18T15:36:54.667Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

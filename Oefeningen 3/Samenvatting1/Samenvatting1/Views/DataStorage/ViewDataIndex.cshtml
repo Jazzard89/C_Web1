@@ -1,0 +1,18 @@
+﻿@{
+    int teller = (int)ViewData["Testdata2"];
+    string dataThing = (string)ViewData["Testdata1"];
+}
+
+<div>
+    <ul>
+        @dataThing
+    </ul>
+    <ul>
+        @for (int i = 1; i < teller; i++)
+        {
+            <li>
+                Dit is de test @i uit de viewbag!
+            </li>
+        }
+    </ul>
+</div>

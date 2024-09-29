@@ -1,0 +1,172 @@
+﻿@{
+@*
+<tw><vc:o-name vm="solutionModel" /></tw>
+<tw><vc:o-name vm="solutionModel2" /></tw>
+<tw><vc:o-name vm="dbModel" /></tw>
+<tw><vc:o-name vm="dbModel2" /></tw>
+<tw><vc:o-name vm="razorPageModel" /></tw>
+<tw><vc:o-name vm="razorPageModel2" /></tw>
+<tw><vc:o-name vm="modelModel" /></tw>
+<tw><vc:o-name vm="modelModel2" /></tw>
+*@
+}
+
+<tw><vc:o-name vm="solutionModel" /></tw>
+
+<h1>Working with DbContext and Dependency Injection in ASP.NET Core</h1>
+
+<h3>Introduction</h3>
+<p>
+    The <code>DbContext</code> class in Entity Framework Core is the primary class for interacting with your database. It represents a session with the database and allows you to query and save data. In ASP.NET Core, <code>DbContext</code> is typically registered in the Dependency Injection (DI) container, making it easily accessible throughout your application.
+</p>
+
+
+
+
+
+<h3>1. Setting Up the DbContext</h3>
+<p>
+    To start using <code>DbContext</code>, you need to create a class that derives from <code>DbContext</code> and includes <code>DbSet</code> properties for each of your entities. Here's an example of a simple <code><tw><vc:o-name vm="dbModel2" /></tw></code>:
+</p>
+
+<code-block>
+    <p>using Microsoft.EntityFrameworkCore;</p>
+    <p>namespace <tw><vc:o-name vm="solutionModel" /></tw>.Data</p>
+
+    <p>{</p>
+    <openblock>
+        public class <tw><vc:o-name vm="dbModel" /></tw> : <cyan-code>DbContext</cyan-code>
+        <p>{</p>
+        <openblock>
+            <p><green-code>// Configure the DbContext, typically via options passed from the DI container</green-code></p>
+            public <tw><vc:o-name vm="dbModel" /></tw> (DbContextOptions&lt;<tw><vc:o-name vm="dbModel" /></tw>&gt; options)
+            
+            <p>: base(options)</p>
+            <p> { } </p><br/>
+            <p><green-code>// Define DbSets for your entities</green-code></p>
+            <p>public DbSet&lt;<cyan-code>Product</cyan-code>&gt; Products { get; set; }</p>
+            <p>public DbSet&lt;<cyan-code>Category</cyan-code>&gt; Categories { get; set; }</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>
+    In this example, <tw><vc:o-name vm="dbModel2" /></tw> contains two <code>DbSet</code> properties: <code>Products</code> and <code>Categories</code>. These properties represent tables in the database.
+</p>
+
+<h3>2. Registering DbContext with Dependency Injection IServicesCollections</h3>
+<p>
+    To use your <code>DbContext</code> throughout your application, it needs to be registered with the ASP.NET Core Dependency Injection container. This is typically done in the <code>Startup.cs</code> file, depending on the project setup.
+</p>
+
+<code-block>
+    <p>using Microsoft.EntityFrameworkCore;</p>
+    <p>using <tw><vc:o-name vm="solutionModel" /></tw>.Data;</p>
+
+    <br /><br />
+    <p><green-code>// Inside the Startup.cs</green-code></p>
+    <p>public void ConfigureServices(IServiceCollection services)</p>
+    <p>{</p>
+    <openblock>
+        <p><green-code>// Register <tw><vc:o-name vm="dbModel2" /></tw> with the DI container</green-code></p>
+        <p>services.AddDbContext&lt;<tw><vc:o-name vm="dbModel" /></tw>&gt;</p>
+        <p>(options =></p>
+        <p>options.UseSqlServer(Configuration.GetConnectionString(<red-code>"DefaultConnection"</red-code>)));</p>
+
+        <p><green-code>// Other service registrations</green-code></p>
+        <p>services.AddControllersWithViews();</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+<h3>2. Registering DbContext with Dependency Injection Program class</h3>
+<p>
+    To use your <code>DbContext</code> throughout your application, it needs to be registered with the ASP.NET Core Dependency Injection container. This is typically done in the <code>Program.cs</code> file, depending on the project setup.
+</p>
+
+<code-block>
+    <p>using Microsoft.EntityFrameworkCore;</p>
+    <p>using <tw><vc:o-name vm="solutionModel2" /></tw>.Data;</p>
+
+    <br /><br />
+    <p><green-code>// Inside the Program.cs</green-code></p>
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");<br/>
+    builder.Services.AddDbContext&lt;<tw><vc:o-name vm="dbModel" /></tw>&gt;(options =><br />
+        <openblock>
+        options.UseSqlServer(connectionString));<br />
+        </openblock>
+
+</code-block>
+
+<p>
+    In this example, the <code>AddDbContext</code> method registers <code><tw><vc:o-name vm="dbModel2" /></tw></code> with the DI container. The <code>UseSqlServer</code> method configures Entity Framework to use SQL Server, with the connection string specified in the <code>appsettings.json</code> file.
+</p>
+
+<h3>3. Using DbContext in Your Controllers</h3>
+<p>
+    Once registered with the DI container, you can inject <code><tw><vc:o-name vm="dbModel2" /></tw></code> into your controllers, services, or other classes that need access to the database.
+</p>
+
+<code-block>
+    <p>using Microsoft.AspNetCore.Mvc;</p>
+    <p>using <tw><vc:o-name vm="solutionModel2" /></tw>.Data;</p>
+    <p>using <tw><vc:o-name vm="solutionModel2" /></tw>.Models;</p>
+
+    <br /><br />
+    <p>public class <cyan-code>ProductsController</cyan-code> : <cyan-code>Controller</cyan-code> </p>
+    <p>{</p>
+    <openblock>
+        <p>private readonly <tw><vc:o-name vm="dbModel" /></tw> _context;</p>
+
+        <p><green-code>// Inject <tw><vc:o-name vm="dbModel2" /></tw> via constructor</green-code></p>
+        <p>public <cyan-code>ProductsController</cyan-code>(<tw><vc:o-name vm="dbModel" /></tw> context)</p>
+        <p>{</p>
+        <openblock>
+            <p>_context = context;</p>
+        </openblock>
+        <p>}</p>
+
+        <br /><br />
+        <p><green-code>// Use the DbContext to query and manipulate data</green-code></p>
+        <p>public IActionResult Index()</p>
+        <p>{</p>
+        <openblock>
+            <p>var products = _context.Products.ToList();</p>
+            <p>return View(products);</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>
+    In this example, <code><tw><vc:o-name vm="dbModel2" /></tw></code> is injected into the <code>ProductsController</code>. It is then used to retrieve a list of products from the database and pass them to the view.
+</p>
+
+<h3>4. Handling DbContext Lifecycle</h3>
+<p>
+    By default, <code>DbContext</code> is registered with a scoped lifetime. This means a new instance of <code>DbContext</code> is created for each request. This lifecycle is suitable for most applications, as it ensures that all database operations within a single request use the same context instance, allowing for more efficient change tracking and saving.
+</p>
+
+<h3>5. DbContext Configuration and Connection Strings</h3>
+<p>
+    Connection strings for the database are typically stored in the <code>appsettings.json</code> file. Here’s how you can define a connection string:
+</p>
+
+<code-block>
+    <p><cyan-code>"ConnectionStrings":</cyan-code> {</p>
+    <openblock>
+        <p><cyan-code>"DefaultConnection"</cyan-code>: <red-code>"Server=(localdb)\\mssqllocaldb;Database=DatabaseName;Trusted_Connection=True;MultipleActiveResultSets=true"</red-code></p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>
+    The connection string is then used in the <code>ConfigureServices</code> method when registering the <code>DbContext</code>.
+</p>
+
+<h3>Conclusion</h3>
+<p>
+    The <code>DbContext</code> class is a critical component for working with databases in ASP.NET Core. By leveraging Dependency Injection, you can easily manage the lifecycle of your <code>DbContext</code> and ensure that it is available wherever you need it in your application. Proper configuration and registration of <code>DbContext</code> are key to building efficient and scalable data-driven applications.
+</p>

@@ -1,0 +1,242 @@
+﻿@* @page "/blazorcompinfo1" *@
+@code {
+    string usingString = "@using";
+    string pageString = "@page";
+    string codeString = "@code";
+    string foreachString = "@foreach";
+    string ifString = "@if";
+    string atString = "@";
+
+    private string RazorPageName = "UserFundList";
+    private string RazorPageNameHook => $"{RazorPageName}()";
+    private string SolutionName = "WebRecap";
+    private string modelName = "UserFund";
+    private string modelNameS => $"{modelName}s";
+    private string dbContextName = "ApplicationDbContext";
+
+    private string lowcas(string str)
+    {
+        return char.ToLower(str[0]) + str.Substring(1);
+    }
+}
+<h1>Using a Blazor Component in your MVC App</h1>
+<label>dbContextName</label>
+<input type="text" @bind="dbContextName" />
+<p>Current Name: @dbContextName</p>
+<br />
+<label>model Name</label>
+<input type="text" @bind="modelName" />
+<p>Current Name: @modelName</p>
+<br />
+<label>SolutionName Name</label>
+<input type="text" @bind="SolutionName" />
+<p>Current Name: @SolutionName</p>
+<br />
+<label>RazorPage Name</label>
+<input type="text" @bind="RazorPageName" />
+<p>Current Name: @RazorPageName</p>
+
+
+
+<h3>Step 1: Add the required code to your Program.cs</h3>
+<p>
+    We need to add the Services and Middlewear to the Program.cs class
+</p>
+<CodeTag>
+    <ColorTag Color="red">//...</ColorTag><br /><br />
+    <ColorTag Color="green">//...</ColorTag><br /><br />
+    builder.Services.AddServerSideBlazor();<br /><br />
+    <ColorTag Color="green">//...</ColorTag><br /><br /><br />
+    app.UseRouting();<br />
+    app.UseAuthentication(); <ColorTag Color="green">// Authentication must come before authorization</ColorTag><br />
+    app.UseAuthorization();<br /><br />
+    app.UseEndpoints(endpoints =><br />
+    {<br />
+    <OpenTag>
+        endpoints.MapDefaultControllerRoute();<br />
+        endpoints.MapControllers();<br />
+        endpoints.MapBlazorHub();<br />
+        <ColorTag Color="green">//endpoints.MapFallbackToPage("/_Host");</ColorTag><br />
+    </OpenTag>
+    });<br />
+</CodeTag>
+<h3>Step 2: Add _imports.razor to the solution</h3>
+<p>
+    In order to have Blazor work we will create a RAZOR COMPONENT in the project solution.
+    it will be placed directly in the solutions root folder.
+</p>
+<CodeTag>
+    <ColorTag Color="blue">@usingString</ColorTag> Microsoft.AspNetCore.Components.Web<br />
+    <ColorTag Color="blue">@usingString</ColorTag> Microsoft.AspNetCore.Components<br />
+    <ColorTag Color="blue">@usingString</ColorTag> Microsoft.AspNetCore.Components.Forms<br />
+    <ColorTag Color="blue">@usingString</ColorTag> Microsoft.AspNetCore.Components.Routing<br />
+    <ColorTag Color="blue">@usingString</ColorTag> Microsoft.JSInterop<br />
+    <ColorTag Color="blue">@usingString</ColorTag> Microsoft.AspNetCore.Identity
+</CodeTag>
+
+
+
+<h3>Step 2.5: Import Blazor logic in the Layout</h3>
+<p>
+    In order to use Blazor code we need to import it over the entire application.
+    The easiest way to do this is in the _layout.cshtml
+</p>
+<CodeTag>
+    <ColorTag Color="blue">&lt;</ColorTag>head<ColorTag Color="blue">&gt;</ColorTag><br />
+    <OpenTag>
+        <ColorTag Color="green">//...</ColorTag><br />
+        <ColorTag Color="green">//blazor logic</ColorTag><br />
+        <ColorTag Color="blue">&lt;</ColorTag><ColorTag Color="purple">base</ColorTag> <ColorTag Color="red">href</ColorTag><ColorTag Color="blue">="~/" /&gt;</ColorTag><br />
+    </OpenTag>
+    <ColorTag Color="blue">&lt;/</ColorTag>head<ColorTag Color="blue">&gt;</ColorTag><br />
+</CodeTag>
+<p>and UNDER the footer</p>
+<CodeTag>
+    <ColorTag Color="blue">&lt;/</ColorTag>footer<ColorTag Color="blue">&gt;</ColorTag><br />
+    <ColorTag Color="green">//...</ColorTag><br />
+    <ColorTag Color="green">//blazor logic</ColorTag><br />
+    <ColorTag Color="blue">&lt;</ColorTag><ColorTag Color="purple">script</ColorTag> <ColorTag Color="red">src</ColorTag><ColorTag Color="blue">="_framework/blazor.server.js"&gt;</ColorTag><ColorTag Color="blue">&lt;/</ColorTag><ColorTag Color="purple">script</ColorTag><ColorTag Color="blue">&gt;</ColorTag><br />
+</CodeTag>
+
+
+<h3>Step 3: Add the razor page</h3>
+<p>
+    We need to access the Blazor component through the Controllers. In order to do this
+    we need to create a RAZOR PAGE that uses summons the Blazor component. <ColorTag Color="red">We will create this component in the next step</ColorTag>
+    we will name this @RazorPageName.
+</p>
+<CodeTag>
+    <ColorTag Color="blue">&lt;</ColorTag>h4<ColorTag Color="blue">&gt;</ColorTag>UserfundsRazor<ColorTag Color="blue">&lt;/</ColorTag>h4<ColorTag Color="blue">&gt;</ColorTag><br />
+
+    <ColorTag Color="blue">&lt;</ColorTag>hr <ColorTag Color="blue">/ &gt;</ColorTag><br />
+
+    <ColorTag Color="blue">&lt;</ColorTag><ColorTag Color="purple">component type</ColorTag><ColorTag Color="blue">="typeof</ColorTag>(@(SolutionName).Blazor.<ColorTag Color="cyan">UserfundsRazor</ColorTag>)<ColorTag Color="blue">"</ColorTag> <ColorTag Color="purple">render-mode</ColorTag><ColorTag Color="blue">="</ColorTag>Server<ColorTag Color="blue">"/ &gt;</ColorTag><br />
+</CodeTag>
+
+
+
+<br />
+<h3>Step 4: We will add the useage for the component in the Controller</h3>
+<CodeTag>
+    <ColorTag Color="blue">public</ColorTag> <ColorTag Color="cyan">IActionResult</ColorTag> @RazorPageNameHook<br />
+    {<br />
+    <OpenTag>
+        <ColorTag Color="purple">return</ColorTag> View();<br />
+    </OpenTag>
+    }
+</CodeTag>
+<p>So when we link it we need to navigate to it like so</p>
+<CodeTag>
+    <ColorTag Color="blue">&lt;</ColorTag><ColorTag Color="purple">a asp-action</ColorTag><ColorTag Color="blue">="@RazorPageName"&gt;</ColorTag>Userfunds razor<ColorTag Color="blue">&lt;/</ColorTag><ColorTag Color="purple">a</ColorTag> <ColorTag Color="blue">&gt;</ColorTag>
+</CodeTag>
+
+
+
+
+<br />
+<h3>Step 5: Add the Blazor folder & RAZOR COMPONENT</h3>
+<p>In our project solution we will add a folder and name this 'Blazor'</p>
+<p>In this folder we will create a RAZOR COMPONENT not a razorpage</p>
+<CodeTag>
+    @pageString <ColorTag Color="red">"/userfund"</ColorTag><br />
+    <ColorTag Color="blue">@usingString</ColorTag> @(SolutionName).Data<br />
+    <ColorTag Color="blue">@usingString</ColorTag> @(SolutionName).Models<br />
+    <ColorTag Color="blue">@usingString</ColorTag> Microsoft.AspNetCore.Identity<br />
+    <ColorTag Color="blue">@usingString</ColorTag> Microsoft.AspNetCore.Components.Authorization<br />
+    <ColorTag Color="blue">@usingString</ColorTag> Microsoft.EntityFrameworkCore<br /><br /><br />
+
+    <ColorTag Color="blue">@codeString</ColorTag> {<br />
+    <OpenTag>
+        [<ColorTag Color="cyan">Inject</ColorTag>]<br />
+        <ColorTag Color="cyan">@dbContextName</ColorTag> @lowcas(dbContextName){<ColorTag Color="blue">get</ColorTag>; <ColorTag Color="blue">set</ColorTag>; }<br />
+        <br />
+        [<ColorTag Color="cyan">Inject</ColorTag>]<br />
+        <ColorTag Color="cyan">UserManager</ColorTag>&lt;<ColorTag Color="cyan">IdentityUser</ColorTag>&gt; userManager {<ColorTag Color="blue">get</ColorTag>; <ColorTag Color="blue">set</ColorTag>; }<br />
+        <br />
+        [<ColorTag Color="cyan">Inject</ColorTag>]<br />
+        <ColorTag Color="cyan">AuthenticationStateProvider</ColorTag> authenticationStateProvider {<ColorTag Color="blue">get</ColorTag>; <ColorTag Color="blue">set</ColorTag>; }<br />
+        <br />
+        [<ColorTag Color="cyan">Inject</ColorTag>]<br />
+        <ColorTag Color="cyan">SignInManager</ColorTag>&lt;<ColorTag Color="cyan">IdentityUser</ColorTag>&gt; SignInManager {<ColorTag Color="blue">get</ColorTag>; <ColorTag Color="blue">set</ColorTag>; }<br />
+        <br />
+        <ColorTag Color="blue">public</ColorTag> <ColorTag Color="cyan">IEnumerable</ColorTag>&lt;<ColorTag Color="cyan">@modelName</ColorTag>&gt;? @modelNameS {<ColorTag Color="blue">get</ColorTag>; <ColorTag Color="blue">set</ColorTag>; }<br />
+        <br />
+        <br />
+        <ColorTag Color="blue">protected override async</ColorTag> <ColorTag Color="cyan">Task</ColorTag> OnInitializedAsync()<br />
+        {<br />
+        <OpenTag>
+            <ColorTag Color="purple">try</ColorTag><br />
+            {<br />
+            <OpenTag>
+                <ColorTag Color="green">// Get the current authentication state</ColorTag><br />
+                <ColorTag Color="blue">var</ColorTag> authState = <ColorTag Color="blue">await</ColorTag> authenticationStateProvider.GetAuthenticationStateAsync();<br />
+                <ColorTag Color="blue">var</ColorTag> user = authState.User;<br /><br />
+                <ColorTag Color="purple">@ifString</ColorTag> (SignInManager.IsSignedIn(user))<br />
+                {<br />
+                <OpenTag>
+                    <ColorTag Color="blue">var</ColorTag> identityUser = <ColorTag Color="blue">new</ColorTag> <ColorTag Color="cyan">IdentityUser</ColorTag>();<br />
+                    identityUser = <ColorTag Color="blue">await</ColorTag> userManager.FindByNameAsync(user.Identity.Name);<br />
+                    <br />
+                    <ColorTag Color="purple">if</ColorTag> (identityUser != <ColorTag Color="blue">null</ColorTag>)<br />
+                    {<br />
+                    <OpenTag>
+                        <ColorTag Color="green">// Fetch user funds from the database</ColorTag><br />
+                        @modelNameS = <ColorTag Color="blue">await</ColorTag> @lowcas(@dbContextName).@modelNameS<br />
+                        <OpenTag>
+                            .Where(uf => uf.UserId == identityUser.Id)<br />
+                            .ToListAsync();<br />
+                        </OpenTag>
+                    </OpenTag>
+                    }<br />
+                </OpenTag>
+                }<br />
+            </OpenTag>
+            }<br />
+            <ColorTag Color="purple">catch</ColorTag> (<ColorTag Color="cyan">Exception</ColorTag> ex)<br />
+            {<br />
+            <OpenTag>
+                <ColorTag Color="green">// Log the exception or handle it as needed</ColorTag><br />
+                <ColorTag Color="cyan">Console</ColorTag>.Error.WriteLine(<ColorTag Color="red">$"An error occurred:</ColorTag> {ex.Message}<ColorTag Color="red">"</ColorTag>);<br />
+            </OpenTag>
+            }
+        </OpenTag>
+        }
+    </OpenTag>
+    }
+    <br />
+    <br />
+<ColorTag Color="purple">@ifString</ColorTag> (@(atString)@(modelNameS) != null)<br/>
+{<br/>
+<OpenTag>
+        <ColorTag Color="purple">@foreachString</ColorTag> (<ColorTag Color="blue">var</ColorTag> @lowcas(modelName) in @modelNameS)<br />
+        {<br />
+        <OpenTag>
+            <ColorTag Color="blue">&lt;</ColorTag>div <ColorTag Color="red">class</ColorTag><ColorTag Color="blue">="card"&gt;</ColorTag><br />
+            <OpenTag>
+                <ColorTag Color="blue">&lt;</ColorTag>div <ColorTag Color="red">class</ColorTag><ColorTag Color="blue">="card-body"&gt;</ColorTag><br />
+                <OpenTag>
+                    <ColorTag Color="blue">&lt;</ColorTag>h5 <ColorTag Color="red">class</ColorTag><ColorTag Color="blue">="card-title"&gt;</ColorTag>@atString@(lowcas(modelName)).UserFundId<ColorTag Color="blue">&lt;/</ColorTag>h5<ColorTag Color="blue">&gt;</ColorTag><br />
+                    <ColorTag Color="blue">&lt;</ColorTag>p <ColorTag Color="red">class</ColorTag><ColorTag Color="blue">="card-text"&gt;</ColorTag>@atString@(lowcas(modelName)).UserId<ColorTag Color="blue">&lt;/</ColorTag>p<ColorTag Color="blue">&gt;</ColorTag><br />
+                    <ColorTag Color="blue">&lt;</ColorTag>p <ColorTag Color="red">class</ColorTag><ColorTag Color="blue">="card-text"&gt;</ColorTag>@atString@(lowcas(dbContextName)).Fondsen.Where(x => x.FundId == @(atString)@(lowcas(modelName)).FundId).Select(x => x.FundName).FirstOrDefault()<ColorTag Color="blue">&lt;/</ColorTag>p<ColorTag Color="blue">&gt;</ColorTag><br />
+                    <ColorTag Color="blue">&lt;</ColorTag>p <ColorTag Color="red">class</ColorTag><ColorTag Color="blue">="card-text"&gt;</ColorTag>@atString@(lowcas(modelName)).Amount.ToString("C")<ColorTag Color="blue">&lt;/</ColorTag>p<ColorTag Color="blue">&gt;</ColorTag><br />
+
+                </OpenTag>
+                <ColorTag Color="blue">&lt;/</ColorTag>div<ColorTag Color="blue">&gt;</ColorTag><br />
+            </OpenTag>
+            <ColorTag Color="blue">&lt;/</ColorTag>div<ColorTag Color="blue">&gt;</ColorTag><br />
+        </OpenTag>
+        }
+</OpenTag>
+}<br/>
+<ColorTag Color="purple">else</ColorTag><br/>
+{<br/>
+    <OpenTag>
+        <ColorTag Color="blue">&lt;</ColorTag>p<ColorTag Color="blue">&gt;</ColorTag>No funds found<ColorTag Color="blue">&lt;/</ColorTag>p<ColorTag Color="blue">&gt;</ColorTag><br />
+    </OpenTag>
+}
+
+
+
+</CodeTag>
+
+       @*  &lt; &gt; *@

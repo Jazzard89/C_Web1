@@ -1,0 +1,287 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = WebRecap
+build_property.RootNamespace = WebRecap
+build_property.ProjectDir = D:\JASPER\WORK\Opleidingen\PXL\Graduaat\C\Web\Oefeningen 3\WebRecap\WebRecap\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\JASPER\WORK\Opleidingen\PXL\Graduaat\C\Web\Oefeningen 3\WebRecap\WebRecap
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Blazor/BlazorCompInfoOne.razor]
+build_metadata.AdditionalFiles.TargetPath = Qmxhem9yXEJsYXpvckNvbXBJbmZvT25lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Blazor/BlazorCompInfoTwo.razor]
+build_metadata.AdditionalFiles.TargetPath = Qmxhem9yXEJsYXpvckNvbXBJbmZvVHdvLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Blazor/CodeTag.razor]
+build_metadata.AdditionalFiles.TargetPath = Qmxhem9yXENvZGVUYWcucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Blazor/ColorTag.razor]
+build_metadata.AdditionalFiles.TargetPath = Qmxhem9yXENvbG9yVGFnLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Blazor/DisplayObjectName.razor]
+build_metadata.AdditionalFiles.TargetPath = Qmxhem9yXERpc3BsYXlPYmplY3ROYW1lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Blazor/ModifyObjectName.razor]
+build_metadata.AdditionalFiles.TargetPath = Qmxhem9yXE1vZGlmeU9iamVjdE5hbWUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Blazor/OpenTag.razor]
+build_metadata.AdditionalFiles.TargetPath = Qmxhem9yXE9wZW5UYWcucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Areas/Identity/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Shared/Components/DisplayObjectName/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcRGlzcGxheU9iamVjdE5hbWVcRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Shared/Components/DropDown/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcRHJvcERvd25cRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Shared/Components/NextPage/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcTmV4dFBhZ2VcRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Shared/Components/OName/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcT05hbWVcRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Shared/Components/RouteList/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcUm91dGVMaXN0XERlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/APIs/Page1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcQVBJc1xQYWdlMS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/APIs/Page2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcQVBJc1xQYWdlMi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/BlazorComponent/Page1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcQmxhem9yQ29tcG9uZW50XFBhZ2UxLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/BlazorComponent/Page2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcQmxhem9yQ29tcG9uZW50XFBhZ2UyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/DataAnnotations/Page1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcRGF0YUFubm90YXRpb25zXFBhZ2UxLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/DataAnnotations/Page2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcRGF0YUFubm90YXRpb25zXFBhZ2UyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/DbContexts/Page1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcRGJDb250ZXh0c1xQYWdlMS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/Duende/Page1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcRHVlbmRlXFBhZ2UxLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/Duende/Page2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcRHVlbmRlXFBhZ2UyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/EndpointRoutingCustomConstraint/Page1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcRW5kcG9pbnRSb3V0aW5nQ3VzdG9tQ29uc3RyYWludFxQYWdlMS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/EndpointRouting/Page1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcRW5kcG9pbnRSb3V0aW5nXFBhZ2UxLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/EndpointRouting/Page2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcRW5kcG9pbnRSb3V0aW5nXFBhZ2UyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/HttpClients/Page1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcSHR0cENsaWVudHNcUGFnZTEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/HttpClients/Page2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcSHR0cENsaWVudHNcUGFnZTIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/Identitys/Page1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcSWRlbnRpdHlzXFBhZ2UxLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/IWebHostEnvironments/Page1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcSVdlYkhvc3RFbnZpcm9ubWVudHNcUGFnZTEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/IWebHostEnvironments/Page2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcSVdlYkhvc3RFbnZpcm9ubWVudHNcUGFnZTIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/LocalDatabank/Page1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcTG9jYWxEYXRhYmFua1xQYWdlMS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/ModelValidations/Page1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcTW9kZWxWYWxpZGF0aW9uc1xQYWdlMS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/ModelValidations/Page2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcTW9kZWxWYWxpZGF0aW9uc1xQYWdlMi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/ModelValidations/Page3.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcTW9kZWxWYWxpZGF0aW9uc1xQYWdlMy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/PartialViews/Page1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcUGFydGlhbFZpZXdzXFBhZ2UxLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/RequestForm/Page1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcUmVxdWVzdEZvcm1cUGFnZTEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/RoleManager/Page1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcUm9sZU1hbmFnZXJcUGFnZTEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/SeedDataIdentity/Page1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcU2VlZERhdGFJZGVudGl0eVxQYWdlMS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/SeedData/Page1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcU2VlZERhdGFcUGFnZTEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/SeedData/Page2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcU2VlZERhdGFcUGFnZTIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/SelectListItems/Page1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcU2VsZWN0TGlzdEl0ZW1zXFBhZ2UxLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/Services/Page1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcU2VydmljZXNcUGFnZTEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/SignInManager/Page1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcU2lnbkluTWFuYWdlclxQYWdlMS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/TagHelpers/Page1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcVGFnSGVscGVyc1xQYWdlMS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/TagHelpers/Page2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcVGFnSGVscGVyc1xQYWdlMi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/TagHelpers/Page3.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcVGFnSGVscGVyc1xQYWdlMy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/TagHelpers/Page4.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcVGFnSGVscGVyc1xQYWdlNC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/TagHelpers/Page5.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcVGFnSGVscGVyc1xQYWdlNS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/Tokens/Page1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcVG9rZW5zXFBhZ2UxLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/Tokens/Page2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcVG9rZW5zXFBhZ2UyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/Tokens/Page3.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcVG9rZW5zXFBhZ2UzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/Tokens/Page4.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcVG9rZW5zXFBhZ2U0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/UserManager/Page1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcVXNlck1hbmFnZXJcUGFnZTEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/ViewBagMethod/Page1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcVmlld0JhZ01ldGhvZFxQYWdlMS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/ViewComponents/Page1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcVmlld0NvbXBvbmVudHNcUGFnZTEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/ViewComponents/Page2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcVmlld0NvbXBvbmVudHNcUGFnZTIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/ViewDataMethod/Page1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcVmlld0RhdGFNZXRob2RcUGFnZTEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Topic/ViewModels/Page1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcVmlld01vZGVsc1xQYWdlMS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/Graduaat/C/Web/Oefeningen 3/WebRecap/WebRecap/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-irlq862xrx

@@ -1,0 +1,142 @@
+﻿@{
+    string awaitText = "@await";
+    string foreachText = "@foreach";
+    string productText = "@product";
+    string partOne = "<img src=\"";
+}
+<h1>Using DbContext and IWebHostEnvironment in ViewComponents</h1>
+
+<h3>Introduction</h3>
+<p>
+    In this section, we will explore how to use <code>DbContext</code> to retrieve data from the database and how to leverage <code>IWebHostEnvironment</code> to access environment-specific settings or files within a ViewComponent. These features are essential for creating dynamic and data-driven components in your ASP.NET Core application.
+</p>
+
+<h3>Setting Up the ViewComponent</h3>
+<p>
+    We will start by setting up a ViewComponent that retrieves a list of products from a database using <code>DbContext</code> and also uses <code>IWebHostEnvironment</code> to access environment-specific files.
+</p>
+
+<h4>1. Creating the ViewComponent Class</h4>
+<p>
+    In the <code>Components</code> folder at the root of your project, create a new class named <code>ProductViewComponent</code>. This class will inherit from <code>ViewComponent</code> and will use dependency injection to get instances of <code>DbContext</code> and <code>IWebHostEnvironment</code>.
+</p>
+
+<code-block>
+    @@using Microsoft.AspNetCore.Mvc;
+    <br/>
+    @@using <tw><vc:o-name vm="solutionModel2"/></tw>.Data;
+    <br/>
+    @@using Microsoft.AspNetCore.Hosting;
+    <br/>
+    @@using System.Threading.Tasks;
+
+    <br/><br/>
+    namespace <tw><vc:o-name vm="solutionModel2"/></tw>.Components
+    <p>{</p>
+    <openblock>
+        public class ProductViewComponent : <cyan-code>ViewComponent</cyan-code>
+        <p>{</p>
+        <openblock>
+            <blue-code>private readonly</blue-code> <tw><vc:o-name vm="dbModel" /></tw> _context;
+            <br/>
+            <blue-code>private readonly</blue-code> <cyan-code>IWebHostEnvironment</cyan-code> _env;
+
+            <br/><br/>
+            public ProductViewComponent(<tw><vc:o-name vm="dbModel" /></tw> context, <cyan-code>IWebHostEnvironment</cyan-code> env)
+            <p>{</p>
+            <openblock>
+                _context = context;
+                _env = env;
+            </openblock>
+            <p>}</p>
+
+            <br/><br/>
+            public async Task&lt;IViewComponentResult&gt; InvokeAsync()
+            <p>{</p>
+            <openblock>
+                <green-code>// Retrieve all products from the database</green-code>
+                <br/>
+                var products = await _context.Products.ToListAsync();
+
+                <br/><br/>
+                <green-code>// Use IWebHostEnvironment to access a specific file path (e.g., for images)</green-code><br/>
+                var uploadsFolder = _env.WebRootPath + <red-code>"/images/uploads/"</red-code>;
+
+                <br/><br/>
+                <green-code>// Pass the products and upload folder path to the view</green-code><br/>
+                var viewModel = new ProductViewModel
+                <p>{</p>
+                <openblock>
+                    Products = products,
+                    UploadsFolderPath = uploadsFolder
+                </openblock>
+                <p>}</p>;
+
+                return View(viewModel);
+            </openblock>
+            <p>}</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>
+    In this example, we have a ViewComponent named <code>ProductViewComponent</code>. It injects <code><tw><vc:o-name vm="dbModel2" /></tw></code> to retrieve products from the database and <code>IWebHostEnvironment</code> to access the web root path, where files such as images might be stored.
+</p>
+
+<h4>2. Creating the ViewModel</h4>
+<p>
+    It's a good practice to use a ViewModel to pass data to your views. Below is an example of a simple ViewModel that contains a list of products and a string for the file path:
+</p>
+
+<code-block>
+    @@using System.Collections.Generic;
+    <br/>
+    @@using <tw><vc:o-name vm="solutionModel2" /></tw>.Models;
+
+    <br/><br/>
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.ViewModels
+    <p>{</p>
+    <openblock>
+        public class <cyan-code>ProductViewModel</cyan-code>
+        <p>{</p>
+        <openblock>
+            public IEnumerable&lt;<cyan-code>Product</cyan-code>&gt; Products { get; set; }
+            <br/>
+            public string UploadsFolderPath { get; set; }
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<h4>3. Creating the View for the ViewComponent</h4>
+<p>
+    Now, create a folder named <code>ProductViewComponent</code> inside <code>Views</code> -> <code>Shared</code> -> <code>Components</code>, and then add a <code>Default.cshtml</code> file. This Razor view will display the products and utilize the path from <code>IWebHostEnvironment</code>.
+</p>
+
+<code-block>
+    @@model <tw><vc:o-name vm="solutionModel2" /></tw>.ViewModels.ProductViewModel
+
+    <br/><br/>
+    <green-code><!-- Display each product with its image --> </green-code></br>
+    <blue-code>@foreachText</blue-code> (var product in Model.Products)
+    <p>{</p>
+    <openblock>
+        <p>@(productText).Name</p>
+        <br/>
+        @partOne @@Model.UploadsFolderPath@(productText).ImageName" alt="@(productText).Name" />
+        <br/>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>
+    In this view, we loop through the list of products, displaying each product's name and its associated image. The image path is constructed using the <code>UploadsFolderPath</code> from the ViewModel.
+</p>
+
+<h3>Conclusion</h3>
+<p>
+    By using <code>DbContext</code> and <code>IWebHostEnvironment</code> within a ViewComponent, you can create powerful, dynamic components that are tightly integrated with your application's data and environment. This allows for a highly flexible and reusable approach to displaying content in your ASP.NET Core application.
+</p>

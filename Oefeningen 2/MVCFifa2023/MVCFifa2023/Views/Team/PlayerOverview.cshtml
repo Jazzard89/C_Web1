@@ -1,0 +1,41 @@
+﻿ @model IEnumerable<MVCFifa2023.Models.Player> 
+
+@{
+    ViewData["Title"] = "PlayerOverview";
+    string teamName = ViewBag.Teams.TeamName.ToString();
+}
+
+<h1>PlayerOverview</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Team
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+ @foreach (var item in Model) {
+        <tr>
+                <td>
+                    @teamName
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+        </tr>
+} 
+    </tbody>
+</table>

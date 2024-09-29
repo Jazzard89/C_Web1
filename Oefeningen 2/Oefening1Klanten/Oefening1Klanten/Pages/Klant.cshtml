@@ -1,0 +1,33 @@
+﻿@page
+@model Oefening1Klanten.Pages.KlantModel
+@{
+    var klanten = Oefening1Klanten.Data.Databank.Klanten;
+    var rowId = 0;
+}
+<div class="text-center">
+    <h1 class="display-4">Klanten</h1>
+    <p>Dit is onze klanten razor page.</p>
+
+    <a asp-page="/NieuweKlant">Nieuwe klant</a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">KlantId</th>
+                <th scope="col">KlantNaam</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var klant in klanten)
+            {
+                rowId++;
+                <tr>
+                    <th scope="row">@rowId</th>
+                    <td>@klant.KlantId</td>
+                    <td>@klant.KlantNaam</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

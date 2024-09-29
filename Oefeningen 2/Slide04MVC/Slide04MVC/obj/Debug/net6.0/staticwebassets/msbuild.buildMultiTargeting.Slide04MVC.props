@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Slide04MVC.props" />
+</Project>

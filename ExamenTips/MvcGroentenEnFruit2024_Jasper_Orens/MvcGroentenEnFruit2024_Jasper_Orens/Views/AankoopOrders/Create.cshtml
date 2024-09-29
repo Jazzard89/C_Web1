@@ -1,0 +1,68 @@
+﻿@model MvcGroentenEnFruit2024_Jasper_Orens.Models.ViewModels.AankoopOrderViewModel
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@{
+    string userId = SignInManager.UserManager.GetUserId(User);
+    ViewData["Title"] = "Create";
+    string dateNow = DateTime.Now.ToString("yyyy-MM-dd");
+
+    // Ensure AankoopOrder and OrderLijn are not null
+    if (Model.AankoopOrder == null)
+    {
+        Model.AankoopOrder = new MvcGroentenEnFruit2024_Jasper_Orens.Models.AankoopOrder();
+    }
+    if (Model.OrderLijn == null)
+    {
+        Model.OrderLijn = new MvcGroentenEnFruit2024_Jasper_Orens.Models.OrderLijn();
+    }
+}
+
+<h1>Create</h1>
+
+<h4>AankoopOrder</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="AankoopOrder.AankoopDatum" class="control-label"></label>
+                <input asp-for="AankoopOrder.AankoopDatum" class="form-control" value="@dateNow" readonly />
+                <span asp-validation-for="AankoopOrder.AankoopDatum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AankoopOrder.IdentityUserId" class="control-label"></label>
+                <input asp-for="AankoopOrder.IdentityUserId" class="form-control" value="@userId" readonly />
+                <span asp-validation-for="AankoopOrder.IdentityUserId" class="text-danger"></span>
+            </div>
+
+            <br />
+            <h4>Orderlijn</h4>
+
+            <div class="form-group">
+                <label for="ArtikelId">Artikel ID</label>
+                <select asp-for="OrderLijn.ArtikelId" class="form-control" asp-items="ViewBag.OrderlijnenArtikelId"></select>
+                <span asp-validation-for="OrderLijn.ArtikelId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderLijn.Aantal">Aantal</label>
+                <input type="number" asp-for="OrderLijn.Aantal" class="form-control" />
+                <span asp-validation-for="OrderLijn.Aantal" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

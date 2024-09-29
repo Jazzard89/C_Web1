@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Languages>
+
+<h3>Language page</h3>
+<a asp-area="" asp-controller="Language" asp-action="Add">Add</a>
+
+@foreach (var language in Model){
+    <div>
+        <h3>@language.LanguageName</h3>
+        <h4>@language.Framework</h4>
+    </div>
+}

@@ -1,0 +1,108 @@
+﻿@{
+    string modelText = "@using";
+    string awaitString = "@await";
+}
+<h1>Model Validations in ASP.NET Core</h1>
+
+<h3>Introduction</h3>
+<p>
+    Model validation in ASP.NET Core ensures that the data received from a user input or any other source meets the required rules or constraints before being processed. This helps to maintain data integrity and prevent invalid data from being stored in the database. This page will guide you through setting up and using model validations in your application.
+</p>
+
+<h3>1. Setting Up Model Validations</h3>
+<p>
+    To set up model validations in ASP.NET Core, you need to use data annotation attributes in your model classes. These attributes enforce validation rules directly in the model. Here's an example of a model class with validation attributes:
+</p>
+
+<code-block>
+    <blue-code>@modelText</blue-code> System.ComponentModel.DataAnnotations;
+
+    <br/><br/>
+    <p>namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Models</p>
+    <p>{</p>
+    <openblock>
+        <p>public class <cyan-code>Product</cyan-code></p>
+        <p>{</p>
+        <openblock>
+            <p>[Required(ErrorMessage = <red-code>"Product Name is required."</red-code>)]</p>
+            <p>public string Name { get; set; }</p>
+
+            <br/><br/>
+            <p>
+                [Range(0.01, 1000.00, ErrorMessage = <red-code>"Price must be between 0.01 and 1000.00."</red-code>)]
+            </p>
+            <p>public decimal  Price{ get; set; }</p>
+
+            <br/><br/>
+            <p>
+                [StringLength(100, ErrorMessage = <red-code>"Description cannot exceed 100 characters."</red-code>)]
+            </p>
+            <p>public string Description { get; set; }</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>
+    In this example:
+</p>
+<ul>
+    <li>
+        <code>[Required]</code> ensures that the <code>Name</code> property is not null or empty.
+    </li>
+    <li>
+        <code>[Range]</code> specifies that the <code>Price</code> must be between 0.01 and 1000.00.
+    </li>
+    <li>
+        <code>[StringLength]</code> restricts the length of the <code>Description</code> to a maximum of 100 characters.
+    </li>
+</ul>
+
+<h3>2. Enabling Client-Side Validation</h3>
+<p>
+    ASP.NET Core automatically enables client-side validation, provided that you include the necessary JavaScript libraries in your view. To ensure that client-side validation works, make sure that your layout file includes these scripts:
+</p>
+
+<code-block>
+    <p><blue-code>@awaitString</blue-code> Html.RenderPartialAsync(<red-code>"_ValidationScriptsPartial"</red-code>)</p>
+</code-block>
+
+<p>
+    The <code>_ValidationScriptsPartial</code> file includes the necessary JavaScript libraries for client-side validation. This helps to give instant feedback to users when they submit a form with invalid data.
+</p>
+
+<h3>3. Validating Models in the Controller</h3>
+<p>
+    In the controller, you can check if the model is valid by using the <code>ModelState.IsValid</code> property. Here's an example:
+</p>
+
+<code-block>
+    public IActionResult Create(<cyan-code>Product</cyan-code> model)
+    <p>{</p>
+    <openblock>
+        <blue-code>if</blue-code> (!ModelState.IsValid)
+        <p>{</p>
+        <openblock>
+            return View(model);
+        </openblock>
+        <p>}</p>
+
+        <br/><br/>
+        <p><green-code>// Save the valid model to the database</green-code></p>
+        <p>_context.<cyan-code>Product</cyan-code>.Add(model);</p>
+        <p>_context.SaveChanges();</p>
+
+        <p>return RedirectToAction(<red-code>"Index"</red-code>);</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>
+    If the model is not valid, the view will be returned with validation errors. If the model is valid, it will be saved to the database.
+</p>
+
+<h3>Conclusion</h3>
+<p>
+    Model validation is an essential part of any ASP.NET Core application. By using data annotations, you can enforce validation rules directly in your model classes, ensuring that only valid data is processed and stored.
+</p>

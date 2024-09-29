@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MVCTagHelper</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MVCTagHelper.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+                <div class="bg-primary row">
+                    <div class="col-1">
+                        <a background-color="danger" asp-controller="Home" asp-action="Index">Home</a>
+                    </div>
+                    <div class="col-1">
+                        <a background-color="success" asp-controller="Land" asp-action="Index">Landen</a>
+                    </div>
+            <div class="col-1">
+                <a background-color="warning" asp-controller="Locatie" asp-action="Index">Locaties</a>
+            </div>
+            <div class="col-1">
+                <a background-color="warning" asp-controller="Medewerker" asp-action="Index">Medewerkers</a>
+            </div>
+                    <div class="col-1">
+                        <a background-color="warning" asp-controller="Afdeling" asp-action="Index">Afdelingen</a>
+                    </div>
+                    <div class="col-1">
+                        <a background-color="warning" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    </div>
+                </div>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - MVCTagHelper - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

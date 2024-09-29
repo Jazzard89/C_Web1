@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MVCClientLocEFCore</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MVCClientLocEFCore.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <div class="text-center">
+            <h2>PXL oefening</h2>
+        </div>
+    </header>
+    <div class="row m-1 p-1">
+            <div id="menu" class="col-3 border border-primary">
+                <div class="container">
+                    <ul>
+                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a asp-controller="Client" asp-action="Index">Clients</a></li>
+                        <li><a asp-controller="Location" asp-action="Index">Locations</a></li>
+                        <li><a asp-controller="ClientLocation" asp-action="Index">Overview</a></li>
+                        <li><a asp-controller="Products" asp-action="Index">Products</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="main" class="col-9 border border-primary">
+                @RenderBody()
+            </div>
+        </div>
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                PXL Oefening - @DateTime.Now.ToString("dd/MM/yyyy") 
+            </div>
+        </footer>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,188 @@
+﻿@{
+    string injectString = "@inject";
+    string usingString = "@using";
+    string userString = "@user";
+}
+<h1>Using UserManager in ASP.NET Core</h1>
+
+<h3>Introduction</h3>
+<p>
+    `UserManager` is a core component of ASP.NET Core Identity used to manage user accounts. It provides functionality for creating, deleting, and updating user information, as well as managing user roles and claims. This guide will demonstrate how to use `UserManager` in a controller, create a TagHelper for user-specific functionality, and utilize it in a Razor view.
+</p>
+
+<h3>1. Using UserManager in a Controller</h3>
+<p>
+    `UserManager` provides various methods for managing users. Below is an example of how to use `UserManager` in a controller to create a new user, update user information, and delete a user.
+</p>
+
+<code-block>
+    using Microsoft.AspNetCore.Identity;
+    <p>using Microsoft.AspNetCore.Mvc;</p>
+    <p>using <tw><vc:o-name vm="solutionModel2" /></tw>.Models;</p>
+    <p>namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Controllers</p>
+    <p>{</p>
+    <openblock>
+        public class <cyan-code>UserController</cyan-code> : Controller
+        <p>{</p>
+        <openblock>
+            private readonly UserManager&lt;IdentityUser&gt; _userManager;
+            <p>public UserController(UserManager&lt;IdentityUser&gt; userManager)</p>
+            <p>{</p>
+            <p>_userManager = userManager;</p>
+            <p>}</p>
+            <br/>
+            <p>public async Task&lt;IActionResult&gt; CreateUser(string username, string password)</p>
+            <p>{</p>
+            <openblock>
+                <p>var user = new IdentityUser { UserName = username };</p>
+                <p>var result = await _userManager.CreateAsync(user, password);</p>
+                <p><blue-code>if</blue-code> (result.Succeeded)</p>
+                <p>{</p>
+                <openblock>
+                    <p>return RedirectToAction(<red-code>"Index"</red-code>);</p>
+                </openblock>
+                <p>}</p>
+                <p><blue-code>foreach</blue-code> (var error in result.Errors)</p>
+                <p>{</p>
+                <openblock>
+                    <p>ModelState.AddModelError(string.Empty, error.Description);</p>
+                </openblock>
+                <p>}</p>
+                <p>return View();</p>
+            </openblock>
+            <p>}</p>
+            <br/>
+            <p>public async Task&lt;IActionResult&gt; UpdateUser(string userId, string newUsername)</p>
+            <p>{</p>
+            <openblock>
+                <p>var user = await _userManager.FindByIdAsync(userId);</p>
+                <p><blue-code>if</blue-code> (user != null)</p>
+                <p>{</p>
+                <openblock>
+                    <p>user.UserName = newUsername;</p>
+                    <p>var result = await _userManager.UpdateAsync(user);</p>
+                    <p><blue-code>if</blue-code> (result.Succeeded)</p>
+                    <p>{</p>
+                    <openblock>
+                        <p>return RedirectToAction(<red-code>"Index"</red-code>);</p>
+                    </openblock>
+                    <p>}</p>
+                    <p>foreach (var error in result.Errors)</p>
+                    <p>{</p>
+                    <openblock>
+                        <p>ModelState.AddModelError(string.Empty, error.Description);</p>
+                    </openblock>
+                    <p>}</p>
+                </openblock>
+                <p>}</p>
+                <p>return View();</p>
+            </openblock>
+            <p>}</p>
+            <br/>
+            <p>public async Task&lt;IActionResult&gt; DeleteUser(string userId)</p>
+            <p>{</p>
+            <openblock>
+                <p>var user = await _userManager.FindByIdAsync(userId);</p>
+                <p><blue-code>if</blue-code> (user != null)</p>
+                <p>{</p>
+                <openblock>
+                    <p>var result = await _userManager.DeleteAsync(user);</p>
+                    <p><blue-code>if</blue-code> (result.Succeeded)</p>
+                    <p>{</p>
+                    <openblock>
+                        <p>return RedirectToAction(<red-code>"Index"</red-code>);</p>
+                    </openblock>
+                    <p>}</p>
+                    <p>foreach (var error in result.Errors)</p>
+                    <p>{</p>
+                    <openblock>
+                        <p>ModelState.AddModelError(string.Empty, error.Description);</p>
+                    </openblock>
+                    <p>}</p>
+                </openblock>
+                <p>}</p>
+                <p>return View();</p>
+            </openblock>
+            <p>}</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<h3>2. Implementing a TagHelper for User-Based Functionality</h3>
+<p>
+    You can create a TagHelper to customize user-specific functionality in your application. Below is an example of a TagHelper that displays user-specific content based on the logged-in user's username.
+</p>
+
+<code-block>
+    using Microsoft.AspNetCore.Identity;
+    <p>using Microsoft.AspNetCore.Razor.TagHelpers;</p>
+    <p>namespace <tw><vc:o-name vm="solutionModel2" /></tw>.TagHelpers</p>
+    <p>{</p>
+    <openblock>
+        public class <cyan-code>UserTagHelper</cyan-code> : TagHelper
+        <p>{</p>
+        <openblock>
+            private readonly UserManager&lt;IdentityUser&gt; _userManager;
+            <p>public <cyan-code>UserTagHelper</cyan-code>(UserManager&lt;IdentityUser&gt; userManager)</p>
+            <p>{</p>
+            <p>_userManager = userManager;</p>
+            <p>}</p>
+            <br/>
+            <p>public override async Task&lt;Task&gt; ProcessAsync(TagHelperContext context, TagHelperOutput output)</p>
+            <p>{</p>
+            <openblock>
+                <p>var user = await _userManager.GetUserAsync(HttpContext.User);</p>
+                <p><blue-code>if</blue-code> (user != null)</p>
+                <p>{</p>
+                <openblock>
+                    <p>output.TagName = <red-code>"div"</red-code>;</p>
+                    <p>output.Content.SetContent(<red-code>"Hello, "</red-code> + user.UserName);</p>
+                </openblock>
+                <p>}</p>
+                <p>else</p>
+                <p>{</p>
+                <openblock>
+                    <p>output.SuppressOutput();</p>
+                </openblock>
+                <p>}</p>
+            </openblock>
+            <p>}</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<h3>3. Using UserManager in a Razor View</h3>
+<p>
+    In Razor views, you can use `UserManager` to display user-specific information or manage user-related functionality. Here’s an example of how to display the current user’s username and email.
+</p>
+
+<code-block>
+    @@using Microsoft.AspNetCore.Identity
+    <p>@@inject UserManager&lt;IdentityUser&gt; UserManager</p>
+    <p>&lt;div&gt;</p>
+    <p>&lt;!-- Display the current user's username and email --&gt;</p>
+    <p>var user = await UserManager.GetUserAsync(User);</p>
+    <p><blue-code>if</blue-code> (user != null)</p>
+    <p>{</p>
+    <openblock>
+        <p>&lt;p&gt;Username: @(userString).UserName&lt;/p&gt;</p>
+        <p>&lt;p&gt;Email: @(userString).Email&lt;/p&gt;</p>
+    </openblock>
+    <p>}</p>
+    <p>else</p>
+    <p>{</p>
+    <openblock>
+        <p>&lt;p&gt;User is not logged in.&lt;/p&gt;</p>
+    </openblock>
+    <p>}</p>
+    <p>&lt;/div&gt;</p>
+</code-block>
+
+<h3>Conclusion</h3>
+<p>
+    This guide demonstrated how to use `UserManager` to manage users within an ASP.NET Core application. We covered how to integrate `UserManager` into a controller for user management, create a TagHelper for user-specific functionality, and display user-specific information in a Razor view. By following these steps, you can effectively manage user accounts and personalize content based on user information in your application.
+</p>

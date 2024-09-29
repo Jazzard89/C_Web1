@@ -1,0 +1,142 @@
+﻿<h1>Setting Up an API application</h1>
+
+<h3>Step 1: Required packages</h3>
+<p>
+    First install the <a href="@Url.Action("DownloadFile", "Home", new { fileName = "microsoft.entityframeworkcore.sqlserver.6.0.33.nupkg" })">
+        Microsoft.EntityFrameworkCore.SqlServer
+    </a>, <a href="@Url.Action("DownloadFile", "Home", new { fileName = "microsoft.entityframeworkcore.tools.6.0.33.nupkg" })">
+        Microsoft.EntityFrameworkCore.Tools
+    </a> and the <a href="@Url.Action("DownloadFile", "Home", new { fileName = "newtonsoft.json.6.0.8.nupkg" })">
+        Newtonsoft.Json
+    </a> packages
+</p>
+
+
+
+<h3>Step 2: Create the models</h3>
+<p>
+    We will create 3 models for this tutorial
+</p>
+
+
+
+<code-block>
+    using System.Text.Json.Serialization;<br />
+    <br />
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.ClassLib.Models<br />
+    {
+    <openblock>
+        <p>public class <cyan-code>Location</cyan-code></p>
+        <p>{</p>
+        <openblock>
+            public long Id { get; set; }
+            <br /> public string City {get; set; }
+            <br /> public string State {get; set; }
+            <br /><green-code>//We add the JsonIgnore so that when we update this class we don't need to pass a Person'</green-code>
+            <br />[JsonIgnore]
+            <br /> public IEnumerable&lt;<cyan-code>Person</cyan-code>&gt; ? People {get; set; }
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>Person class</p>
+<code-block>
+
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.ClassLib.Models<br />
+    {
+    <openblock>
+        <p>public class <cyan-code>Person</cyan-code></p>
+        <p>{</p>
+        <openblock>
+            public long Id { get; set; }
+            <br /> public string FirstName {get; set; }
+            <br /> public string Surname {get; set; }
+            <br /> public <cyan-code>Department</cyan-code> Department {get; set; }
+            <br /> public long DepartmentId {get; set; }
+            <br /> public <cyan-code>Location</cyan-code> Location {get; set; }
+            <br /> public long LocationId {get; set; }
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+
+
+
+<p>Department class</p>
+<code-block>
+
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.ClassLib.Models<br />
+    {
+    <openblock>
+        <p>public class <cyan-code>Department</cyan-code></p>
+        <p>{</p>
+        <openblock>
+            public long Id { get; set; }
+            <br /> public string Name {get; set; }
+            <br /> public IEnumerable&lt;<cyan-code>Person</cyan-code>&gt; People {get; set; }
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<h3>Step 3: Setting up the appsettings.json</h3>
+<p>
+    Add a connectionString to the appsettings json file
+</p>
+<code-block>
+    <openblock>
+        <p>{</p>
+        </br><green-code>//...</green-code>
+        <br />"PeopleConnection": <red-code>"Server=(localdb)\\MSSQLLocalDB;Database=<tw><vc:o-name vm="solutionModel2" /></tw>;MultipleActiveResultSets=True"</red-code>
+        </br><green-code>//...</green-code>
+        <p>}</p>
+    </openblock>
+</code-block>
+
+<h3>Step 4: Program.cs</h3>
+<p>
+    We need to pass the correct services to set up our database
+</p>
+<code-block>
+
+    <br /><green-code>//...</green-code>
+    <br />var connString = builder.Configuration.GetConnectionString(<red-code>"PeopleConnection"</red-code>);
+    <br />builder.Services.AddDbContext&lt;<tw><vc:o-name vm="dbModel" /></tw>&gt;(options =>
+    <p>{</p>
+    <openblock>
+        options.UseSqlServer(connString);
+    </openblock>
+    <p>});</p>
+</code-block>
+
+
+
+<h3>Step 5: Create the <tw><vc:o-name vm="dbModel2" /></tw> class</h3>
+<p>
+    Please mind yourself to do a 'drop-database' prior if this has already been created
+    and after that an 'add-migration initial' and 'update-database'.
+</p>
+<code-block>
+    using Microsoft.EntityFrameworkCore;<br />
+    using <tw><vc:o-name vm="solutionModel2" /></tw>.ClassLib.Models;<br />
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Data<br />
+    {<br/>
+    <openblock>
+        public class <tw><vc:o-name vm="dbModel" /></tw> : <cyan-code>DbContext</cyan-code>
+        <br/>{<br/>
+        <openblock>
+            public <tw><vc:o-name vm="dbModel" /></tw>(<cyan-code>DbContextOptions</cyan-code>&lt;<tw><vc:o-name vm="dbModel" /></tw>&gt; options) : base(options) { }
+            <br/>
+            <br />public DbSet&lt;<cyan-code>Person</cyan-code>&gt; People {get; set; }
+            <br />public DbSet&lt;<cyan-code>Department</cyan-code>&gt; Departments {get; set; }
+            <br />public DbSet&lt;<cyan-code>Location</cyan-code>&gt; Locations {get; set; }
+        </openblock>
+        }
+    </openblock>
+    }
+</code-block>

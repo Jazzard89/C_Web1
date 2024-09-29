@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\MVCFifa2023.props" />
+</Project>

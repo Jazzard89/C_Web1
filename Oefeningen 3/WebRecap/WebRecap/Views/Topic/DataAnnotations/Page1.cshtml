@@ -1,0 +1,142 @@
+﻿
+@{
+    string modelText = "@using";
+    string modelText2 = "@Model";
+}
+
+<h1>DataAnnotations</h1>
+<table>
+    <thead>
+        <tr>
+            <h3>Page 1: Using DataAnnotations to Customize Entity Properties</h3>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                DataAnnotations in ASP.NET Core are attributes you can apply to class properties to define how they should be represented and validated, both in your application and in the database. These annotations are particularly useful for specifying the data types, validation rules, and display formatting.
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Why Use DataAnnotations?</h3>
+<p>
+    DataAnnotations allow you to enforce rules and constraints directly in your models, ensuring that your data is correctly validated and formatted before it reaches the database. This helps in maintaining data integrity and consistency across the application.
+</p>
+
+<h3>Common DataAnnotations for SQL Representation</h3>
+<p>
+    Below are some common DataAnnotations used to customize how properties are mapped to SQL types:
+</p>
+
+<h4>1. Specifying Decimal Precision</h4>
+<p>
+    To specify a decimal property with a particular precision and scale (e.g., `decimal(8,2)` in SQL), use the <code>[Column]</code> attribute:
+</p>
+
+<code-block>
+    <blue-code>@modelText </blue-code> System.ComponentModel.DataAnnotations;
+    <br />
+    <blue-code>@modelText </blue-code>System.ComponentModel.DataAnnotations.Schema;
+
+    <br /><br />
+    public class <cyan-code>Product</cyan-code>
+    <p>{</p>
+    <openblock>
+        public int Id { get; set; }
+        <br /><br />
+        [Column(TypeName = <red-code>"decimal(8,2)"</red-code>)]
+        <br />
+        public decimal Price { get; set; }
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>
+    This annotation ensures that the <code>Price</code> property is stored as a decimal with 8 total digits, 2 of which are after the decimal point.
+</p>
+
+<h4>2. Storing Date Only (No Time)</h4>
+<p>
+    If you need to store a date without a time component (similar to `DATE` in SQL), you can use the <code>[DataType]</code> attribute:
+</p>
+
+<code-block>
+    <blue-code>@modelText </blue-code>System.ComponentModel.DataAnnotations;
+    <br />
+    <blue-code>@modelText </blue-code>System.ComponentModel.DataAnnotations.Schema;
+
+    <br /><br />
+    public class <cyan-code>Event</cyan-code>
+    <p>{</p>
+    <openblock>
+        public int Id { get; set; }
+        <br /><br />
+        [DataType(DataType.Date)]
+        <br />
+        [Column(TypeName = <red-code>"date"</red-code>)]
+        <br />
+        public DateTime EventDate { get; set; }
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>
+    The combination of <code>[DataType(DataType.Date)]</code> and <code>[Column(TypeName = "date")]</code> ensures that the `EventDate` property is stored as a date-only field in the database, without a time component.
+</p>
+
+<h4>3. Formatting String Length</h4>
+<p>
+    To specify the maximum length of a string in the database, use the <code>[MaxLength]</code> or <code>[StringLength]</code> attributes:
+</p>
+
+<code-block>
+    <blue-code>@modelText </blue-code>System.ComponentModel.DataAnnotations;
+
+    <br /><br />
+    public class <cyan-code>User</cyan-code>
+    <p>{</p>
+    <openblock>
+        public int Id { get; set; }
+        <br /><br />
+        [MaxLength(50)]
+        <br />
+        public string UserName { get; set; }
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>
+    This ensures that the `UserName` property cannot exceed 50 characters in length when stored in the database.
+</p>
+
+<h4>4. Setting a Property as Required</h4>
+<p>
+    Use the <code>[Required]</code> attribute to enforce that a field must have a value:
+</p>
+
+<code-block>
+    <blue-code>@modelText </blue-code> System.ComponentModel.DataAnnotations;
+
+    <br /><br />
+    public class <cyan-code>Employee</cyan-code>
+    <p>{</p>
+    <openblock>
+        public int Id { get; set; }
+        <br /><br />
+        [Required]
+        <br />
+        public string FirstName { get; set; }
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>
+    The `[Required]` annotation ensures that `FirstName` cannot be null or empty in the database, enforcing a not-null constraint.
+</p>
+
+<h3>Conclusion</h3>
+<p>
+    DataAnnotations provide a powerful way to control how your entity properties are mapped to SQL types and how they behave in your application. By using these annotations, you can ensure that your data is accurately represented and validated, both in the code and in the database.
+</p>

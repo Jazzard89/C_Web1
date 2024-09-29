@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Slide23.props" />
+</Project>

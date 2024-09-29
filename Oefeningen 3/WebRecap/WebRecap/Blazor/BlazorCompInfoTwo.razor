@@ -1,0 +1,263 @@
+﻿@* @page "/blazorcompinfo1" *@
+@code {
+    string usingString = "@using";
+    string pageString = "@page";
+    string codeString = "@code";
+    string ifString = "@if";
+    string foreachString = "@foreach";
+    string weirdString = "@(()";
+    string bindValString = "@bind-Value";
+    string fundString = "@fund";
+
+    private string RazorPageName = "UserFundList";
+    private string RazorPageNameHook => $"{RazorPageName}()";
+    private string SolutionName = "WebRecap";
+    private string modelName = "UserFund";
+    private string modelNameS => $"{modelName}s";
+    private string dbContextName = "ApplicationDbContext";
+    private string lowcas(string str)
+    {
+        return char.ToLower(str[0]) + str.Substring(1);
+    }
+}
+<h1>Using a Blazor Component in your MVC App</h1>
+<label>dbContextName</label>
+<input type="text" @bind="dbContextName" />
+<p>Current Name: @dbContextName</p>
+<br />
+<label>model Name</label>
+<input type="text" @bind="modelName" />
+<p>Current Name: @modelName</p>
+<br />
+<label>SolutionName Name</label>
+<input type="text" @bind="SolutionName" />
+<p>Current Name: @SolutionName</p>
+<br />
+<label>RazorPage Name</label>
+<input type="text" @bind="RazorPageName" />
+<p>Current Name: @RazorPageName</p>
+
+<h3>Step 6: Set up the link in the razor page</h3>
+<p>
+    Set up the link in the razor page .cshtml where you want to navigate to the Blazor component
+</p>
+<CodeTag>
+    <ColorTag Color="blue">&lt;</ColorTag><ColorTag Color="purple">component type</ColorTag> <ColorTag Color="blue">="typeof</ColorTag>(@(SolutionName).Blazor.<ColorTag Color="cyan">UserfundAdd</ColorTag>)<ColorTag Color="blue">"</ColorTag> <ColorTag Color="purple">render-mode</ColorTag><ColorTag Color="blue">="</ColorTag>Server<ColorTag Color="blue">"/&gt;</ColorTag>
+</CodeTag>
+<br />
+<h3>Step 7: Modify the Create in the Controller</h3>
+<p>Simply modify the Create to return a View and delete the Post method</p>
+<CodeTag>
+    <ColorTag Color="blue">public</ColorTag> <ColorTag Color="cyan">IActionResult</ColorTag> <ColorTag Color="brown">Create</ColorTag>()<br />
+    {<br />
+    <OpenTag>
+        <ColorTag Color="purple">return</ColorTag> <ColorTag Color="brown">View</ColorTag>();<br />
+    </OpenTag>
+    }
+</CodeTag>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3>Step 5: Create Blazor component in the Blazor folder</h3>
+<p>Add a new folder named 'Blazor' to the project, then create a Razor component named `CreateUserFundComponent`:</p>
+<CodeTag>
+    @pageString <ColorTag Color="red">"/createuserfund"</ColorTag><br />
+    <ColorTag Color="blue">@usingString</ColorTag> @(SolutionName).Data<br />
+    <ColorTag Color="blue">@usingString</ColorTag> @(SolutionName).Models<br />
+    <ColorTag Color="blue">@usingString</ColorTag> Microsoft.AspNetCore.Identity<br />
+    <ColorTag Color="blue">@usingString</ColorTag> Microsoft.AspNetCore.Components.Authorization<br />
+    <ColorTag Color="blue">@usingString</ColorTag> Microsoft.EntityFrameworkCore<br />
+    <ColorTag Color="blue">@usingString</ColorTag> Microsoft.AspNetCore.Components.Forms<br/>
+    <ColorTag Color="blue">@usingString</ColorTag> Microsoft.AspNetCore.Mvc.Rendering<br /><br /><br />
+    <ColorTag Color="blue">@codeString</ColorTag> {<br />
+    <OpenTag>
+        [<ColorTag Color="cyan">Inject</ColorTag>]<br />
+        <ColorTag Color="cyan">@dbContextName</ColorTag> @lowcas(dbContextName) { <ColorTag Color="blue">get</ColorTag>; <ColorTag Color="blue">set</ColorTag>; }<br />
+        <br />
+        [<ColorTag Color="cyan">Inject</ColorTag>]<br />
+        <ColorTag Color="cyan">SignInManager</ColorTag>&lt;<ColorTag Color="cyan">IdentityUser</ColorTag>&gt; SignInManager {<ColorTag Color="blue">get</ColorTag>; <ColorTag Color="blue">set</ColorTag>; }<br />
+        <br />
+        [<ColorTag Color="cyan">Inject</ColorTag>]<br />
+        <ColorTag Color="cyan">UserManager</ColorTag>&lt;<ColorTag Color="cyan">IdentityUser</ColorTag>&gt; userManager {<ColorTag Color="blue">get</ColorTag>; <ColorTag Color="blue">set</ColorTag>; }<br />
+        <br />
+        [<ColorTag Color="cyan">Inject</ColorTag>]<br />
+        <ColorTag Color="cyan">AuthenticationStateProvider</ColorTag> authenticationStateProvider {<ColorTag Color="blue">get</ColorTag>; <ColorTag Color="blue">set</ColorTag>; }<br />
+        <br />
+        <ColorTag Color="blue">private string</ColorTag> UserId { <ColorTag Color="blue">get</ColorTag>; <ColorTag Color="blue">set</ColorTag>; }
+        <br />
+        <ColorTag Color="blue">private</ColorTag> <ColorTag Color="cyan">@modelName</ColorTag> @lowcas(modelName) {<ColorTag Color="blue">get</ColorTag>; <ColorTag Color="blue">set</ColorTag>; } = <ColorTag Color="purple">new</ColorTag> @modelName ();<br />
+        <br />
+        <ColorTag Color="blue">private</ColorTag> <ColorTag Color="cyan">List</ColorTag>&lt;<ColorTag Color="cyan">SelectListItem</ColorTag>&gt; Funds {<ColorTag Color="blue">get</ColorTag>; <ColorTag Color="blue">set</ColorTag>; } = <ColorTag Color="blue">new</ColorTag> <ColorTag Color="cyan">List</ColorTag>&lt;<ColorTag Color="cyan">SelectListItem</ColorTag>&gt;();
+        <br />
+        <br />
+        <ColorTag Color="blue">protected override async</ColorTag> <ColorTag Color="cyan">Task</ColorTag> <ColorTag Color="brown">OnInitializedAsync</ColorTag>()<br />
+        {<br />
+        <OpenTag>
+            <ColorTag Color="blue">await</ColorTag> AddUserId();<br />
+            <ColorTag Color="blue">await</ColorTag> LoadFunds();<br />
+        </OpenTag>
+        }<br />
+        <br />
+        <ColorTag Color="blue">private async</ColorTag> <ColorTag Color="cyan">Task</ColorTag> AddUserId()<br />
+        {<br />
+        <OpenTag>
+            <ColorTag Color="blue">var</ColorTag> authState = <ColorTag Color="blue">await</ColorTag> authenticationStateProvider.<ColorTag Color="brown">GetAuthenticationStateAsync</ColorTag>();
+            <br />
+            <ColorTag Color="blue">var</ColorTag> user = authState.User;
+            <br />
+            <br />
+            <ColorTag Color="purple">if</ColorTag> (SignInManager.<ColorTag Color="brown">IsSignedIn</ColorTag>(user))<br />
+            {<br />
+            <OpenTag>
+                <ColorTag Color="blue">var</ColorTag> identityUser = <ColorTag Color="blue">await</ColorTag> userManager.<ColorTag Color="brown">FindByNameAsync</ColorTag>(user.Identity.Name);<br />
+                UserId = identityUser.Id;<br />
+                userFund.UserId = UserId;<br />
+            </OpenTag>
+            }
+        </OpenTag>
+        }<br />
+
+        <ColorTag Color="blue">private async</ColorTag> <ColorTag Color="cyan">Task</ColorTag> <ColorTag Color="brown">LoadFunds</ColorTag>()<br />
+        {<br />
+        <OpenTag>
+            <ColorTag Color="blue">var</ColorTag> funds = <ColorTag Color="blue">await</ColorTag> @(lowcas(dbContextName)).Funds.<ColorTag Color="brown">ToListAsync</ColorTag>();<br />
+            Funds = funds.Select(f => <ColorTag Color="blue">new</ColorTag> <ColorTag Color="cyan">SelectListItem</ColorTag><br />
+            {<br />
+            <OpenTag>
+                Value = f.FundId.ToString(),<br />
+                Text = f.FundName<br />
+            </OpenTag>
+            }).<ColorTag Color="brown">ToList</ColorTag>();<br />
+        </OpenTag>
+        }<br />
+
+
+        <ColorTag Color="blue">private async</ColorTag> <ColorTag Color="cyan">Task</ColorTag> <ColorTag Color="brown">HandleValidSubmit</ColorTag>()<br />
+        {<br />
+        <OpenTag>
+            userFund.UserId = UserId;<br />
+            @(lowcas(dbContextName)).@(modelNameS).<ColorTag Color="brown">Add</ColorTag>(userFund);<br />
+            <ColorTag Color="blue">await</ColorTag> @(lowcas(dbContextName)).<ColorTag Color="brown">SaveChangesAsync</ColorTag>();<br />
+
+        </OpenTag>
+        }
+    </OpenTag>
+    }<br />
+
+
+
+    <ColorTag Color="blue">&lt;</ColorTag><ColorTag Color="brown">h4</ColorTag><ColorTag Color="blue">&gt;</ColorTag>Create User Fund<ColorTag Color="blue">&lt;/</ColorTag><ColorTag Color="purple">h4</ColorTag><ColorTag Color="blue">&gt;</ColorTag><br />
+    <ColorTag Color="blue">&lt;</ColorTag><ColorTag Color="brown">hr</ColorTag> <ColorTag Color="blue">/&gt;</ColorTag><br />
+    <ColorTag Color="blue">&lt;</ColorTag><ColorTag Color="brown">div</ColorTag> <ColorTag Color="red">class</ColorTag><ColorTag Color="blue">="row"&gt;</ColorTag><br />
+    <OpenTag>
+        <ColorTag Color="blue">&lt;</ColorTag><ColorTag Color="brown">div</ColorTag> <ColorTag Color="red">class</ColorTag><ColorTag Color="blue">="col-md-4"&gt;</ColorTag><br />
+
+
+
+
+
+
+
+
+
+        <ColorTag Color="blue">&lt;</ColorTag><ColorTag Color="purple">EditForm Model</ColorTag>="userFund" OnValidSubmit="HandleValidSubmit"<ColorTag Color="blue">&gt;</ColorTag><br />
+        <OpenTag>
+            <ColorTag Color="blue">&lt;</ColorTag>DataAnnotationsValidator /<ColorTag Color="blue">&gt;</ColorTag><br />
+            <ColorTag Color="blue">&lt;</ColorTag>ValidationSummary /<ColorTag Color="blue">&gt;</ColorTag><br />
+            <br />
+            <ColorTag Color="blue">&lt;</ColorTag>div class="form-group"<ColorTag Color="blue">&gt;</ColorTag><br />
+            <OpenTag>
+                <br />
+                <ColorTag Color="blue">&lt;</ColorTag>label for="FundId"<ColorTag Color="blue">&gt;</ColorTag>Fund<ColorTag Color="blue">&lt;</ColorTag>/label<ColorTag Color="blue">&gt;</ColorTag><br />
+                <ColorTag Color="blue">&lt;</ColorTag>InputSelect id="FundId" @bindValString ="userFund.FundId" class="form-control"<ColorTag Color="blue">&gt;</ColorTag><br />
+                <ColorTag Color="purple">@ifString</ColorTag> (Funds != null)<br />
+                {<br />
+                <OpenTag>
+                    <ColorTag Color="purple">foreach</ColorTag> (<ColorTag Color="blue">var</ColorTag> fund <ColorTag Color="purple">in</ColorTag> Funds)<br />
+                    {<br />
+                    <OpenTag>
+                        <ColorTag Color="blue">&lt;</ColorTag>option value="@(fundString).Value"<ColorTag Color="blue">&gt;</ColorTag>@(fundString).Text<ColorTag Color="blue">&lt;</ColorTag>/option<ColorTag Color="blue">&gt;</ColorTag><br />
+                    </OpenTag>
+                    }<br />
+                </OpenTag>
+                }<br />
+                else<br />
+                {<br />
+                <OpenTag>
+                    <ColorTag Color="blue">&lt;</ColorTag>option value=""<ColorTag Color="blue">&gt;</ColorTag>No funds available<ColorTag Color="blue">&lt;</ColorTag>/option<ColorTag Color="blue">&gt;</ColorTag><br />
+                </OpenTag>
+                }<br />
+                <ColorTag Color="blue">&lt;</ColorTag>/InputSelect<ColorTag Color="blue">&gt;</ColorTag><br />
+                <ColorTag Color="blue">&lt;</ColorTag>ValidationMessage For="@weirdString =<ColorTag Color="blue">&gt;</ColorTag> userFund.FundId)" /<ColorTag Color="blue">&gt;</ColorTag><br />
+
+            </OpenTag>
+            <ColorTag Color="blue">&lt;</ColorTag>/div<ColorTag Color="blue">&gt;</ColorTag><br />
+            
+            <ColorTag Color="blue">&lt;</ColorTag>div class="form-group"<ColorTag Color="blue">&gt;</ColorTag><br />
+            <OpenTag>
+                <ColorTag Color="blue">&lt;</ColorTag>label for="Amount"<ColorTag Color="blue">&gt;</ColorTag>Amount<ColorTag Color="blue">&lt;</ColorTag>/label<ColorTag Color="blue">&gt;</ColorTag><br />
+                <ColorTag Color="blue">&lt;</ColorTag>InputNumber id="Amount" @bindValString ="userFund.Amount" class="form-control" /<ColorTag Color="blue">&gt;</ColorTag><br />
+                <ColorTag Color="blue">&lt;</ColorTag>ValidationMessage For="@weirdString =<ColorTag Color="blue">&gt;</ColorTag> userFund.Amount)" /<ColorTag Color="blue">&gt;</ColorTag><br />
+
+            </OpenTag>
+            <ColorTag Color="blue">&lt;</ColorTag>/div<ColorTag Color="blue">&gt;</ColorTag><br />
+            
+            <ColorTag Color="blue">&lt;</ColorTag>div class="form-group"<ColorTag Color="blue">&gt;</ColorTag><br />
+            <OpenTag>
+                <ColorTag Color="blue">&lt;</ColorTag>button type="submit" class="btn btn-primary"<ColorTag Color="blue">&gt;</ColorTag><br />Create<ColorTag Color="blue">&lt;</ColorTag>/button<ColorTag Color="blue">&gt;</ColorTag><br />
+
+            </OpenTag>
+            <ColorTag Color="blue">&lt;</ColorTag>/div<ColorTag Color="blue">&gt;</ColorTag><br />
+
+        </OpenTag>
+        <ColorTag Color="blue">&lt;</ColorTag>/EditForm<ColorTag Color="blue">&gt;</ColorTag><br />
+
+
+
+
+
+
+
+
+
+
+
+        <ColorTag Color="blue">&lt;/</ColorTag><ColorTag Color="brown">div</ColorTag><ColorTag Color="blue">&gt;</ColorTag><br />
+    </OpenTag>
+    <ColorTag Color="blue">&lt;/</ColorTag><ColorTag Color="brown">div</ColorTag><ColorTag Color="blue">&gt;</ColorTag><br />
+<br/>
+<br/>
+    <ColorTag Color="blue">&lt;</ColorTag><ColorTag Color="brown">div</ColorTag> <ColorTag Color="blue">&gt;</ColorTag><br />
+    <OpenTag>
+        <ColorTag Color="blue">&lt;</ColorTag><ColorTag Color="brown">a</ColorTag> <ColorTag Color="red">href</ColorTag><ColorTag Color="blue">="/index"&gt;</ColorTag>Back to List<ColorTag Color="blue">&lt;/</ColorTag><ColorTag Color="brown">a</ColorTag><ColorTag Color="blue">&gt;</ColorTag><br />
+    </OpenTag>
+    <ColorTag Color="blue">&lt;/</ColorTag><ColorTag Color="brown">div</ColorTag> <ColorTag Color="blue">&gt;</ColorTag><br />
+</CodeTag>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* <ColorTag Color="blue">&lt;</ColorTag> <ColorTag Color="blue">&gt;</ColorTag> *@

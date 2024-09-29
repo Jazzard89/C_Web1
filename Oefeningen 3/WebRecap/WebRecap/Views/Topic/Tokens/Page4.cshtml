@@ -1,0 +1,296 @@
+﻿<h1>Setting Up Token based Authentication</h1>
+
+<h3>Step 5: Create the model TokenModel class</h3>
+<p>
+    This class is required to store the token and the refresh token for use in the
+    AccountController.
+</p>
+<code-block>
+    using Microsoft.AspNetCore.Identity;<br/>
+    using Microsoft.AspNetCore.Mvc;<br />
+    using Microsoft.IdentityModel.Tokens;<br />
+    using <tw><vc:o-name vm="solutionModel2" /></tw>.Data;<br />
+    using <tw><vc:o-name vm="solutionModel2" /></tw>.Models;<br />
+    using <tw><vc:o-name vm="solutionModel2" /></tw>.Models.ViewModels;<br />
+    using System.IdentityModel.Tokens.Jwt;<br />
+    using System.Security.Claims;<br />
+    using System.Text;<br />
+    <br/>
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Controllers<br />
+    {<br/>
+        <openblock>
+            [<cyan-code>Route</cyan-code>(<red-code>"api/[controller]"</red-code>)]<br/>
+            [<cyan-code>ApiController</cyan-code>]<br/><br/>
+            public class <cyan-code>AccountController</cyan-code> : Controller<br/>
+            {<br/>
+            <openblock>
+            private readonly UserManager&lt;ApplicationUser&gt; _userManager;<br/>
+            private readonly RoleManager&lt;IdentityRole&gt; _roleManager;<br/>
+            private readonly <cyan-code>IConfiguration</cyan-code> _configuration;<br/>
+            <br/>
+            public <cyan-code>AccountController</cyan-code>(UserManager&lt;ApplicationUser&gt; userManager, RoleManager&lt;IdentityRole&gt; roleManager, <cyan-code>IConfiguration</cyan-code> configuration)<br/>
+            {<br/>
+                <openblock>
+                _userManager = userManager;<br/>
+                _roleManager = roleManager;<br/>
+                _configuration = configuration;<br/>
+                </openblock>
+            }<br/>
+
+            [HttpPost]<br/>
+            [<cyan-code>Route</cyan-code>(<red-code>"Login"</red-code>)]<br/>
+            public async Task&lt;IActionResult&gt; LoginAsync([FromBody] <cyan-code>LoginModel</cyan-code> model)<br/>
+            {<br/>
+            <openblock>
+                var user = await _userManager.FindByNameAsync(model.UserName);<br/>
+                <purple-code>if</purple-code> (user == null || await _userManager.CheckPasswordAsync(user, model.Password) == false)<br />
+                {<br />
+                <openblock>
+                    return Unauthorized();<br />
+                </openblock>
+                }<br />
+                <br />
+                var userRoles = await _userManager.GetRolesAsync(user);<br />
+                <br />
+                var authClaim = new List&lt;Claim&gt;<br />
+                {<br />
+                 <openblock>
+                    new Claim(<cyan-code>ClaimTypes</cyan-code>.Name, user.UserName),<br />
+                    new Claim(<cyan-code>JwtRegisteredClaimNames</cyan-code>.Jti, Guid.NewGuid().ToString())<br />
+                 </openblock>
+                };<br />
+                <br />
+                <purple-code>if</purple-code> (userRoles.Count > 0)<br />
+                {<br />
+                    <openblock>
+                <purple-code>foreach</purple-code> (var userRole in userRoles)<br />
+                {<br />
+                    <openblock>
+                authClaim.Add(new Claim(<cyan-code>ClaimTypes</cyan-code>.Role, userRole));<br />
+                    </openblock>
+                    }<br />
+                </openblock>
+                }<br />
+                <purple-code>else</purple-code><br/>
+                {<br />
+                    <openblock>
+                    return StatusCode(StatusCodes.Status500InternalServerError,<br />
+                    new { Status = <red-code>"Error"</red-code>, Message = <red-code>"UserRoles is null"</red-code> });<br />
+                </openblock>
+                 }<br />
+                <br />
+                var token = CreateToken(authClaim);<br />
+                var refreshToken = GenerateRefreshToken();<br />
+                <br />
+                _ = int.TryParse(_configuration[<red-code>"JWT:RefreshTokenValidityInDays"</red-code>],<br />
+                <blue-code>out int</blue-code> refreshTokenValidityInDays);<br />
+                <br />
+                user.RefreshToken = refreshToken;<br />
+                user.RefreshTokenExpiryTime = DateTime.Now.AddDays(refreshTokenValidityInDays);<br />
+                <br />
+                await _userManager.UpdateAsync(user);<br />
+                <br />
+                try<br />
+                {<br />
+                <openblock>
+                    var tokenResult = new<br />
+                    {<br />
+                        <openblock>
+                        Token = new JwtSecurityTokenHandler().WriteToken(token),<br />
+                        RefreshToken = refreshToken,<br />
+                        Expiration = token.ValidTo<br />
+                        </openblock>
+                    };<br />
+                    <purple-code>if</purple-code> (tokenResult == null)<br />
+                    {<br />
+                        <openblock>
+                        return StatusCode(StatusCodes.Status500InternalServerError,<br />
+                        new { Status = <red-code>"Error"</red-code>, Message = <red-code>"Token is null"</red-code> });<br />
+                        </openblock>
+                    }<br />
+                    else<br />
+                    {<br />
+                    <openblock>
+                        return Ok(tokenResult);<br />
+                    </openblock>
+                    }<br />
+                </openblock>
+                }<br />
+                catch (Exception ex)<br />
+                {<br />
+                <openblock>
+                    return StatusCode(StatusCodes.Status500InternalServerError,<br />
+                    new { Status = <red-code>"Error"</red-code>, Message = ex.Message });<br />
+                </openblock>
+                }<br />
+
+
+
+
+
+
+
+            </openblock>
+            }<br/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            [HttpPost]<br />
+            [<cyan-code>Route</cyan-code>(<red-code>"Register"</red-code>)]<br />
+            public async Task&lt;IActionResult&gt; RegisterAsync([FromBody] <cyan-code>RegistrationModel</cyan-code> model)<br />
+            {<br />
+            <openblock>
+                var searchUser = await _userManager.FindByNameAsync(model.UserName);<br />
+                <purple-code>if</purple-code> (searchUser != null)<br />
+                {<br />
+                <openblock>
+                    return StatusCode(StatusCodes.Status500InternalServerError,<br />
+                    new { Status = <red-code>"Error"</red-code>, Message = <red-code>"User already exists!"</red-code> });<br />
+                </openblock>
+                }<br />
+                <br />
+                var user = new ApplicationUser()<br />
+                {<br />
+                <openblock>
+                    Email = model.Email,<br />
+                    SecurityStamp = Guid.NewGuid().ToString(),<br />
+                    UserName = model.UserName<br />
+                </openblock>
+                };<br />
+                <br />
+                var result = await _userManager.CreateAsync(user, model.Password);<br />
+                <purple-code>if</purple-code> (!result.Succeeded)<br />
+                {<br />
+                <openblock>
+                    return StatusCode(StatusCodes.Status500InternalServerError,<br />
+                    new { Status = <red-code>"Error"</red-code>, Message = result.Errors.FirstOrDefault() });<br />
+                </openblock>
+                }<br />
+                var roleResult = await _userManager.AddToRoleAsync(user, <red-code>"User"</red-code>);<br />
+                return Ok(new { Status = <red-code>"Success"</red-code>, Message = <red-code>"User created successfully!"</red-code> });<br />
+            </openblock>
+            }<br />
+
+            [HttpPost]<br />
+            [<cyan-code>Route</cyan-code>(<red-code>"refresh-token"</red-code>)]<br />
+            public async Task&lt;IActionResult&gt; RefreshToken(<cyan-code>TokenModel</cyan-code> tokenModel)<br />
+            {<br />
+            <openblock>
+                <purple-code>if</purple-code> (tokenModel == null)<br />
+                {<br />
+                <openblock>
+                    return BadRequest(<red-code>"Invalid client request"</red-code>);<br />
+                </openblock>
+                }<br />
+                string? accessToken = tokenModel.Token;<br />
+                string? refreshToken = tokenModel.RefreshToken;<br />
+                <br />
+                var principal = GetPrincipalFromExpiredToken(accessToken);<br />
+                <purple-code>if</purple-code> (principal == null)<br />
+                {<br />
+                <openblock>
+                    return BadRequest(<red-code>"Invalid access token or refresh token"</red-code>);<br />
+                </openblock>
+                }<br />
+                <br />
+                string userName = principal.Identity.Name;<br />
+                var user = await _userManager.FindByNameAsync(userName);<br />
+                <purple-code>if</purple-code> (user == null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)<br />
+                {<br />
+                <openblock>
+                    return BadRequest(<red-code>"Invalid access token or refresh token"</red-code>);<br />
+                </openblock>
+                }<br />
+                <br />
+                var newAccessToken = CreateToken(principal.Claims.ToList());<br />
+                var newRefreshToken = GenerateRefreshToken();<br />
+                <br />
+                user.RefreshToken = newRefreshToken;<br />
+                <br />
+                await _userManager.UpdateAsync(user);<br />
+                <br />
+                return new <cyan-code>ObjectResult</cyan-code>(new<br />
+                {<br />
+                <openblock>
+                    accessToken = new JwtSecurityTokenHandler().WriteToken(newAccessToken),<br />
+                    refreshToken = newRefreshToken<br />
+                </openblock>
+                });<br />
+            </openblock>
+            }<br />
+
+            private JwtSecurityToken CreateToken(List&lt;Claim&gt; authClaim)<br />
+            {<br />
+            <openblock>
+                var authSigninKey = new <cyan-code>SymmetricSecurityKey</cyan-code>(<cyan-code>Encoding</cyan-code>.UTF8.GetBytes(_configuration[<red-code>"JWT:Secret"</red-code>]));<br />
+                _ = int.TryParse(_configuration[<red-code>"JWT:TokenValidityInMinutes"</red-code>],<br />
+                <blue-code>out int</blue-code> tokenValidityInMinutes);<br />
+                <br />
+                var token = new JwtSecurityToken(<br />
+                issuer: _configuration[<red-code>"JWT:ValidIssuer"</red-code>],<br />
+                audience: _configuration[<red-code>"JWT:ValidAudience"</red-code>],<br />
+                expires: DateTime.Now.AddMinutes(tokenValidityInMinutes),<br />
+                claims: authClaim,<br />
+                signingCredentials: new SigningCredentials(authSigninKey, SecurityAlgorithms.HmacSha256));<br />
+                <br />
+                return token;<br />
+            </openblock>
+            }<br />
+
+            private static string GenerateRefreshToken()<br />
+            {<br />
+            <openblock>
+                var randomNummer = new byte[64];<br />
+                var rng = System.Security.Cryptography.<cyan-code>RandomNumberGenerator</cyan-code>.Create();<br />
+                rng.GetBytes(randomNummer);<br />
+                <br />
+                return <cyan-code>Convert</cyan-code>.ToBase64String(randomNummer);<br />
+            </openblock>
+            }<br />
+
+            private ClaimsPrincipal? GetPrincipalFromExpiredToken(string? token)<br />
+            {<br />
+            <openblock>
+                var tokenValidationParameters = new <cyan-code>TokenValidationParameters</cyan-code><br />
+                {<br />
+                <openblock>
+                    ValidateAudience = false,<br />
+                    ValidateIssuer = false,<br />
+                    ValidateIssuerSigningKey = true,<br />
+                    IssuerSigningKey = new <cyan-code>SymmetricSecurityKey</cyan-code>(<cyan-code>Encoding</cyan-code>.UTF8.GetBytes(_configuration[<red-code>"JWT:Secret"</red-code>])),<br />
+                    ValidateLifetime = false<br />
+                </openblock>
+                };<br />
+                <br />
+                var tokenHandler = new JwtSecurityTokenHandler();<br />
+                <br />
+                var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, <blue-code>out</blue-code> <cyan-code>SecurityToken</cyan-code> securityToken);<br />
+                <br />
+                <purple-code>if</purple-code> (securityToken <blue-code>is not</blue-code> JwtSecurityToken jwtSecurityToken || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256,<br />
+                <cyan-code>StringComparison</cyan-code>.InvariantCultureIgnoreCase))<br />
+                {<br />
+                <openblock>
+                    throw new <cyan-code>SecurityTokenException</cyan-code>(<red-code>"Invalid token"</red-code>);<br />
+                </openblock>
+                }<br />
+                <br />
+                return principal;<br />
+            </openblock>
+            }<br />
+
+        </openblock>
+        }<br />
+    </openblock>
+    }<br />
+</code-block>

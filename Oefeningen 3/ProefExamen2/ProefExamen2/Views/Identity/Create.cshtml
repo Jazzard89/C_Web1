@@ -1,0 +1,15 @@
+﻿@model ProefExamen2.Models.ViewModels.RoleViewModel
+<br />
+<h1>Identity Roles</h1>
+
+<div class="form-group">
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="text" class="form-control" asp-for="RoleName" />
+
+
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

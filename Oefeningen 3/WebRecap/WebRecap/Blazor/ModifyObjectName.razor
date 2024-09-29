@@ -1,0 +1,53 @@
+﻿
+ @page "/modify-db-context-name"
+@using WebRecap.Services.Interfaces
+@inject IStringNames StringNames
+
+@code {
+    [Parameter]
+    public string ModelNameReceived { get; set; }
+
+    private string newName;
+
+    private void UpdateNameMethod()
+    {
+        if (!string.IsNullOrWhiteSpace(newName))
+        {
+            if (ModelNameReceived == "DbContextName")
+            {
+                StringNames.UpdateName(ModelNameReceived, newName);
+                StringNames.UpdateName("DbContextname", newName.ToLower());
+            }
+            else
+            {
+                StringNames.UpdateName(ModelNameReceived, newName);
+            }
+        }
+    }
+}
+
+<h3>Modify @ModelNameReceived</h3>
+<label>New @ModelNameReceived:</label>
+<input type="text" @bind="newName" />
+<button @onclick="UpdateNameMethod">Update</button>
+
+@if (ModelNameReceived == "DbContextName")
+{
+    <p>Current Name: @StringNames.DbContextName</p>
+}
+else if (ModelNameReceived == "RazorPageName")
+{
+    <p>Current Name: @StringNames.RazorPageName</p>
+}
+else if (ModelNameReceived == "SolutionName")
+{
+    <p>Current Name: @StringNames.SolutionName</p>
+}
+else if (ModelNameReceived == "ModelName")
+{
+    <p>Current Name: @StringNames.ModelName</p>
+}
+else
+{
+    <p>Unknown Model Name</p>
+}

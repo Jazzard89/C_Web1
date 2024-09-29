@@ -1,0 +1,212 @@
+﻿@{
+    string modelText = "@using";
+    string modelText2 = "@Model";
+}
+
+<h1>DataAnnotations</h1>
+<table>
+    <thead>
+        <tr>
+            <h3>Page 2: Using [Key] and [ForeignKey] for Table Relationships</h3>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                DataAnnotations like <code>[Key]</code> and <code>[ForeignKey]</code> are critical for defining relationships between tables in your database when working with Entity Framework in ASP.NET Core. This page will explore how to use these attributes effectively to manage primary and foreign keys in your models.
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Defining Primary Keys with [Key]</h3>
+<p>
+    The <code>[Key]</code> attribute is used to define the primary key of a table. This attribute is usually applied to a property that uniquely identifies a record in the table.
+</p>
+
+<code-block>
+    <blue-code>@modelText </blue-code>System.ComponentModel.DataAnnotations;
+    <br />
+    <blue-code>@modelText </blue-code>System.ComponentModel.DataAnnotations.Schema;
+
+    <br /><br />
+    public class <cyan-code>Client</cyan-code>
+    <p>{</p>
+    <openblock>
+        [Key]
+        <br />
+        public int Id { get; set; }
+        <br /><br />
+        [Required]
+        <br />
+        public string? Name { get; set; }
+        <br /><br />
+        [Required]
+        <br />
+        public string? LastName { get; set; }
+        <br /><br />
+        [Required]
+        <br />
+        public int LocationId { get; set; }
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>
+    In the example above, the `Id` property is marked as the primary key for the `Client` class, meaning it will uniquely identify each `Client` record in the database.
+</p>
+
+
+
+
+
+
+
+
+<h3>Establishing Relationships with [ForeignKey]</h3>
+<p>
+    The <code>[ForeignKey]</code> attribute is used to define a foreign key relationship between two tables. This attribute is applied to a navigation property that references another entity.
+</p>
+
+<code-block>
+    <blue-code>@modelText </blue-code>System.ComponentModel.DataAnnotations;
+    <br />
+    <blue-code>@modelText </blue-code>System.ComponentModel.DataAnnotations.Schema;
+
+    <br /><br />
+    public class <cyan-code>Client</cyan-code>
+    <p>{</p>
+    <openblock>
+        [Key]
+        <br />
+        public int Id { get; set; }
+        <br /><br />
+        [Required]
+        <br />
+        public string? Name { get; set; }
+        <br /><br />
+        [Required]
+        <br />
+        public string? LastName { get; set; }
+        <br /><br />
+        [Required]
+        <br />
+        public int LocationId { get; set; }
+
+        <br /><br />
+        [ForeignKey(<red-code>"LocationId"</red-code>)]
+        <br />
+        public <cyan-code>Location</cyan-code>? Location { get; set; }
+    </openblock>
+    <p>}</p>
+</code-block>
+or
+<code-block>
+    <blue-code>@modelText </blue-code>System.ComponentModel.DataAnnotations;
+    <br />
+    <blue-code>@modelText </blue-code>System.ComponentModel.DataAnnotations.Schema;
+
+    <br /><br />
+    public class <cyan-code>Client</cyan-code>
+    <p>{</p>
+    <openblock>
+        [Key]
+        <br />
+        public int Id { get; set; }
+        <br /><br />
+        [Required]
+        <br />
+        public string? Name { get; set; }
+        <br /><br />
+        [Required]
+        <br />
+        public string? LastName { get; set; }
+        <br /><br />
+        [Required]<br />
+        [ForeignKey(<red-code>"Location"</red-code>)]
+        <br />
+        public int LocationId { get; set; }
+        <br /><br />
+        public <cyan-code>Location</cyan-code>? Location { get; set; }
+    </openblock>
+    <p>}</p>
+</code-block>
+
+
+
+
+
+
+<p>
+    In this example, the `LocationId` property in the `Client` class is linked to the `Location` class. The `[ForeignKey("LocationId")]` annotation on the `Location` navigation property ensures that this property represents a foreign key relationship with the `Location` table.
+</p>
+
+<h4>Connecting Tables Without [ForeignKey]</h4>
+<p>
+    It’s also possible to define relationships without explicitly using the <code>[ForeignKey]</code> attribute. Instead, Entity Framework will infer the relationships based on navigation properties and conventions.
+</p>
+
+<code-block>
+    <blue-code>@modelText </blue-code>System.ComponentModel.DataAnnotations;
+
+    <br /><br />
+    public class <cyan-code>Team</cyan-code>
+    <p>{</p>
+    <openblock>
+        public int TeamId { get; set; }
+        <br /><br />
+        [Required]
+        <br />
+        public string TeamName { get; set; }
+        <br /><br />
+        public ICollection&lt;<cyan-code>TeamPlayer</cyan-code>?&gt; TeamPlayers { get; set; }
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>
+    In this `Team` class, the relationship is defined using a collection of `TeamPlayer` without explicitly using `[ForeignKey]`. The `TeamPlayer` class will hold the foreign key references.
+</p>
+
+<code-block>
+    <blue-code>@modelText </blue-code>System.ComponentModel.DataAnnotations;
+
+    <br /><br />
+    public class <cyan-code>TeamPlayer</cyan-code>
+    <p>{</p>
+    <openblock>
+        [Key]
+        <br />
+        public int Id { get; set; }
+        <br /><br />
+        [Required]
+        <br />
+        public int? TeamId { get; set; }
+        <br /><br />
+        [Required]
+        <br />
+        public int? PlayerId { get; set; }
+        <br /><br />
+        [Required]
+        <br />
+        public DateTime StartDate { get; set; }
+        <br /><br />
+        [Required]
+        <br />
+        public DateTime EndDate { get; set; }
+        <br /><br />
+        public <cyan-code>Team</cyan-code>? Team { get; set; }
+        <br />
+        public <cyan-code>Player</cyan-code>? Player { get; set; }
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>
+    The `TeamPlayer` class holds the foreign keys `TeamId` and `PlayerId` and navigation properties `Team` and `Player`. This setup allows Entity Framework to understand the relationship between the tables without explicitly needing `[ForeignKey]`.
+</p>
+
+<h3>Conclusion</h3>
+<p>
+    Understanding how to use `[Key]` and `[ForeignKey]` attributes, along with alternative methods for defining relationships, is essential for designing a robust and scalable database schema in ASP.NET Core. These tools help you precisely control how your entities relate to each other and ensure that your database design is well-structured and maintainable.
+</p>

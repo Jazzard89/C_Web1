@@ -1,0 +1,83 @@
+﻿<h1>Creating and Using Custom Route Constraints</h1>
+<h3>Step 1: Create the `Constraints` Folder</h3>
+<p>
+    First, create a new folder named <code>Constraints</code> in the root of your project. This folder will contain the custom route constraint classes.
+</p>
+<h3>Step 2: Create the `FirstNameConstraint` Class</h3>
+<p>
+    Inside the <code>Constraints</code> folder, create a new class named <code>FirstNameConstraint</code> that implements the <code>IRouteConstraint</code> interface. This class will be used to define a custom route constraint for validating first names. Here is the code for the class:
+</p>
+<code-block>
+    using Microsoft.AspNetCore.Http;
+    <br />
+    using Microsoft.AspNetCore.Mvc.Routing;
+    <br />
+    using Microsoft.AspNetCore.Routing;
+    <br />
+    using System.Linq;
+    <br /><br />
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Constraints
+    <p>{</p>
+    <openblock>
+        public class <cyan-code>FirstNameConstraint</cyan-code> : <cyan-code>IRouteConstraint</cyan-code>
+        <p>{</p>
+        <openblock>
+            private string[] firstNames = new [] { <red-code>"adam"</red-code>, <red-code>"alice"</red-code>, <red-code>"bob"</red-code> };
+            <br /><br />
+            public bool Match(HttpContext httpContext, <cyan-code>IRouter</cyan-code> route,
+            string routeKey, <cyan-code>RouteValueDictionary</cyan-code> values, <cyan-code>RouteDirection</cyan-code> routeDirection)
+            <p>{</p>
+            <openblock>
+                return firstNames.Contains(values[routeKey]?.ToString());
+            </openblock>
+            <p>}</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+<p>
+    The <code>FirstNameConstraint</code> class checks if a route value matches one of the predefined first names. It implements the <code>Match</code> method from the <code>IRouteConstraint</code> interface.
+</p>
+<h3>Step 3: Register the Constraint in `Program.cs`</h3>
+<p>
+    Open the <code>Program.cs</code> file. Register the custom route constraint by configuring the <code>RouteOptions</code> with the constraint mapping. Add the following code before the line <code>var app = builder.Build();</code>:
+</p>
+<code-block>
+    builder.Services.Configure&lt;RouteOptions&gt;(options =&gt; options.ConstraintMap.Add
+    <p>(</p>
+    <openblock>
+        <p><red-code>"allowedFirstNames"</red-code>, typeof(FirstNameConstraint));</p>
+    </openblock>
+    <p>)</p>
+</code-block>
+<p>
+    This code registers the <code>FirstNameConstraint</code> with a name of <code>allowedFirstNames</code> in the constraint map. This name will be used to reference the constraint in route patterns.
+</p>
+<h3>Step 4: Configure the Custom Route in `Program.cs`</h3>
+<p>
+    Next, configure the route pattern to use the custom constraint. Below the line <code>app.UseRouting();</code>, modify the <code>app.UseEndpoints</code> configuration as follows:
+</p>
+<code-block>
+    <p>app.UseRouting();</p>
+    <p>app.UseEndpoints(endpoints =&gt;</p>
+    <p>{</p>
+    <openblock>
+        <p>endpoints.MapControllerRoute(</p>
+        <openblock>
+            <p>name: <red-code>"default"</red-code>,</p>
+            <p>pattern: <red-code>"{controller=Home}/{action=Index}/{id:allowedFirstNames?}"</red-code>);</p>
+        </openblock>
+    </openblock>
+    <p>});</p>
+</code-block>
+<p>
+    This code sets up a route pattern that includes the <code>allowedFirstNames</code> constraint for the <code>id</code> parameter. The route will only match if the <code>id</code> value is one of the predefined first names.
+</p>
+
+
+
+<h3>Conclusion</h3>
+<p>
+    By following these steps, you have successfully created and integrated a custom route constraint into your ASP.NET Core application. This constraint ensures that specific route values meet predefined criteria, enhancing the flexibility and control of your routing configuration.
+</p>

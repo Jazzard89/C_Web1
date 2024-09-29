@@ -1,0 +1,35 @@
+﻿@page
+@model Oefening1Klanten.Pages.LocatiesModel
+@{
+    var locaties = Oefening1Klanten.Data.Databank.Locaties;
+    var rowId = 0;
+}
+<div class="text-center">
+    <h1 class="display-4">Locaties</h1>
+    <p>Dit is onze locaties razor page.</p>
+
+    <a asp-area="" asp-page="/NieuweLocatie">Nieuwe Locatie</a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">LocatieId</th>
+                <th scope="col">PostCode</th>
+                <th scope="col">Gemeente</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var locatie in locaties)
+            {
+                rowId++;
+                <tr>
+                    <th scope="row">@rowId</th>
+                    <td>@locatie.LocatieId</td>
+                    <td>@locatie.PostCode</td>
+                    <td>@locatie.Gemeente</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

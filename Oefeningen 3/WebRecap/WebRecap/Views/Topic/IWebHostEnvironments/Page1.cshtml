@@ -1,0 +1,166 @@
+﻿<h1>Working with IWebHostEnvironment in ASP.NET Core</h1>
+
+<h3>Introduction</h3>
+<p>
+    The <code>IWebHostEnvironment</code> interface in ASP.NET Core provides information about the web hosting environment in which the application is running. It allows you to determine the environment (Development, Staging, Production), access web root and content root paths, and configure environment-specific settings and services. This page will guide you through the setup and use of <code>IWebHostEnvironment</code> in your application.
+</p>
+
+<h3>1. Accessing IWebHostEnvironment</h3>
+<p>
+    The <code>IWebHostEnvironment</code> interface is typically injected into controllers, services, or middleware where you need to access environment-specific information. Here’s an example of how to inject and use <code>IWebHostEnvironment</code> in a controller:
+</p>
+
+<code-block>
+    <p>using Microsoft.AspNetCore.Mvc;</p>
+    <p>using Microsoft.Extensions.Hosting;</p>
+
+    <br /><br />
+    public class <cyan-code>HomeController</cyan-code> : Controller
+    <p>{</p>
+    <openblock>
+        <p>private readonly IWebHostEnvironment _env;</p>
+        <br />
+        <p><green-code>// Inject IWebHostEnvironment via constructor</green-code></p>
+        <p>public <cyan-code>HomeController</cyan-code>(IWebHostEnvironment env)</p>
+        <p>{</p>
+        <openblock>
+            _env = env;
+        </openblock>
+        <p>}</p>
+
+        <br /><br />
+        <p><green-code>// Use IWebHostEnvironment to determine environment-specific logic</green-code></p>
+        <p>public IActionResult Index()</p>
+        <p>{</p>
+        <openblock>
+            <p><blue-code>if</blue-code> (_env.IsDevelopment())</p>
+            <p>{</p>
+            <openblock>
+                <p>ViewBag.Message = <red-code>"Running in Development environment"</red-code>;</p>
+            </openblock>
+            <p>}</p>
+            <p><blue-code>else if</blue-code> (_env.IsProduction())</p>
+            <p>{</p>
+            <openblock>
+                <p>ViewBag.Message = <red-code>"Running in Production environment"</red-code>;</p>
+            </openblock>
+            <p>}</p>
+
+            <p>return View();</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<h3>Alternative Use of <code>IWebHostEnvironment</code> in the Controller</h3>
+<p>
+    Another approach to using <code>IWebHostEnvironment</code> in a controller is to utilize it for managing file uploads or accessing the web root path. Here's an example from a book management application:
+</p>
+
+<code-block>
+    <p>using System;</p>
+    <p>using System.Collections.Generic;</p>
+    <p>using System.Linq;</p>
+    <p>using System.Threading.Tasks;</p>
+    <p>using Microsoft.AspNetCore.Authorization;</p>
+    <p>using Microsoft.AspNetCore.Mvc;</p>
+    <p>using Microsoft.EntityFrameworkCore;</p>
+    <p>using Microsoft.AspNetCore.Mvc.Rendering;</p>
+    <p>using Microsoft.AspNetCore.Http;</p>
+    <p>using System.IO;</p>
+
+    <br /><br />
+    public class <cyan-code>BoekController</cyan-code> : Controller
+    <p>{</p>
+    <openblock>
+        <p>private readonly <tw><vc:o-name vm="dbModel" /></tw> _context;</p>
+        <p>private IWebHostEnvironment _environment;</p>
+
+        <p>public <cyan-code>BoekController</cyan-code>(<tw><vc:o-name vm="dbModel" /></tw> context, IWebHostEnvironment environment)</p>
+        <p>{</p>
+        <openblock>
+            <p>_context = context;</p>
+            <p>_environment = environment;</p>
+        </openblock>
+        <p>}</p>
+
+        <br /><br />
+        <p>public async Task IActionResult Create(<cyan-code>Boek</cyan-code> boek, IFormFile afbeelding)</p>
+        <p>{</p>
+        <openblock>
+            <p><blue-code>if</blue-code> (ModelState.IsValid)</p>
+            <p>{</p>
+            <openblock>
+                <p><blue-code>if</blue-code> (afbeelding != null && afbeelding.Length > 0)</p>
+                <p>{</p>
+                <openblock>
+                    <p><green-code>// Construct the path to save the file using IWebHostEnvironment</green-code></p>
+                    <p>string uploadFolder = Path.Combine(_environment.WebRootPath, <red-code>"Afbeelding"</red-code>);</p>
+                    <p>string filePath = Path.Combine(uploadFolder, boek.Titel + <red-code>".jpg"</red-code>);</p>
+
+                    <p>using (var fileStream = new FileStream(filePath, FileMode.Create))</p>
+                    <p>{</p>
+                    <openblock>
+                        <p>await afbeelding.CopyToAsync(fileStream);</p>
+                    </openblock>
+                    <p>}</p>
+
+                    <p>_context.Boeken.Add(boek);</p>
+                    <p>await _context.SaveChangesAsync();</p>
+                    <p>return RedirectToAction(<red-code>"Index"</red-code>);</p>
+                </openblock>
+                <p>}</p>
+            </openblock>
+            <p>}</p>
+            <p>return View(boek);</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>
+    <green-code>// This code demonstrates how to save an uploaded file using the web root path accessed through IWebHostEnvironment. The file is saved in a folder named "Afbeelding" located in the wwwroot directory.</green-code>
+</p>
+
+<h3>2. Accessing Web Root and Content Root Paths</h3>
+<p>
+    The <code>IWebHostEnvironment</code> interface also provides properties to access the web root and content root paths of your application. These are useful when working with files and directories within your project.
+</p>
+
+<code-block>
+    <p>public IActionResult GetFilePath()</p>
+    <p>{</p>
+    <openblock>
+        <p>
+            <green-code>// Access the web root path (wwwroot)</green-code>
+        </p>
+        <p>
+            var webRootPath = _env.WebRootPath;
+        </p>
+
+        <p>
+            <green-code>// Access the content root path (project root)</green-code>
+        </p>
+        <p>
+            var contentRootPath = _env.ContentRootPath;
+        </p>
+
+        <br /><br />
+        <p>
+            <green-code>// Example: Build a file path using the content root</green-code>
+        </p>
+        <p>
+            var filePath = Path.Combine(contentRootPath, <red-code>"files"</red-code>, <red-code>"myfile.txt"</red-code>);
+        </p>
+
+        <p>return Content(<red-code>$"File path:</red-code> {filePath}<red-code>"</red-code>);</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>
+    The <code>WebRootPath</code> property points to the <code>wwwroot</code> folder, where static files like CSS, JavaScript, and images are stored. The <code>ContentRootPath</code> property points to the root of the application (where the project file is located). These paths can be used to locate and manage files within your application.
+</p>
+

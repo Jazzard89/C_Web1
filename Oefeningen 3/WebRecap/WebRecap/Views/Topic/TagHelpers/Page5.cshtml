@@ -1,0 +1,86 @@
+﻿@{
+    string tagString = "addTagHelper";
+}
+<h1>Using ViewContext in TagHelpers</h1>
+
+<h3>Introduction</h3>
+<p>
+    In ASP.NET Core, TagHelpers are a powerful feature that allows you to create reusable components and enhance the rendering of HTML elements in your views. One useful feature of TagHelpers is the ability to use the <code>ViewContext</code> attribute. This page will explain the purpose of the <code>ViewContext</code> attribute and demonstrate how to use it within a TagHelper.
+</p>
+
+<h3>1. What is ViewContext?</h3>
+<p>
+    The <code>ViewContext</code> property provides access to the current context of the view in which the TagHelper is being rendered. This includes information about the request, response, and various aspects of the view, such as <code>HttpContext</code>, <code>ViewData</code>, and more. It is particularly useful when you need to interact with the view’s context or perform operations based on the current request.
+</p>
+
+<h3>2. Using ViewContext in a TagHelper</h3>
+<p>
+    To use <code>ViewContext</code> in a TagHelper, you need to declare a property in your TagHelper class and decorate it with the <code>[ViewContext]</code> attribute. This will allow the TagHelper to access the view context when it is rendered.
+</p>
+
+<code-block>
+    using Microsoft.AspNetCore.Mvc.Rendering;
+    <p>using Microsoft.AspNetCore.Razor.TagHelpers;</p>
+    <p>namespace <tw><vc:o-name vm="solutionModel2" /></tw>.TagHelpers</p>
+    <p>{</p>
+    <openblock>
+        [HtmlTargetElement("current-time")]
+        <p>public class <cyan-code>CurrentTimeTagHelper</cyan-code> : TagHelper</p>
+        <p>{</p>
+        <openblock>
+            <p>[ViewContext]</p>
+            <p>public ViewContext ViewContext { get; set; }</p>
+
+            <br/>
+
+            <p>public override void Process(TagHelperContext context, TagHelperOutput output)</p>
+            <p>{</p>
+            <openblock>
+                <p><green-code>// Set the tag content to the current date and time</green-code></p>
+                <p><blue-code>output</blue-code>.Content.SetContent(DateTime.Now.ToString(<red-code>"F"</red-code>));</p>
+            </openblock>
+            <p>}</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<h3>3. Adding the TagHelper to a View</h3>
+<p>
+    After creating the TagHelper, you need to use it in a view to display the current date and time. Here’s how to add the TagHelper to your Razor view:
+</p>
+
+<code-block>
+    <blue-code>@tagString *, <tw><vc:o-name vm="solutionModel" /></tw></blue-code>
+    <p>&lt;!DOCTYPE html&gt;</p>
+    <p>&lt;html&gt;</p>
+    <p>&lt;head&gt;</p>
+    <p>&lt;meta charset="utf-8" /&gt;</p>
+    <p>&lt;title&gt;Current Time TagHelper&lt;/title&gt;</p>
+    <p>&lt;/head&gt;</p>
+    <p>&lt;body&gt;</p>
+    <p>&lt;h1&gt;Current Time&lt;/h1&gt;</p>
+    <p>&lt;current-time /&gt;</p>
+    <p>&lt;/body&gt;</p>
+    <p>&lt;/html&gt;</p>
+</code-block>
+
+<p>
+    The <code>&lt;current-time /&gt;</code> tag will be replaced with the current date and time when the view is rendered. This demonstrates how the <code>ViewContext</code> can be used to access and display dynamic content based on the current request.
+</p>
+
+<h3>4. Common Use Cases for ViewContext</h3>
+<p>
+    The <code>ViewContext</code> property is useful in various scenarios, such as:
+</p>
+<ul>
+    <li><p>Accessing <code>ViewData</code> or <code>ViewBag</code> values within a TagHelper.</p></li>
+    <li><p>Performing operations based on the current HTTP request or response.</p></li>
+    <li><p>Customizing the behavior of the TagHelper based on the context of the view.</p></li>
+</ul>
+
+<h3>Conclusion</h3>
+<p>
+    The <code>ViewContext</code> attribute in TagHelpers provides valuable context about the current view, making it easier to create dynamic and context-aware components. By understanding and using <code>ViewContext</code>, you can enhance your TagHelpers and improve the overall functionality of your ASP.NET Core application.
+</p>

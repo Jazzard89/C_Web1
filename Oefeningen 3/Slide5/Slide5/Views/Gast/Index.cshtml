@@ -1,0 +1,33 @@
+﻿@model Slide5.Models.Gast
+@{
+    var lst = new List<SelectListItem>();
+    lst.Add(new SelectListItem { Text = "Ja", Value = "true" });
+    lst.Add(new SelectListItem { Text = "Nee", Value = "false" });
+}
+<form asp-action="Reservatie" method="post">
+    <div>
+        <label asp-for="Naam"></label>
+        <input asp-for="Naam" />
+    </div>
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email"/>
+    </div>
+    <div>
+        <label asp-for="Telefoon"></label>
+        <input asp-for="Telefoon"/>
+    </div>
+    <div>
+        <label asp-for="Aanwezig"></label>
+        <select asp-for="Aanwezig" asp-items="@lst"></select>>
+@{
+                //        <select asp-for="Aanwezig">
+                //<option value="0">Kies één van de opties</option>
+                //<option value="true">Ja, ik zal aanwezig zijn!</option>
+                //<option value="false">Neen, ik kan niet komen!</option>
+                //        </select>
+}
+
+    </div>
+    <button type="submit">Inschrijven</button>
+</form>

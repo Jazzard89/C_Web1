@@ -1,0 +1,44 @@
+﻿
+<h1>TagHelpers</h1>
+<table>
+    <thead>
+        <tr>
+            <h3>Page 3: Altering span and passing an element</h3>
+        </tr>
+    </thead>
+</table>
+<p>Sometimes we need to pass an attribute to the TagHelper, in this example we'll display how this is done</p>
+
+
+<code-block>
+    <p>namespece </p><tw><vc:o-name vm="solutionModel2" /></tw>.TagHelpers
+    <p>{</p>
+    <openblock>
+        [HtmlTargetElement("<red-code>green-code</red-code>")]
+        <p><green-code>  //this is the name you give the tag</green-code></p>
+        public class <cyan-code>GreenCodeTagHelper</cyan-code> : TagHelper <green-code>//Be sure to check if it has the TagHelper inheritance</green-code>
+        <p>{</p>
+        <openblock>
+            public override void Process("TagHelperContext <blue-code>context</blue-code>, TagHelperOutput <blue-code>output</blue-code>")
+            <p>{</p>
+            <openblock>
+                <green-code>// Change the tag to a < p > tag</green-code>
+                <p><blue-code>output</blue-code>.TagName = "span";</p>
+                <p><green-code>// Get the content inside the tag</green-code></p>
+                <p>var content = <blue-code>output</blue-code>.GetChildContentAsync().Result.GetContent();</p>
+                <p><green-code>// Set the style attribute with proper syntax</green-code></p>
+                <p>
+                    <blue-code>output</blue-code>.Attributes.SetAttribute("style", "font-family: 'Cascadia Mono'; color: green;");
+                </p>
+
+                <p><blue-code>output</blue-code>.Attributes.</p>
+
+                <p><blue-code>output</blue-code>.Content.SetHtmlContent(content);</p>
+
+            </openblock>
+            <p>}</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>

@@ -1,0 +1,44 @@
+﻿<h1>Local Databank</h1>
+<table>
+    <thead>
+        <tr>
+            <h3>Use Case</h3>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                We use this when we don't want to save the data in a SQL database, but we do 
+                want to display it as long as we use the app
+            </td>
+        </tr>
+    </tbody>
+</table>
+    <code-block>
+        using TestProject.Models;
+        <br />
+        <br />
+            namespace TestProject.Data
+        <p>{</p>
+
+        <openblock>
+            public class <cyan-code>LocalData</cyan-code>
+            <p>{</p>
+            <openblock>
+            public static List &lt;<cyan-code>Gast</cyan-code>&gt; Gastlijst = new List &lt;<cyan-code>Gast</cyan-code>&gt;;
+            </openblock>
+            <p>}</p>
+        </openblock>
+
+        <p>}</p>
+    </code-block>
+    <br/>
+    <p>Than later it can be used in a control like so:
+    <code-block>
+        public IActionResult Index()
+        <p>{</p>
+            <openblock>
+                return View(<blue-code>LocalData</blue-code>.Gastlijst();
+            </openblock>
+        <p>}</p>
+    </code-block>

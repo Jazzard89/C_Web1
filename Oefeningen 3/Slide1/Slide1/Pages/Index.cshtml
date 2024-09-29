@@ -1,0 +1,31 @@
+﻿@page  
+@model Slide1.Pages.IndexModel 
+
+@{
+
+    var name = string.Empty;  
+    if (Request.HasFormContentType)  // Check if the current request contains form data.
+    {
+        name = Request.Form["name"];  // If the request has form data, retrieve the value of 'name' from the form data.
+    }
+}
+<div style="margin-top:30px;">
+    <form method="post">
+        <div>Name: <input name="name" /></div>  
+        <br />  
+        <div><input type="submit" /></div>  /
+        @Html.AntiForgeryToken()  
+            @{
+            // Generates an anti-forgery token to prevent CSRF attacks.
+            //this makes sure that the submit can only be done on this website making a cookie (encrypted)
+            //and linking this to the website
+            }
+    </form>
+</div>
+<div>
+    @if (!string.IsNullOrEmpty(name))  
+    {
+        <p>Hello @name!</p>
+    }
+</div>
+<a href="Jasper">Go to Jasper page</a>

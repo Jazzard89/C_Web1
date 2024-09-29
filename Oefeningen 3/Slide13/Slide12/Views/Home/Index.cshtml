@@ -1,0 +1,32 @@
+﻿@model Slide12.ViewModels.ProductModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<div>
+    <a asp-action="Create" class="btn border border-secondary m-1" asp-controller="Product">Create product</a>
+</div>
+@foreach (var p in Model.Products)
+{
+    <div>
+        <h3>@p.Name</h3>
+        @p.Description
+        <h4>
+            @p.ProductPrice.ToString("c")
+        </h4>
+    </div>
+}
+<br/>
+<div class="row">
+
+    @for (int i = 1; i <= Model.PagingInfo.TotalPages; i++)
+    {
+        <div class="col text-center">
+            <a class="btn border border-secondary m-1" asp-controller="Home" asp-action="Index" asp-route-id="@i">@i</a>
+        </div>
+    }
+</div>

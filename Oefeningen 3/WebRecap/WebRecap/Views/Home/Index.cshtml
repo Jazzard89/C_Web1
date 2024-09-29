@@ -1,0 +1,116 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    var downloadFolder = "/downloads/";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <table class="table" style="background:white; width: 50vw; margin: auto;">
+        <thead>
+            <tr>
+                <td>
+                    <h1>Required packages</h1>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <a href="@Url.Action("DownloadFile", "Home", new { fileName = "microsoft.aspnetcore.identity.entityframeworkcore.6.0.33.nupkg" })">
+                        Microsoft.AspNetCore.Identity.EntityFrameworkCore
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="@Url.Action("DownloadFile", "Home", new { fileName = "microsoft.aspnetcore.identity.ui.6.0.33.nupkg" })">
+                        Microsoft.AspNetCore.Identity.UI
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="@Url.Action("DownloadFile", "Home", new { fileName = "microsoft.entityframeworkcore.sqlserver.6.0.33.nupkg" })">
+                        Microsoft.EntityFrameworkCore.SqlServer
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="@Url.Action("DownloadFile", "Home", new { fileName = "microsoft.entityframeworkcore.design.6.0.33.nupkg" })">
+                        Microsoft.EntityFrameworkCore.Design
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="@Url.Action("DownloadFile", "Home", new { fileName = "microsoft.entityframeworkcore.tools.6.0.33.nupkg" })">
+                        Microsoft.EntityFrameworkCore.Tools
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="@Url.Action("DownloadFile", "Home", new { fileName = "microsoft.entityframeworkcore.6.0.33.nupkg" })">
+                        Microsoft.EntityFrameworkCore
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="@Url.Action("DownloadFile", "Home", new { fileName = "microsoft.visualstudio.web.codegeneration.design.6.0.17.nupkg" })">
+                        Microsoft.VisualStudio.Web.CodeGeneration.Design
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="@Url.Action("DownloadFile", "Home", new { fileName = "microsoft.aspnetcore.authentication.facebook.6.0.33.nupkg" })">
+                        Microsoft.Aspnetcore.Authentication.Facebook
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="@Url.Action("DownloadFile", "Home", new { fileName = "microsoft.aspnetcore.authentication.google.6.0.33.nupkg" })">
+                        Microsoft.Aspnetcore.Authentication.Google
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="@Url.Action("DownloadFile", "Home", new { fileName = "microsoft.aspnetcore.authentication.openidconnect.6.0.33.nupkg" })">
+                        Microsoft.Aspnetcore.Authentication.OpenIdConnect
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="@Url.Action("DownloadFile", "Home", new { fileName = "DuendeIdentityServer.zip" })">
+                        Duende startup files
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="@Url.Action("DownloadFile", "Home", new { fileName = "microsoft.aspnetcore.authentication.jwtbearer.6.0.33.nupkg" })">
+                        Microsoft.Aspnetcore.Authentication.JWTbearer (API)
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="@Url.Action("DownloadFile", "Home", new { fileName = "newtonsoft.json.6.0.8.nupkg" })">
+                        Newtonsoft.Json
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="@Url.Action("DownloadFile", "Home", new { fileName = "microsoft.aspnet.webapi.client.6.0.0.nupkg" })">
+                        WebApi.Client
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

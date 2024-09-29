@@ -1,0 +1,40 @@
+﻿
+<h1>TagHelpers</h1>
+<table>
+    <thead>
+        <tr>
+            <h3>Page 2: Altering basic Div</h3>
+        </tr>
+    </thead>
+</table>
+<p>If we need a simple Div that has some class and styling properties where we need to pass the child</p>
+<p>We can do this using the method bellow:</p>
+<code-block>
+    <p>namespece </p><tw><vc:o-name vm="solutionModel2" /></tw>.TagHelpers
+    <p>{</p>
+        <openblock>
+            [HtmlTargetElement("<blue-code>code-block</blue-code>")]
+        <p><green-code>  //this is the name you give the tag</green-code></p>
+            public class <blue-code>CodeBlock</blue-code>Helper : TagHelper <green-code>//Be sure to check if it has the TagHelper inheritance</green-code>
+            <p>{</p>
+                <openblock>
+                    public override void Process("TagHelperContext <blue-code>context</blue-code>, TagHelperOutput <blue-code>output</blue-code>")
+                    <p>{</p>
+                        <openblock>
+                            <green-code>// Change the wrapper tag to 'div' as you intend</green-code>
+                            <p><blue-code>output</blue-code>.TagName = "div";</p>
+                            <p><green-code>// Retrieve the inner content (including any nested tag helpers)</green-code></p>
+                            <p>var childContent = <blue-code>output</blue-code>.GetChildContentAsync().Result;</p>
+                            <p><green-code>// Ensure the content is wrapped in a styled div</green-code></p>
+                <p>
+                    <blue-code>output</blue-code>.Attributes.SetAttribute("style", "background: white; font-family: 'Cascadia Mono'; padding: 10px;");
+                </p>
+                <p><blue-code>output</blue-code>.Content.SetHtmlContent(childContent);</p>
+                        
+                        </openblock>
+                    <p>}</p>
+                </openblock>
+            <p>}</p>
+        </openblock>
+    <p>}</p>
+</code-block>

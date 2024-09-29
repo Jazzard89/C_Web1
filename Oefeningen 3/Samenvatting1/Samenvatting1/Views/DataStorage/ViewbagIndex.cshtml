@@ -1,0 +1,18 @@
+﻿@{
+    int teller = (int)ViewBag.Testdatabag2;
+    string dataThing = (string)ViewBag.Testdatabag1;
+}
+
+<div>
+    <ul>
+        @dataThing
+    </ul>
+    <ul>
+        @for (int i = 1; i < teller; i++)
+        {
+            <li>
+                Dit is de test @i uit de viewbag!
+            </li>
+        }
+    </ul>
+</div>

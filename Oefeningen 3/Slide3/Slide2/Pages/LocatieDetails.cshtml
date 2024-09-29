@@ -1,0 +1,20 @@
+﻿@page
+@model Slide2.Pages.LocatieDetailsModel
+@{
+    var id = Model.LocatieID;
+    var row = Slide2.Data.Databank.Locaties.Where(
+        x => x.LocatieID == id).FirstOrDefault();
+
+    var postCode = (row != null) ? row.PostCode : "";
+    var gemeente = (row != null) ? row.Gemeente : "";
+}
+
+<div> 
+    <h1>Locatie details</h1>
+    <br/>
+    Id : @id
+    <br/>
+    Postcode : @postCode
+    <br/>
+    Gemeente: @gemeente
+</div>

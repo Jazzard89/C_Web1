@@ -1,0 +1,77 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{92FD782D-4C1D-46A6-BF51-50C8D1BBA46D}|WebRecap\\WebRecap.csproj|d:\\jasper\\work\\opleidingen\\pxl\\graduaat\\c\\web\\oefeningen 3\\webrecap\\webrecap\\taghelpers\\codeblockhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{92FD782D-4C1D-46A6-BF51-50C8D1BBA46D}|WebRecap\\WebRecap.csproj|solutionrelative:webrecap\\taghelpers\\codeblockhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{92FD782D-4C1D-46A6-BF51-50C8D1BBA46D}|WebRecap\\WebRecap.csproj|d:\\jasper\\work\\opleidingen\\pxl\\graduaat\\c\\web\\oefeningen 3\\webrecap\\webrecap\\views\\shared\\components\\dropdown\\default.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{92FD782D-4C1D-46A6-BF51-50C8D1BBA46D}|WebRecap\\WebRecap.csproj|solutionrelative:webrecap\\views\\shared\\components\\dropdown\\default.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{92FD782D-4C1D-46A6-BF51-50C8D1BBA46D}|WebRecap\\WebRecap.csproj|d:\\jasper\\work\\opleidingen\\pxl\\graduaat\\c\\web\\oefeningen 3\\webrecap\\webrecap\\blazor\\modifyobjectname.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{92FD782D-4C1D-46A6-BF51-50C8D1BBA46D}|WebRecap\\WebRecap.csproj|solutionrelative:webrecap\\blazor\\modifyobjectname.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{74946827-37a0-11d2-a273-00c04f8ef4ff}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CodeBlockHelper.cs",
+              "DocumentMoniker": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\TagHelpers\\CodeBlockHelper.cs",
+              "RelativeDocumentMoniker": "WebRecap\\TagHelpers\\CodeBlockHelper.cs",
+              "ToolTip": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\TagHelpers\\CodeBlockHelper.cs",
+              "RelativeToolTip": "WebRecap\\TagHelpers\\CodeBlockHelper.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAgAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-27T12:23:30.962Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Default.cshtml",
+              "DocumentMoniker": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\Views\\Shared\\Components\\DropDown\\Default.cshtml",
+              "RelativeDocumentMoniker": "WebRecap\\Views\\Shared\\Components\\DropDown\\Default.cshtml",
+              "ToolTip": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\Views\\Shared\\Components\\DropDown\\Default.cshtml",
+              "RelativeToolTip": "WebRecap\\Views\\Shared\\Components\\DropDown\\Default.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-29T16:20:00.273Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ModifyObjectName.razor",
+              "DocumentMoniker": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\Blazor\\ModifyObjectName.razor",
+              "RelativeDocumentMoniker": "WebRecap\\Blazor\\ModifyObjectName.razor",
+              "ToolTip": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\Blazor\\ModifyObjectName.razor",
+              "RelativeToolTip": "WebRecap\\Blazor\\ModifyObjectName.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-29T16:18:42.396Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,179 @@
+﻿@*
+<tw><vc:o-name vm="solutionModel" /></tw>
+<tw><vc:o-name vm="solutionModel2" /></tw>
+<tw><vc:o-name vm="dbModel" /></tw>
+<tw><vc:o-name vm="dbModel2" /></tw>
+<tw><vc:o-name vm="razorPageModel" /></tw>
+<tw><vc:o-name vm="razorPageModel2" /></tw>
+<tw><vc:o-name vm="modelModel" /></tw>
+<tw><vc:o-name vm="modelModel2" /></tw>
+*@
+<h1>Setting Up an API application</h1>
+
+<h3>Step 6: Setup the necessary using statements and namespace</h3>
+<code-block>
+    using Microsoft.AspNetCore.Http;
+    <br />
+    using Microsoft.AspNetCore.Mvc;
+    <br />
+    using <tw><vc:o-name vm="solutionModel2" /></tw>.ClassLib.Models;
+    <br />
+    using <tw><vc:o-name vm="solutionModel2" /></tw>.ClassLib.Models.ViewModels;
+    <br />
+    using <tw><vc:o-name vm="solutionModel2" /></tw>.Data;
+    <br />
+
+    <br />
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Controllers.Api
+    <br />
+    {
+    <br />
+    <openblock>
+        [<red-code>Route("api/[controller]")</red-code>]<br />
+        [<red-code>ApiController</red-code>]<br />
+        public class <cyan-code>LocationController</cyan-code> : ControllerBase<br />
+        {<br />
+        <openblock>
+            private readonly <tw><vc:o-name vm="dbModel" /></tw> _context;<br />
+            public <cyan-code>LocationController</cyan-code>(<tw><vc:o-name vm="dbModel" /></tw> context)<br />
+            {<br />
+            <openblock>
+                _context = context;<br />
+            </openblock>
+            }<br />
+
+            <br />
+            [HttpGet]<br />
+            public IActionResult <cyan-code>GetLocations</cyan-code>()<br />
+            {<br />
+            <openblock>
+                try<br />
+                {<br />
+                <openblock>
+                    var locations = _context.Locations;<br />
+                    return Ok(locations);<br />
+                </openblock>
+                }<br />
+                catch (Exception ex)<br />
+                {<br />
+                <openblock>
+                    return BadRequest(ex.Message);<br />
+                </openblock>
+                }<br />
+            </openblock>
+            }<br />
+
+            <br />
+            [HttpGet("{id}")]<br />
+            public IActionResult GetDetails(long id)<br />
+            {<br />
+            <openblock>
+                <cyan-code>Location</cyan-code> location = _context.Locations.Find(id);<br />
+                if (location == null)<br />
+                {<br />
+                <openblock>
+                    return NotFound();<br />
+                </openblock>
+                }<br />
+                else<br />
+                {<br />
+                <openblock>
+                    return Ok(location);<br />
+                </openblock>
+                }<br />
+            </openblock>
+            }<br />
+
+            <br /><p><green-code>//This viewmodel just contains strings of the parameters</green-code></p>
+            [<red-code>HttpPost</red-code>]<br />
+            public IActionResult AddLocation(<cyan-code>LocationViewModel</cyan-code> model)<br />
+            {<br />
+            <openblock>
+                try<br />
+                {<br />
+                <openblock>
+                    <cyan-code>Location</cyan-code> location = new <cyan-code>Location</cyan-code><br />
+                    {<br />
+                    <openblock>
+                        City = model.City,<br />
+                        State = model.State<br />
+                    </openblock>
+                    };<br />
+                    _context.Locations.Add(location);<br />
+                    _context.SaveChanges();<br />
+                    return Ok(location);<br />
+                </openblock>
+                }<br />
+                catch (Exception ex)<br />
+                {<br />
+                <openblock>
+                    return BadRequest(ex.Message);<br />
+                </openblock>
+                }<br />
+            </openblock>
+            }<br />
+
+            <br />
+            [<red-code>HttpPut("{id}")</red-code>]<br />
+            public IActionResult UpdateLocation(long id, [<red-code>FromBody</red-code>] <cyan-code>Location</cyan-code> location)<br />
+            {<br />
+            <openblock>
+                try<br />
+                {<br />
+                <openblock>
+                    var existingLocation = _context.Locations.Find(id);<br />
+
+                    if (existingLocation == null)<br />
+                    {<br />
+                    <openblock>
+                        return NotFound();<br />
+                    </openblock>
+                    }<br />
+
+                    existingLocation.City = location.City;<br />
+                    existingLocation.State = location.State;<br />
+
+                    _context.Locations.Update(existingLocation);<br />
+                    _context.SaveChanges();<br />
+
+                    return Ok(existingLocation);<br />
+                </openblock>
+                }<br />
+                catch (Exception ex)<br />
+                {<br />
+                <openblock>
+                    return BadRequest(ex.Message);<br />
+                </openblock>
+                }<br />
+            </openblock>
+            }<br />
+
+            <br />
+            [<red-code>HttpDelete("{id}")</red-code>]<br />
+            public IActionResult DeleteLocation(long id)<br />
+            {<br />
+            <openblock>
+                <cyan-code>Location</cyan-code> location = _context.Locations.Find(id);<br />
+                if (location == null)<br />
+                {<br />
+                <openblock>
+                    return NotFound();<br />
+                </openblock>
+                }<br />
+                else<br />
+                {<br />
+                <openblock>
+                    _context.Locations.Remove(location);<br />
+                    _context.SaveChanges();<br />
+                    return Ok();<br />
+                </openblock>
+                }<br />
+            </openblock>
+            }<br />
+        </openblock>
+        }<br />
+    </openblock>
+    }
+    <br />
+
+</code-block>

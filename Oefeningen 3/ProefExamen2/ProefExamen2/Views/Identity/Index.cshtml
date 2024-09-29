@@ -1,0 +1,9 @@
+﻿<br/>
+<h1>Identity Roles</h1>
+@foreach (var role in ViewBag.Roles)
+{
+    <div class="form-group">
+        <p class="form-control">@role</p>
+    </div>
+}
+<a asp-controller="Identity" asp-action="Create" class="btn btn-primary">Create Role</a>

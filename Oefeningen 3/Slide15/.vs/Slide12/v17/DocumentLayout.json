@@ -1,0 +1,174 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\Oefeningen 3\\Slide15\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0C436039-73B8-4500-9948-1A66FFBBE4C0}|Slide12\\Slide12.csproj|d:\\jasper\\work\\opleidingen\\pxl\\c\\web\\oefeningen 3\\slide15\\slide12\\components\\navigationmenuviewcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C436039-73B8-4500-9948-1A66FFBBE4C0}|Slide12\\Slide12.csproj|solutionrelative:slide12\\components\\navigationmenuviewcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C436039-73B8-4500-9948-1A66FFBBE4C0}|Slide12\\Slide12.csproj|d:\\jasper\\work\\opleidingen\\pxl\\c\\web\\oefeningen 3\\slide15\\slide12\\viewmodels\\paginginfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C436039-73B8-4500-9948-1A66FFBBE4C0}|Slide12\\Slide12.csproj|solutionrelative:slide12\\viewmodels\\paginginfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C436039-73B8-4500-9948-1A66FFBBE4C0}|Slide12\\Slide12.csproj|d:\\jasper\\work\\opleidingen\\pxl\\c\\web\\oefeningen 3\\slide15\\slide12\\viewmodels\\pagingsettingviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C436039-73B8-4500-9948-1A66FFBBE4C0}|Slide12\\Slide12.csproj|solutionrelative:slide12\\viewmodels\\pagingsettingviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C436039-73B8-4500-9948-1A66FFBBE4C0}|Slide12\\Slide12.csproj|d:\\jasper\\work\\opleidingen\\pxl\\c\\web\\oefeningen 3\\slide15\\slide12\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C436039-73B8-4500-9948-1A66FFBBE4C0}|Slide12\\Slide12.csproj|solutionrelative:slide12\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C436039-73B8-4500-9948-1A66FFBBE4C0}|Slide12\\Slide12.csproj|d:\\jasper\\work\\opleidingen\\pxl\\c\\web\\oefeningen 3\\slide15\\slide12\\taghelpers\\pagelinktaghelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C436039-73B8-4500-9948-1A66FFBBE4C0}|Slide12\\Slide12.csproj|solutionrelative:slide12\\taghelpers\\pagelinktaghelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C436039-73B8-4500-9948-1A66FFBBE4C0}|Slide12\\Slide12.csproj|d:\\jasper\\work\\opleidingen\\pxl\\c\\web\\oefeningen 3\\slide15\\slide12\\repositories\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C436039-73B8-4500-9948-1A66FFBBE4C0}|Slide12\\Slide12.csproj|solutionrelative:slide12\\repositories\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C436039-73B8-4500-9948-1A66FFBBE4C0}|Slide12\\Slide12.csproj|d:\\jasper\\work\\opleidingen\\pxl\\c\\web\\oefeningen 3\\slide15\\slide12\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C436039-73B8-4500-9948-1A66FFBBE4C0}|Slide12\\Slide12.csproj|solutionrelative:slide12\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C436039-73B8-4500-9948-1A66FFBBE4C0}|Slide12\\Slide12.csproj|d:\\jasper\\work\\opleidingen\\pxl\\c\\web\\oefeningen 3\\slide15\\slide12\\views\\shared\\components\\navigationmenu\\default.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0C436039-73B8-4500-9948-1A66FFBBE4C0}|Slide12\\Slide12.csproj|solutionrelative:slide12\\views\\shared\\components\\navigationmenu\\default.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C436039-73B8-4500-9948-1A66FFBBE4C0}|Slide12\\Slide12.csproj|d:\\jasper\\work\\opleidingen\\pxl\\c\\web\\oefeningen 3\\slide15\\slide12\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0C436039-73B8-4500-9948-1A66FFBBE4C0}|Slide12\\Slide12.csproj|solutionrelative:slide12\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 8,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{74946827-37a0-11d2-a273-00c04f8ef4ff}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PagingSettingViewModel.cs",
+              "DocumentMoniker": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\Oefeningen 3\\Slide15\\Slide12\\ViewModels\\PagingSettingViewModel.cs",
+              "RelativeDocumentMoniker": "Slide12\\ViewModels\\PagingSettingViewModel.cs",
+              "ToolTip": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\Oefeningen 3\\Slide15\\Slide12\\ViewModels\\PagingSettingViewModel.cs",
+              "RelativeToolTip": "Slide12\\ViewModels\\PagingSettingViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-08T15:11:40.098Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\Oefeningen 3\\Slide15\\Slide12\\Controllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "Slide12\\Controllers\\ProductController.cs",
+              "ToolTip": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\Oefeningen 3\\Slide15\\Slide12\\Controllers\\ProductController.cs",
+              "RelativeToolTip": "Slide12\\Controllers\\ProductController.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAA1wAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-08T15:11:24.593Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PagingInfo.cs",
+              "DocumentMoniker": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\Oefeningen 3\\Slide15\\Slide12\\ViewModels\\PagingInfo.cs",
+              "RelativeDocumentMoniker": "Slide12\\ViewModels\\PagingInfo.cs",
+              "ToolTip": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\Oefeningen 3\\Slide15\\Slide12\\ViewModels\\PagingInfo.cs",
+              "RelativeToolTip": "Slide12\\ViewModels\\PagingInfo.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-08T15:11:00.723Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ProductRepository.cs",
+              "DocumentMoniker": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\Oefeningen 3\\Slide15\\Slide12\\Repositories\\ProductRepository.cs",
+              "RelativeDocumentMoniker": "Slide12\\Repositories\\ProductRepository.cs",
+              "ToolTip": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\Oefeningen 3\\Slide15\\Slide12\\Repositories\\ProductRepository.cs",
+              "RelativeToolTip": "Slide12\\Repositories\\ProductRepository.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAA1wB4AAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-07T11:23:06.956Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\Oefeningen 3\\Slide15\\Slide12\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Slide12\\Controllers\\HomeController.cs",
+              "ToolTip": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\Oefeningen 3\\Slide15\\Slide12\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Slide12\\Controllers\\HomeController.cs",
+              "ViewState": "AQIAABEAAAAAAAAAAAAswCAAAAA9AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-07T10:59:44.599Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Default.cshtml",
+              "DocumentMoniker": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\Oefeningen 3\\Slide15\\Slide12\\Views\\Shared\\Components\\NavigationMenu\\Default.cshtml",
+              "RelativeDocumentMoniker": "Slide12\\Views\\Shared\\Components\\NavigationMenu\\Default.cshtml",
+              "ToolTip": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\Oefeningen 3\\Slide15\\Slide12\\Views\\Shared\\Components\\NavigationMenu\\Default.cshtml",
+              "RelativeToolTip": "Slide12\\Views\\Shared\\Components\\NavigationMenu\\Default.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-07T10:43:40.745Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "NavigationMenuViewComponent.cs",
+              "DocumentMoniker": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\Oefeningen 3\\Slide15\\Slide12\\Components\\NavigationMenuViewComponent.cs",
+              "RelativeDocumentMoniker": "Slide12\\Components\\NavigationMenuViewComponent.cs",
+              "ToolTip": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\Oefeningen 3\\Slide15\\Slide12\\Components\\NavigationMenuViewComponent.cs",
+              "RelativeToolTip": "Slide12\\Components\\NavigationMenuViewComponent.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-07T10:42:30.244Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\Oefeningen 3\\Slide15\\Slide12\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Slide12\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\Oefeningen 3\\Slide15\\Slide12\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Slide12\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAAA0AAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-07T10:09:34.111Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PageLinkTagHelper.cs",
+              "DocumentMoniker": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\Oefeningen 3\\Slide15\\Slide12\\TagHelpers\\PageLinkTagHelper.cs",
+              "RelativeDocumentMoniker": "Slide12\\TagHelpers\\PageLinkTagHelper.cs",
+              "ToolTip": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\Oefeningen 3\\Slide15\\Slide12\\TagHelpers\\PageLinkTagHelper.cs",
+              "RelativeToolTip": "Slide12\\TagHelpers\\PageLinkTagHelper.cs",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAABUAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-07T09:20:59.591Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

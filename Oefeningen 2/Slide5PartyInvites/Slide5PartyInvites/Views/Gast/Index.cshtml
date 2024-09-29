@@ -1,0 +1,30 @@
+﻿@model Gast
+@{
+    var lst = new List<SelectListItem>();
+    lst.Add(new SelectListItem { Text = "Ja", Value = "true" });
+    lst.Add(new SelectListItem { Text = "Nee", Value = "false" });
+}
+<form asp-action="Reservatie" method="post">
+    <siv>
+        <label asp-for="Naam"></label>
+        <input asp-for="Naam"/>
+    </siv>
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email"/>
+    </div>
+    <div>
+        <label asp-for="Telefoon"></label>
+        <input asp-for="Telefoon"/>
+    </div>
+    <div>
+        <label asp-for="Aanwezig"></label>
+        <select asp-for="Aanwezig" asp-items="@lst">
+            @*het onderste werd vervangen met asp-items="@lst"*@
+@*            <option value="0">Kies één van de options</option>
+            <option value="true">Ja, ik zal aanwezig zijn!</option>
+            <option value="false">Neen, Ik kan niet komen!</option>*@
+        </select>
+    </div>
+    <button type="submit">Inschrijven</button>
+</form>

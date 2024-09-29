@@ -1,0 +1,37 @@
+﻿
+<h1>TagHelpers</h1>
+<table>
+    <thead>
+        <tr>
+            <h3>Page 1: Use Case</h3>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                To create custom tags we can use in .cshtml
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>We open the <blue-code>_ViewImports.cshtml</blue-code> this is located in the <blue-code>Views</blue-code> folder</p>
+<br/>
+<p>We then add the code bellow, the name '<tw><vc:o-name vm="solutionModel2" /></tw>' needs to be replaced with your application's name.</p>
+<br/>
+<code-block>
+    @@using <tw><vc:o-name vm="solutionModel2" /></tw>
+    <br/>
+    @@using <tw><vc:o-name vm="solutionModel2" /></tw>.Models
+    <br/>
+    @@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+    <br/>
+    <blue-code>@@addTagHelper *, <tw><vc:o-name vm="solutionModel2" /></tw></blue-code>
+
+</code-block>
+<br/>
+<p>Then in our project root we create a folder named <blue-code>TagHelpers</blue-code>.</p>
+<p>Be sure to use TagHelper<b>s</b> and not TagHelper</p>
+<p>In this folder we create a TagHelper class</p>
+<img src="/images/TagHelperClass.png" alt="taghelperclass" />
+
+

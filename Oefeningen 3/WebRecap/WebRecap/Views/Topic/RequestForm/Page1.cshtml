@@ -1,0 +1,87 @@
+﻿<h1>Request Form</h1>
+<table>
+    <thead>
+        <tr>
+            <h3>Use Case</h3>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                The Request Form is used to get data from the cshtml to the backend or the controller
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<code-block>
+    <green-code>The method in the form tag refers to the action we use in the backend or controller</green-code>
+    <br />
+    <purple-code>&lt;form method="Post"&gt;</purple-code>
+    <br />
+    <openblock>
+        &lt;fieldset&gt;
+        <br />
+        <openblock>
+            &lt;legend&gt;Locatie toevoegen&lt;/legend&gt;
+            <br />
+            &lt;div&gt;
+            <br />
+            <openblock>
+                &lt;label for="<blue-code>PostCode</blue-code>"&gt;Postcode:&lt;/label&gt;
+                <br />
+                &lt;input type="text" name="PostCode"/&gt;
+                <br />
+                &lt;label for="<blue-code>Gemeente</blue-code>"&gt;Gemeente:&lt;/label&gt;
+                <br />
+                &lt;input type="text" name="Gemeente"/&gt;
+                <br />
+                &lt;label&gt;&amp;nbsp;&lt;/label&gt;
+                <br />
+                &lt;input type="submit" value="Submit" class="submit"/&gt;
+            </openblock>
+            <br />
+            &lt;/div&gt;
+        </openblock>
+        <br />
+        &lt;/fieldset&gt;
+        <br />
+        &lt;/form&gt;
+    </openblock>
+</code-block>
+<br/>
+<p>And then in the backend we can use it like so</p>
+<code-block>
+    public IActionResult OnPost()
+    <br/>
+    <p>{</p>
+    <openblock>
+        string postCode = Request.Form[<red-code>"PostCode"</red-code>];
+        <br/>
+        string city = Request.Form[<red-code>"Gemeente"</red-code>];
+        <br/>
+        <cyan-code>Databank</cyan-code>.AddLocation(postCode, city);
+        <br/>
+        return RedirectToPage("Locaties");
+    </openblock>
+    <p>}</p>
+</code-block>
+<br/>
+<p>or in the controller like so</p>
+<br/>
+<code-block>
+    [HttpPost]
+    <br/>
+    public IActionResult Post
+    <p>{</p>
+    <openblock>
+        string postCode = Request.Form[<red-code>"PostCode"</red-code>];
+        <br />
+        string city = Request.Form[<red-code>"Gemeente"</red-code>];
+        <br />
+        <cyan-code>Databank</cyan-code>.AddLocation(postCode, city); <green-code>//Or _context.Location.Add(postCode, city)</green-code>
+        <br />
+        return RedirectToPage(<red-code>"Locaties"</red-code>);
+    </openblock>
+    <p>}</p>
+</code-block>

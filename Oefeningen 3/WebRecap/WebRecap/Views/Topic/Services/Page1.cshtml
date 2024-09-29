@@ -1,0 +1,151 @@
+﻿<h1>Creating and Using Services in ASP.NET Core</h1>
+<h3>Step 1: Create the `Product` Model</h3>
+<p>
+    Begin by creating a new class named <code>Product</code> in the <code>Models</code> folder. This class will represent the product entity in your application. Here’s the code for the <code>Product</code> class:
+</p>
+<code-block>
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Models
+    <p>{</p>
+    <openblock>
+        public class <cyan-code>Product</cyan-code>
+        <p>{</p>
+        <openblock>
+            public string Name { get; set; }
+            <br />
+            public decimal Price { get; set; }
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+<p>
+    This class has two properties: <code>Name</code> and <code>Price</code>, which will hold the product's name and price, respectively.
+</p>
+<h3>Step 2: Create the `IProductRepository` Interface</h3>
+<p>
+    Now, create a folder named <code>Services</code> and inside it, another folder named <code>Interfaces</code>. In the <code>Interfaces</code> folder, create an interface named <code>IProductRepository</code>. This interface will define the contract for any product repository implementation. Here’s the code for the interface:
+</p>
+<code-block>
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Services.Interfaces
+    <p>{</p>
+    <openblock>
+        public interface <cyan-code>IProductRepository</cyan-code>
+        <p>{</p>
+        <openblock>
+            IEnumerable&lt;<cyan-code>Product</cyan-code>&gt; Products { get; }
+            <br />
+            <cyan-code>Product</cyan-code> <blue-code>this</blue-code>[string name] { get; }
+            <br />
+            void Add(<cyan-code>Product</cyan-code> product);
+            <br />
+            void Delete(<cyan-code>Product</cyan-code> product);
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+<p>
+    This interface defines the methods and properties that any product repository should implement, including fetching products, adding, and deleting them.
+</p>
+<h3>Step 3: Create the `ProductRepository` Service</h3>
+<p>
+    Inside the <code>Services</code> folder, create a new class named <code>ProductRepository</code>. This class will implement the <code>IProductRepository</code> interface and provide a concrete implementation of the product management logic. Here’s the code:
+</p>
+<code-block>
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Services
+    <p>{</p>
+    <openblock>
+        public class <cyan-code>ProductRepository</cyan-code> : <cyan-code>IProductRepository</cyan-code>
+        <p>{</p>
+        <openblock>
+            private Dictionary&lt;string, <cyan-code>Product</cyan-code>&gt; products;
+            <br /><br />
+            public <cyan-code>ProductRepository</cyan-code>()
+            <p>{</p>
+            <openblock>
+                <cyan-code>Product</cyan-code> football = new <cyan-code>Product</cyan-code>();
+                <p>football.Name = <red-code>"football"</red-code>;</p>
+                <p>football.Price = 10m;</p>
+                <br />
+
+                <cyan-code>Product</cyan-code> tennisball = new <cyan-code>Product</cyan-code>();
+                <p>tennisball.Name = <red-code>"tennisball"</red-code>;</p>
+                <p>tennisball.Price = 3m;</p>
+
+                <br />
+
+                products = new Dictionary&lt;string, <cyan-code>Product</cyan-code>&gt;();
+                <p>products.Add(football.Name, football);</p>
+                <p>products.Add(tennisball.Name, tennisball);</p>
+            </openblock>
+            <p>}</p>
+
+            <br />
+
+            public IEnumerable&lt; <cyan-code>Product</cyan-code>&gt; Products => products.Values;
+            <br />
+            public  <cyan-code>Product</cyan-code> <blue-code>this</blue-code>[string name] => products[name];
+            <br />
+            public void Add( <cyan-code>Product</cyan-code> product) => products[product.Name] = product;
+            <br />
+            public void Delete( <cyan-code>Product</cyan-code> product) => products.Remove(product.Name);
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+    </code-block>
+<p>
+    The <code>ProductRepository</code> class simulates a product database using an in-memory dictionary. It provides functionality to add, retrieve, and delete products.
+</p>
+<h3>Step 4: Register the Service in `Program.cs`</h3>
+<p>
+    Open the <code>Program.cs</code> file and register the <code>ProductRepository</code> service with the dependency injection container. You can choose the lifetime of the service as <code>Transient</code>, <code>Scoped</code>, or <code>Singleton</code>. Add the following code before the line <code>var app = builder.Build();</code>:
+</p>
+<code-block>
+    <p>builder.Services.AddControllersWithViews();</p>
+    <p><green-code>// we can use the AddSingleton if we want it to only make it once.</green-code></p>
+    <p><green-code>// the Transient makes a service everytime it is called upon</green-code></p>
+    <p><green-code>// The Scoped only makes it once upon every app startup.</green-code></p>
+    <p>builder.Services.AddTransient&lt;<cyan-code>IProductRepository</cyan-code>, <cyan-code>ProductRepository</cyan-code>&gt;();</p>
+</code-block>
+<p>
+    This code registers the <code>ProductRepository</code> service as a <code>Transient</code> service, meaning a new instance will be created each time it is requested.
+</p>
+<h3>Step 5: Use the Service in a Controller</h3>
+<p>
+    You can now inject and use the <code>IProductRepository</code> service in your controllers. Here’s an example of how to use it in a <code>HomeController</code>:
+</p>
+<code-block>
+    public class <cyan-code>HomeController</cyan-code> : Controller
+    <p>{</p>
+    <openblock>
+        private readonly <cyan-code>IProductRepository</cyan-code> _repo;
+        <br /><br />
+
+        public <cyan-code>HomeController</cyan-code>(<cyan-code>IProductRepository</cyan-code> repo)
+        <p>{</p>
+        <openblock>
+            _repo = repo;
+        </openblock>
+        <p>}</p>
+
+        <br />
+
+        public IActionResult Index()
+        <p>{</p>
+        <openblock>
+            ViewBag.ProductCount = _repo.Products.Count();
+            <br />
+            return View();
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+<p>
+    The <code>HomeController</code> uses dependency injection to get an instance of <code>IProductRepository</code>. The <code>Index</code> action method then counts the number of products and passes this information to the view via <code>ViewBag</code>.
+</p>
+<h3>Conclusion</h3>
+<p>
+    By following these steps, you have successfully implemented a service using dependency injection in your ASP.NET Core application. This approach decouples your business logic from the data layer and enhances the testability and maintainability of your code.
+</p>

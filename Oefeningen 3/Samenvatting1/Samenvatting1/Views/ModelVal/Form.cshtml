@@ -1,0 +1,24 @@
+﻿@model ModelValClass
+
+<form asp-action="Form">
+    <table>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <thead>
+            <tr>
+                <th><label asp-for="Number">Number</label></th>
+                <th><label asp-for="Name">Name</label></th>
+                <th><label asp-for="Date">Date</label></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th><input asp-for="Number" /></th>
+                <th><input asp-for="Name" /></th>
+                <th><input asp-for="Date" /></th>
+            </tr>
+            <tr>
+                <th><input type="submit" value="submit" /></th>
+            </tr>
+        </tbody>
+    </table>
+</form>

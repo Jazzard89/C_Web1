@@ -1,0 +1,278 @@
+﻿@*
+<tw><vc:o-name vm="solutionModel" /></tw>
+<tw><vc:o-name vm="solutionModel2" /></tw>
+<tw><vc:o-name vm="dbModel" /></tw>
+<tw><vc:o-name vm="dbModel2" /></tw>
+<tw><vc:o-name vm="razorPageModel" /></tw>
+<tw><vc:o-name vm="razorPageModel2" /></tw>
+<tw><vc:o-name vm="modelModel" /></tw>
+<tw><vc:o-name vm="modelModel2" /></tw>
+*@
+
+<h1>Setting Up the Account Controller</h1>
+<p>This guide will walk you through the implementation of an `AccountController` in an ASP.NET Core application, integrating it with Duende IdentityServer for user authentication. The controller handles user registration, login, and logout, along with the integration of Duende for external authentication using OpenID Connect (OIDC).</p>
+<h3>Step 1: AccountController Class</h3>
+<p>Start by creating the `AccountController` class in your `Controllers` folder with the following code:</p>
+<code-block>
+    using Microsoft.AspNetCore.Identity;
+    <br />using Microsoft.AspNetCore.Mvc;
+    <br />using <tw><vc:o-name vm="solutionModel2" /></tw>.Models.ViewModels;
+    <br />using System.Security.Claims;
+    <br /><br />namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Controllers
+    <p>{</p>
+    <openblock>
+        public class <cyan-code>AccountController</cyan-code> : <cyan-code>Controller</cyan-code>
+        <p>{</p>
+
+
+        <openblock>
+            <green-code>
+                <p>//We start by injecting `SignInManager` and `UserManager`, which are essential services provided by ASP.NET Core Identity for managing user authentication and identity.</p>
+            </green-code>
+            private readonly SignInManager&lt;IdentityUser&gt; _signInManager;
+            <br />
+            private readonly UserManager&lt;IdentityUser&gt; _userManager;
+            <br />
+            public <cyan-code>AccountController</cyan-code>(SignInManager&lt;IdentityUser&gt; signInManager, UserManager&lt;IdentityUser&gt; userManager)
+            <p>{</p>
+            <openblock>
+                _signInManager = signInManager;
+                <br />
+                _userManager = userManager;
+            </openblock>
+            <p>}</p>
+
+        </openblock>
+
+
+
+    </openblock>
+</code-block>
+
+<h3>Step 2: Login Logic</h3>
+<p>//Next, we implement the login functionality. This section consists of two methods: `Login()` to display the login view, and `LoginAsync()` to handle the login POST request asynchronously.</p>
+
+
+
+<code-block>
+    <openblock>
+        <openblock>
+            [HttpGet]
+            <br />public IActionResult Login()
+            <p>{</p>
+            <openblock>
+                return View();
+            </openblock>
+            <p>}</p>
+
+            [HttpPost]
+            <br />public async Task&lt;IActionResult&gt LoginAsync(<cyan-code>UserViewModel</cyan-code> model)
+            <p>{</p>
+            <openblock>
+                return View(model);
+            </openblock>
+            <p>}</p>
+        </openblock>
+
+
+
+
+
+    </openblock>
+</code-block>
+
+<h3>Step 3: Duende Logic</h3>
+<p>This section integrates Duende IdentityServer for external authentication using OpenID Connect (OIDC).</p>
+
+
+<code-block>
+    <openblock>
+
+        <openblock>
+            public IActionResult DuendeLogin()
+            <p>{</p>
+            <openblock>
+                <green-code>// Configure the external authentication properties using Duende IdentityServer.</green-code>
+                <br />string redirectUrl = Url.Action(<red-code>"DuendeResponse"</red-code>, <red-code>"Account"</red-code>);
+                <br />string scheme = <red-code>"oidc"</red-code>;
+                <br />var properties = _signInManager.ConfigureExternalAuthenticationProperties(scheme, redirectUrl);
+
+                <br />return new ChallengeResult(scheme, properties);
+            </openblock>
+            <p>}</p>
+
+            public async  Task&lt;IActionResult&gt;DuendeResponse()
+            <p>{</p>
+            <openblock>
+                <green-code>// Retrieve the external login information after the user is redirected back from Duende.</green-code>
+                <br />
+                <br />
+                ExternalLoginInfo externalLoginInfo = await _signInManager.GetExternalLoginInfoAsync();
+                <br /><br />
+                <green-code>// If the external login information is null, redirect the user to the login page.</green-code>
+                <br /><blue-code>if</blue-code> (externalLoginInfo == null)
+                <p>{</p>
+                <openblock>
+                    return RedirectToAction(<red-code>"Login"</red-code>);
+                </openblock>
+                <p>}</p>
+
+                <green-code>// Extract the user's name and email from the external login information.</green-code>
+                <br />string userName = externalLoginInfo.Principal.FindFirst(<red-code>"name"</red-code>).Value;
+                <br /><cyan-code>UserViewModel</cyan-code> model = new <cyan-code>UserViewModel</cyan-code>()
+                <p>{</p>
+                <openblock>
+                    Username = userName,
+                    <br />Email = externalLoginInfo.Principal.FindFirst(<red-code>"email"</red-code>).Value
+                </openblock>
+                <p>};</p>
+
+
+                <green-code>// Attempt to sign in the user using the external login information.</green-code>
+                <br />Microsoft.AspNetCore.<cyan-code>Identity</cyan-code>.SignInResult result =
+                await _signInManager.ExternalLoginSignInAsync(externalLoginInfo.LoginProvider,
+                externalLoginInfo.ProviderKey, false);
+
+                <p><blue-code>if</blue-code> (!result.Succeeded)</p>
+                <p>{</p>
+                <openblock>
+                    <p><green-code>// If the sign-in fails, create a new Identity user and associate the external login with this user.</green-code></p>
+                    <br />
+                    <p>var identityResult = await CreateIdentityUserAsync(externalLoginInfo, model);</p>
+
+                    <p><blue-code>if</blue-code> (!identityResult.Succeeded)</p>
+                    <p>{</p>
+                    <openblock>
+                        return View(<red-code>"Login"</red-code>);
+                    </openblock>
+                    <p>}</p>
+
+
+
+
+                </openblock>
+                <p>}</p>
+                return View(model);
+                
+            </openblock>
+            <p>}</p>
+
+        </openblock>
+    </openblock>
+</code-block>
+
+<h3>Step 3: Register logic</h3>
+<p>The registration process allows users to create new accounts. The `Register()` method handles GET and POST requests for the registration view.</p>
+
+<code-block>
+    <openblock>
+        <openblock>
+            [HttpGet]
+            <br />public IActionResult Register()
+            <p>{</p>
+            <openblock>
+                return View();
+            </openblock>
+            <p>}</p>
+
+            [HttpPost]
+            <br />public async Task&lt;IActionResult&gt; RegisterAsync(<cyan-code>UserViewModel</cyan-code> model)
+            <p>{</p>
+            <openblock>
+                return View(model);
+            </openblock>
+            <p>}</p>
+        </openblock>
+
+
+        </openblock>
+        </code-block>
+
+
+
+<h3>Step 4: Logout logic</h3>
+<p>The logout functionality ends the user's session, signing them out of the application.</p>
+
+        <code-block>
+            <openblock>
+
+        <openblock>
+            [HttpGet]
+            <br />public async Task&lt;IActionResult&gt; Logout()
+            <p>{</p>
+            <openblock>
+                await _signInManager.SignOutAsync();<br />
+                <br /> return View();
+            </openblock>
+            <p>}</p>
+        </openblock>
+        </openblock>
+        </code-block>
+
+
+<h3>Step 5: Private methods</h3>
+<p>These private methods assist in creating and managing Identity users based on the external login information.</p>
+
+<code-block>
+    <openblock>
+
+
+        <openblock>
+            private IdentityUser GetIdentityUser(ExternalLoginInfo info, <cyan-code>UserViewModel</cyan-code> model)
+            <p>{</p>
+            <openblock>
+                <green-code>// Generate a unique username using the external login provider and key.</green-code>
+                <br />string userName = <red-code>$"</red-code>{model.Username}<red-code>_</red-code>{info.LoginProvider}<red-code>_</red-code>{info.ProviderKey}<red-code>"</red-code>;
+
+                <br />return new IdentityUser(userName)
+                <p>{</p>
+                <openblock>
+                    Email = model.Email,
+                </openblock>
+                <p>};</p>
+            </openblock>
+            <p>}</p>
+
+            private async Task&lt;IdentityResult&gt; CreateIdentityUserAsync(ExternalLoginInfo externalLoginInfo, <cyan-code>UserViewModel</cyan-code> model)
+            <p>{</p>
+            <openblock>
+                IdentityUser user = GetIdentityUser(externalLoginInfo, model);
+                IdentityResult identityResult = await _userManager.CreateAsync(user);
+
+                <blue-code>if</blue-code> (identityResult.Succeeded)
+                <p>{</p>
+                <openblock>
+                    identityResult = await _userManager.AddLoginAsync(user, externalLoginInfo);
+
+                    <br /> <blue-code>if</blue-code> (identityResult.Succeeded)
+                    <p>{</p>
+                    <openblock>
+                        await _signInManager.SignInAsync(user, false);
+                    </openblock>
+                    <p>}</p>
+                    <blue-code>else</blue-code>
+                    <p>{</p>
+                    <openblock>
+                        return IdentityResult.Failed(new IdentityError { Description = <red-code>"Login failed"</red-code> });
+                    </openblock>
+                    <p>}</p>
+                </openblock>
+                <p>}</p>
+                return identityResult;
+            </openblock>
+            <p>}</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+
+
+</code-block>
+<h3>Conclusion</h3>
+<p>
+    This `AccountController` demonstrates how to manage user authentication
+    with ASP.NET Core Identity and integrate Duende IdentityServer
+    for OIDC-based external login. The use of `SignInManager`,
+    `UserManager`, and `IdentityResult` provides a
+    flexible and secure approach to handling user accounts.
+</p>

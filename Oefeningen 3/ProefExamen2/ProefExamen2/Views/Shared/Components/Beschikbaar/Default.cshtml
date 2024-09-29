@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Boek>
+
+@foreach (var boek in Model)
+{
+    <div>
+        <boektitel titel="@boek.Titel"></boektitel>
+        <p>@boek.Auteur</p>
+        <img src="@boek.Afbeelding" alt="@boek.Titel" style="height:300px;"/>
+    </div>
+}

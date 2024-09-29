@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Oef4MvcClientLocation.props" />
+</Project>

@@ -1,0 +1,316 @@
+﻿@{
+    string modelString = "@model";
+}
+<h1>Setting Up ASP.NET Core Identity</h1>
+
+<h3>Introduction</h3>
+<p>
+    ASP.NET Core Identity provides a robust framework for managing user authentication and authorization. This guide will walk you through integrating Identity into your ASP.NET Core application, including configuring `DbContext`, setting up `Program.cs`, and creating an `AccountController` with login, registration, and logout functionalities.
+</p>
+
+<h3>1. Install Microsoft.AspNetCore.Identity.EntityFrameworkCore</h3>
+<p>
+    First, install the necessary NuGet package for Identity by running the following command in the Package Manager Console:
+</p>
+
+<code-block>
+    <green-code>Install-Package Microsoft.AspNetCore.Identity.EntityFrameworkCore</green-code>
+</code-block>
+
+<p>
+    Alternatively, you can add it via the NuGet Package Manager in Visual Studio.
+</p>
+
+<h3>2. Update Your DbContext</h3>
+<p>
+    Replace your existing `DbContext` with `IdentityDbContext` to support Identity features. Update your `<tw><vc:o-name vm="dbModel2" /></tw>` to inherit from `IdentityDbContext` and configure it in the `Program.cs` file.
+</p>
+
+<code-block>
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    <p>using Microsoft.EntityFrameworkCore;</p>
+    <p>namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Data</p>
+    <p>{</p>
+    <openblock>
+        <p>public class <tw><vc:o-name vm="dbModel" /></tw> : IdentityDbContext</p>
+        <p>{</p>
+        <openblock>
+            <p>public <tw><vc:o-name vm="dbModel" /></tw>(DbContextOptions&lt;<tw><vc:o-name vm="dbModel" /></tw>&gt; options)</p>
+            <p>: base(options)</p>
+            <p>{</p>
+            <p><green-code>&lt;!-- Constructor logic here --&gt;</green-code></p>
+            <p>}</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<h3>3. Configure Identity in Program.cs</h3>
+<p>
+    Configure Identity services and update the `Program.cs` file to include Identity-related services. This setup ensures that Identity is available throughout the application.
+</p>
+
+<code-block>
+    var builder = WebApplication.CreateBuilder(args);
+    <br/>
+    <p><green-code>// Add services to the container.</green-code></p>
+    <p>builder.Services.AddDbContext&lt;<tw><vc:o-name vm="dbModel" /></tw>&gt;(options =&gt;</p>
+    <openblock>
+        <p>options.UseSqlServer(builder.Configuration.GetConnectionString(<red-code>"DefaultConnection"</red-code>));</p>
+    </openblock>
+    <p>);</p>
+    <br/>
+    <p><green-code> // Configure Identity services</green-code></p>
+    <p>builder.Services.AddIdentity&lt;IdentityUser, IdentityRole&gt;(options =&gt;</p>
+    <openblock>
+        <p><green-code>// Configure identity options here</green-code></p>
+        <p>options.Password.RequireDigit = true;</p>
+        <p>options.Password.RequiredLength = 6;</p>
+        <p>options.Password.RequireLowercase = true;</p>
+        <p>options.Password.RequireNonAlphanumeric = false;</p>
+        <p>options.Password.RequireUppercase = true;</p>
+        <p>options.Password.RequiredUniqueChars = 1;</p>
+    </openblock>
+    <p>).AddEntityFrameworkStores&lt;<tw><vc:o-name vm="dbModel" /></tw>&gt;().AddDefaultTokenProviders();</p>
+    <br/>
+    <p><green-code>// Add MVC services to the container</green-code></p>
+    <p>builder.Services.AddControllersWithViews();</p>
+    <br/>
+    <p><green-code>// Build and configure the app</green-code></p>
+    <p>var app = builder.Build();</p>
+    <p>if (!app.Environment.IsDevelopment())</p>
+    <openblock>
+        <p>app.UseExceptionHandler(<red-code>"/Home/Error"</red-code>);</p>
+        <p>app.UseHsts();</p>
+    </openblock>
+    <p>}</p>
+    <br/>
+    <p>app.UseHttpsRedirection();</p>
+    <p>app.UseStaticFiles();</p>
+    <p>app.UseRouting();</p>
+    <p>app.UseAuthentication();</p>
+    <p>app.UseAuthorization();</p>
+    <br/>
+    <p>app.MapControllerRoute(</p>
+    <openblock>
+        <p>name: <red-code>"default"</red-code>,</p>
+        <p>pattern: <red-code>"{controller=Home}/{action=Index}/{id?}"</red-code></p>
+    </openblock>
+    <p>);</p>
+    <p>app.MapRazorPages();</p>
+    <br/>
+    <p>app.Run();</p>
+</code-block>
+
+<h3>4. Create the AccountController</h3>
+<p>
+    Create an `AccountController` to handle login, registration, and logout actions. This controller will use Identity services to manage user authentication.
+</p>
+
+<code-block>
+    using Microsoft.AspNetCore.Identity;
+    <p>using Microsoft.AspNetCore.Mvc;</p>
+    <p>using <tw><vc:o-name vm="solutionModel2" /></tw>.Models;</p>
+    <p>namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Controllers</p>
+    <p>{</p>
+    <openblock>
+        public class AccountController : Controller
+        <p>{</p>
+        <openblock>
+            private readonly SignInManager&lt;IdentityUser&gt; _signInManager;
+            <p>private readonly UserManager&lt;IdentityUser&gt; _userManager;</p>
+            <p>public AccountController(UserManager&lt;IdentityUser&gt; userManager, SignInManager&lt;IdentityUser&gt; signInManager)</p>
+            <p>{</p>
+            <openblock>
+                <p>_userManager = userManager;</p>
+                <p>_signInManager = signInManager;</p>
+            </openblock>
+            <p>}</p>
+            <br/>
+            <p>public IActionResult Login()</p>
+            <p>{</p>
+            <openblock>
+                <p>return View();</p>
+            </openblock>
+            <p>}</p>
+            <br/>
+            <p>public async Task&lt;IActionResult&gt; Login(<cyan-code>LoginViewModel</cyan-code> model)</p>
+            <p>{</p>
+            <openblock>
+                <p><blue-code>if</blue-code> (!ModelState.IsValid)</p>
+                <p>{</p>
+                <openblock>
+                    <p>return View(model);</p>
+                </openblock>
+                <p>}</p>
+                <br/>
+                <p>var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: true);</p>
+                <p><blue-code>if</blue-code> (result.Succeeded)</p>
+                <p>{</p>
+                <openblock>
+                    <p>return RedirectToAction(<red-code>"Index"</red-code>, <red-code>"Home"</red-code>);</p>
+                </openblock>
+                <p>}</p>
+                <p><blue-code>if</blue-code> (result.IsLockedOut)</p>
+                <p>{</p>
+                <openblock>
+                    <p>return RedirectToAction(<red-code>"Lockout"</red-code>);</p>
+                </openblock>
+                <p>}</p>
+                <p>ModelState.AddModelError(string.Empty, <red-code>"Invalid login attempt."</red-code>);</p>
+                <br/>
+                <p>return View(model);</p>
+            </openblock>
+            <p>}</p>
+            <br/>
+            <p>public IActionResult Register()</p>
+            <p>{</p>
+            <openblock>
+                <p>return View();</p>
+            </openblock>
+            <p>}</p>
+            <br/>
+            <p>public async Task&lt;IActionResult&gt; Register(RegisterViewModel model)</p>
+            <p>{</p>
+            <openblock>
+                <blue-code>if</blue-code> (!ModelState.IsValid)
+                <p>{</p>
+                <openblock>
+                    <p>return View(model);</p>
+                </openblock>
+                <p>}</p>
+                <br/>
+                <p>var user = new IdentityUser { UserName = model.Email, Email = model.Email };</p>
+                <p>var result = await _userManager.CreateAsync(user, model.Password);</p>
+                <p>if (result.Succeeded)</p>
+                <p>{</p>
+                <openblock>
+                    <p>await _signInManager.SignInAsync(user, isPersistent: false);</p>
+                    <p>return RedirectToAction(<red-code>"Index"</red-code>, <red-code>"Home"</red-code>);</p>
+                </openblock>
+                <p>}</p>
+                <p><blue-code>foreach</blue-code> (var error in result.Errors)</p>
+                <p>{</p>
+                <openblock>
+                    <p>ModelState.AddModelError(string.Empty, error.Description);</p>
+                </openblock>
+                <p>}</p>
+                <br/>
+                <p>return View(model);</p>
+            </openblock>
+            <p>}</p>
+            <br/>
+            <p>public async Task&lt;IActionResult&gt; Logout()</p>
+            <p>{</p>
+            <openblock>
+                <p>await _signInManager.SignOutAsync();</p>
+                <p>return RedirectToAction(<red-code>"Index"</red-code>, <red-code>"Home"</red-code>);</p>
+            </openblock>
+            <p>}</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<h3>5. Create Views for Login and Registration</h3>
+<p>
+    Create Razor views for login and registration in the <code>Views/Account</code> folder. For example, create <code>Login.cshtml</code> and <code>Register.cshtml</code> files with the necessary forms.
+</p>
+
+<code-block>
+    <blue-code>@modelString </blue-code><tw><vc:o-name vm="solutionModel2" /></tw>.Models.<cyan-code>LoginViewModel</cyan-code>
+    <p>&lt;h2&gt;Login&lt;/h2&gt;</p>
+    <p>&lt;form asp-action="Login" method="post"&gt;</p>
+    <openblock>
+        <p>&lt;div class="form-group"&gt;</p>
+            <openblock>
+            <p>&lt;label asp-for="Email"&gt;&lt;/label&gt;</p>
+            <p>&lt;input asp-for="Email" class="form-control" /&gt;</p>
+            <p>&lt;span asp-validation-for="Email" class="text-danger"&gt;&lt;/span&gt;</p>
+            </openblock>
+        <p>&lt;/div&gt;</p>
+
+        <br />
+
+        <p>&lt;div class="form-group"&gt;</p>
+            <openblock>
+            <p>&lt;label asp-for="Password"&gt;&lt;/label&gt;</p>
+            <p>&lt;input asp-for="Password" type="password" class="form-control" /&gt;</p>
+            <p>&lt;span asp-validation-for="Password" class="text-danger"&gt;&lt;/span&gt;</p>
+            </openblock>
+        <p>&lt;/div&gt;</p>
+
+        <br />
+
+        <p>&lt;div class="form-group"&gt;</p>
+        <openblock>
+            <p>&lt;input asp-for="RememberMe" /&gt; Remember me</p>
+        </openblock>
+        <p>&lt;/div&gt;</p>
+
+        <br/>
+
+        <p>&lt;button type="submit" class="btn btn-primary"&gt;Login&lt;/button&gt;</p>
+    </openblock>
+    <p>&lt;/form&gt;</p>
+</code-block>
+
+<h3>6. Create a Partial View for Authentication Links</h3>
+<p>
+    Add a Partial View to <code>Views/Shared</code> to display authentication links like login and register. This partial view will be included in the `_Layout.cshtml` file.
+</p>
+
+<code-block>
+    using Microsoft.AspNetCore.Identity;<br/>
+    <p>namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Views.Shared</p>
+    <p>{</p>
+    <openblock>
+        public class _AuthPartial.cshtml
+        <p>&lt;div&gt;</p>
+            <openblock>
+            <p><purple-code>&lt;partial name="_LoginPartial" /&gt;</purple-code></p>
+            <br />
+            <p>&lt;div class="nav-link"&gt;</p>
+                <openblock>
+                <p>@User.Identity.IsAuthenticated ? </p>
+                <p>&lt;a asp-controller=<red-code>"Account"</red-code> asp-action=<red-code>"Logout"</red-code> &gt;Logout&lt;/a&gt;</p>
+                <p>:&lt;a asp-controller=<red-code>"Account"</red-code> asp-action=<red-code>"Login"</red-code>&gt;Login&lt;/a&gt; | </p>
+                <p>&lt;a asp-controller=<red-code>"Account"</red-code> asp-action=<red-code>"Register"</red-code>&gt;Register&lt;/a&gt;</p>
+                </openblock>
+            <p>&lt;/div&gt;</p>
+            </openblock>
+        <p>&lt;/div&gt;</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<h3>7. Update _Layout.cshtml to Include the Partial View</h3>
+<p>
+    Finally, include the Partial View in your `_Layout.cshtml` file to ensure that authentication links are available throughout your application.
+</p>
+
+<code-block>
+    <green-code>&lt;!-- Add the partial view here --&gt;</green-code>
+    <p>&lt;div class="container"&gt;</p>
+        <openblock>
+        <p>&lt;header&gt;</p>
+        <openblock>
+            <green-code><p>&lt;!-- Other header content --&gt;</p></green-code>
+            <p>&lt;partial name="_AuthPartial" /&gt;</p>
+        </openblock>
+        <p>&lt;/header&gt;</p>
+        <p>&lt;main role="main" class="pb-3"&gt;</p>
+        <openblock>
+            <green-code><p>&lt;!-- Main content here --&gt;</p></green-code>
+        </openblock>
+        <p>&lt;/main&gt;</p>
+        </openblock>
+    <p>&lt;/div&gt;</p>
+</code-block>
+
+<h3>Conclusion</h3>
+<p>
+    By following these steps, you’ve integrated ASP.NET Core Identity into your application, allowing you to manage user authentication and authorization effectively. You've set up `DbContext`, configured Identity, created controllers and views for account management, and included authentication links in your layout. This setup provides a solid foundation for managing user identity in your ASP.NET Core application.
+</p>

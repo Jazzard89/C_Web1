@@ -1,0 +1,119 @@
+﻿@{
+    string valString = "@Html.ValidationSummary()";
+    string labelString = "@Html.";
+    string atUsing = "@using";
+}
+
+<h1>Handling Validation Errors in the Controller and Razor View</h1>
+
+<h3>Introduction</h3>
+<p>
+    When a model fails validation, it's important to handle the errors correctly in both the controller and the Razor view. This page will show you how to display validation errors to the user, manage them effectively in your application, and manually add validation errors in the controller.
+</p>
+
+<h3>1. Handling Validation Errors in the Controller</h3>
+<p>
+    In the controller, you can check if the model is valid using <code>ModelState.IsValid</code>. If the model is not valid, you can return the view with the validation errors intact. Here’s an example:
+</p>
+
+<code-block>
+    public IActionResult Create(<cyan-code>Product</cyan-code> model)
+    <p>{</p>
+    <openblock>
+        <p><blue-code>if</blue-code> (!ModelState.IsValid)</p>
+        <p>{</p>
+        <openblock>
+            return View(model)
+        </openblock>
+        <p>}</p>
+        <br />
+        <green-code>// Save the valid model to the database</green-code>
+        <p>_context.Products.Add(model);</p>
+        <p>_context.SaveChanges();</p>
+
+        return RedirectToAction(<red-code>"Index"</red-code>);
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>
+    When the model is invalid, the controller will return the view with the model, including the validation errors. This allows the user to correct their input and resubmit the form.
+</p>
+
+<h3>2. Manually Adding Model Errors</h3>
+<p>
+    Sometimes, you may need to add custom validation errors to the <code>ModelState</code> manually. This can be useful for complex validation scenarios or when business logic requires additional validation that is not covered by data annotations. Here’s how you can do it:
+</p>
+
+<code-block>
+    public IActionResult Create(<cyan-code>Product</cyan-code> model)
+    <p>{</p>
+    <openblock>
+        <blue-code>if</blue-code> (model.Price > 1000)
+        <p>{</p>
+        <openblock>
+            <p>ModelState.AddModelError(<red-code>"Price"</red-code>, <red-code>"Price cannot exceed 1000."</red-code>);</p>
+        </openblock>
+        <p>}</p>
+
+        <p><blue-code>if</blue-code> (!ModelState.IsValid)</p>
+        <p>{</p>
+        <openblock>
+            <p>return View(model);</p>
+        </openblock>
+        <p>}</p>
+
+        <p><green-code>// Save the valid model to the database</green-code></p>
+        <p>_context.Products.Add(model);</p>
+        <p>_context.SaveChanges();</p>
+
+        return RedirectToAction(<red-code>"Index"</red-code>);
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>
+    In this example, a custom validation error is added to the <code>ModelState</code> if the <code>Price</code> exceeds 1000. This error will be displayed in the view like any other validation error.
+</p>
+
+<h3>3. Displaying Validation Errors in the Razor View</h3>
+<p>
+    In the Razor view, you can use the <code>@(labelString).ValidationSummary()</code> and <code>@(labelString).ValidationMessageFor()</code> helpers to display validation errors to the user. Here’s an example:
+</p>
+
+<code-block>
+    <p><green-code><!-- Display the validation summary for general errors --></green-code></p>
+    <p>@valString</p>
+
+    <br /><br />
+    <green-code><!-- Display a form for creating a product --></green-code>
+    <p>@atUsing (Html.BeginForm())</p>
+    <p>{</p>
+    <openblock>
+        <p><green-code>...</green-code></p>
+
+        <br /><br />
+        <p><green-code>// Display the validation message for the Name field </green-code></p>
+        <p>@(labelString)LabelFor(model => model.Name)</p>
+        <p>@(labelString)TextBoxFor(model => model.Name)</p>
+        <p>@(labelString)ValidationMessageFor(model => model.Name)</p>
+
+        <br /><br />
+        <p><green-code>...</green-code></p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>
+    The <code>@valString</code> helper displays a summary of all validation errors. The <code>@labelString. ValidationMessageFor()</code> helper displays validation errors for a specific field.
+</p>
+
+<h3>4. Preserving User Input</h3>
+<p>
+    When returning the view with validation errors, it’s crucial to preserve the user’s input so they don’t have to re-enter the information. Razor view helpers like <code>@labelString. TextBoxFor()</code> automatically preserve the input when the view is returned with validation errors.
+</p>
+
+<h3>Conclusion</h3>
+<p>
+    Properly handling validation errors in both the controller and the Razor view is essential for a smooth user experience. By using the tools provided by ASP.NET Core, you can ensure that validation errors are displayed clearly, that user input is preserved, and that custom validation logic can be applied effectively.
+</p>

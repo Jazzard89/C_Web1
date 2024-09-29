@@ -1,0 +1,29 @@
+﻿@model MVCSportStore.ViewModels.ProductModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <br/>
+    <a class="btn border border-secondary m-1" asp-controller="Product" asp-action="Create">Create new</a>
+    <br/>
+    @foreach (var p in Model.Products)
+    {
+        <partial name="ProductSummary" model="p"/>
+    }
+    <br/>
+    <page-link paging-info="@Model.PagingInfo"></page-link>
+@*    <br />
+    <div class="row">
+        @for (int i = 1; i <= Model.PagingInfo.TotalPages; i++)
+        {
+            <span style="float:left;width:50px">
+                <a class="btn border border-secondary m-1"
+               asp-controller="Home" asp-action="Index" asp-route-id="@i">@i</a>
+            </span>
+        }
+    </div>*@
+</div>

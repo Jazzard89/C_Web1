@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    var lst = ViewBag.ClientLocation;
+}
+
+<h1>Index</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ClientName:
+            </th>
+            <th>
+                City:
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in ViewBag.ClientLocation) {
+        <tr>
+            <td>
+                @item.c.ClientName
+            </td>
+            <td>
+                @item.l.City
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

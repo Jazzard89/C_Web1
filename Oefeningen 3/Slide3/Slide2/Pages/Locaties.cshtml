@@ -1,0 +1,36 @@
+﻿@page
+@model Slide2.Pages.LocatiesModel
+@{
+    var locaties = Slide2.Data.Databank.Locaties;
+    var rowId = 0;
+}
+
+<div class="text-center">
+    <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+    <h1 class="display-4">Klanten</h1>
+    <p>Dit is onze klanten razor page.</p>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">LocatieID</th>
+                <th scope="col">Gemeente</th>
+                <th scope="col">Postcode</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var locatie in locaties)
+            {
+                rowId++;
+                <tr>
+                    <th scope="row">@rowId</th>
+                    <td>@locatie.LocatieID</td>
+                    <td>@locatie.Gemeente</td>
+                    <td>@locatie.PostCode</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

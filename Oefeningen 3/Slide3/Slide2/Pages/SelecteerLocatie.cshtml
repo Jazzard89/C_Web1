@@ -1,0 +1,18 @@
+﻿@page
+@model Slide2.Pages.SelecteerLocatieModel
+@{
+    //var selectList = Enumerable.Empty<SelectListItem>();
+    var selectList = Data.Databank.Locaties.Select(x => new SelectListItem 
+        { 
+            Text = x.Gemeente,
+            Value = x.LocatieID.ToString() 
+        });
+}
+<div>
+    <h1>Selecteer locatie</h1>
+    <form method="post">
+        <select name="SelectLocatie" asp-items="@selectList"></select>
+        <label>&nbsp;</label>
+        <input type="submit" value="Selecteer locatie" class="submit"/>
+    </form>
+</div>

@@ -1,0 +1,33 @@
+﻿@using Slide5PartyInvites.Data;
+@model IEnumerable<Gast>
+@{
+    ViewData["Title"] = "Home Page";
+    var lst = LocalData.GastList.Where(x => x.Aanwezig == true)
+    .Select(y => $"({y.Naam} - {y.Email} - {y.Telefoon})").ToList();
+}
+
+<div class="text-center">
+    <br/>
+    <a asp-controller="Gast" asp-action="Index">Schrijf je hier in!</a>
+    <br/>
+    @if(Model.Count() > 0)
+    {
+        <table>
+            <tr>
+                <th class="font-weight-bold">Aanwezig</th>
+            </tr>
+            @foreach (var s in lst)
+            {
+                <tr>
+                    <td>@s</td>
+                </tr>
+            }
+        </table>
+        <br/>
+        <table>
+            <tr>
+                <th class="font-weight-bold">Afwezig</th>
+            </tr>
+        </table>
+    }
+</div>

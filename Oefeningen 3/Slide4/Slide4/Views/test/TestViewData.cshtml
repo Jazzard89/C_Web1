@@ -1,0 +1,15 @@
+﻿@{
+    Layout = "_Layout";
+    int teller = (int)ViewData["Teller"];
+}
+
+<div>
+    <ul>
+        @for (int i = 1; i < teller; i++)
+        {
+            <li>
+                Dit is een @i uit de viewbag!
+            </li>
+        }
+    </ul>
+</div>

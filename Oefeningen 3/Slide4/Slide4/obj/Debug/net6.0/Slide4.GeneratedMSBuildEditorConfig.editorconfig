@@ -1,0 +1,65 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Slide4
+build_property.RootNamespace = Slide4
+build_property.ProjectDir = D:\JASPER\WORK\Opleidingen\PXL\C\Web\Oefeningen 3\Slide4\Slide4\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\JASPER\WORK\Opleidingen\PXL\C\Web\Oefeningen 3\Slide4\Slide4
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 3/Slide4/Slide4/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 3/Slide4/Slide4/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 3/Slide4/Slide4/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 3/Slide4/Slide4/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 3/Slide4/Slide4/Views/test/Formulier.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcdGVzdFxGb3JtdWxpZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 3/Slide4/Slide4/Views/test/FormulierPost.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcdGVzdFxGb3JtdWxpZXJQb3N0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 3/Slide4/Slide4/Views/test/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcdGVzdFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 3/Slide4/Slide4/Views/test/TestViewBag.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcdGVzdFxUZXN0Vmlld0JhZy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 3/Slide4/Slide4/Views/test/TestViewData.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcdGVzdFxUZXN0Vmlld0RhdGEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 3/Slide4/Slide4/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 3/Slide4/Slide4/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 3/Slide4/Slide4/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-stq9ten26k

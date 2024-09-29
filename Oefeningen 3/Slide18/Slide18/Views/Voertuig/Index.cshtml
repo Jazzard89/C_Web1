@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Slide18.Models.Voertuig>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+@foreach (var voertuig in Model)
+{
+    <partial name="VoertuigCard" model="voertuig"/>
+}

@@ -1,0 +1,215 @@
+﻿@{
+    string modelText = "@using";
+    string modelText2 = "@Model";
+}
+
+<h1>SeedData</h1>
+<table>
+    <thead>
+        <tr>
+            <h3>Page 1: Understanding SeedData</h3>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                Seed data is initial data that you can populate into your database when the application is first run. This can be useful for setting up default values, creating demo data, or ensuring that your database starts with some predefined content.
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Why Use Seed Data?</h3>
+<p>
+    Seed data allows you to ensure that your application has the necessary initial data it needs to function correctly. Whether for testing, development, or production, seed data can help ensure that your database is populated with essential records right from the start.
+</p>
+
+<h3>Setting Up Seed Data</h3>
+<p>
+    To set up seed data in your ASP.NET Core application, you can follow these steps:
+</p>
+
+<h4>1. Create a SeedData Class</h4>
+<p>
+    First, create a new static class named <code>SeedData</code> in a folder named <code>Data</code> (or wherever suits your project structure). This class will contain methods to populate your database.
+</p>
+
+<code-block>
+    <blue-code>@modelText </blue-code> <tw><vc:o-name vm="solutionModel2" /></tw>.Models;<br />
+
+    <br/>
+    <blue-code>namespace</blue-code> <tw><vc:o-name vm="solutionModel2" /></tw>.Data.SeedData<br />
+    {<br/>
+    <openblock>
+        public static class SeedData<br />
+        {<br/>
+        <openblock>
+            private static IEnumerable&lt;<cyan-code>Job</cyan-code>&gt; Jobs => GetJobList();
+            <br/>
+            private static IEnumerable&lt;<cyan-code>Client</cyan-code>&gt; Clients => GetClientList();
+            <br/>
+            private static IEnumerable&lt;string&gt; Locations => GetLocationList();<br />
+        </openblock>
+        }<br/>
+    </openblock>
+</code-block>
+
+<p>Here are methods to generate lists of <code>Job</code>, <code>Client</code>, and <code>Location</code> entities:</p>
+
+<code-block>
+    private static IEnumerable&lt;<cyan-code>Job</cyan-code>&gt; GetJobList()<br />
+    {<br/>
+    <openblock>
+        List&lt;<cyan-code>Job</cyan-code>&gt; jobs = new List&lt;<cyan-code>Job</cyan-code>&gt;();
+        <br/>
+        jobs.Add(new Job(new string[] { <red-code>"API"</red-code>, <red-code>"Create an API for the client"</red-code> }));
+        <br/>
+        jobs.Add(new Job(new string[] { <red-code>"WebShop"</red-code>, <red-code>"Create a webshop"</red-code> }));
+        <br/>
+        jobs.Add(new Job(new string[] { <red-code>"Single page Website"</red-code>, <red-code>"Create a single paged website"</red-code> }));
+        <br/>
+        jobs.Add(new Job(new string[] { <red-code>"Multi page website"</red-code>, <red-code>"Create a website with multiple pages"</red-code> }));
+        <br/>
+        jobs.Add(new Job(new string[] { <red-code>"Application"</red-code>, <red-code>"Create a custom application"</red-code> }));
+        <br/>
+        return jobs;<br />
+    </openblock>
+    }<br/>
+</code-block>
+
+<p>The same structure can be applied to <code>Client</code> and <code>Location</code> data:</p>
+
+<code-block>
+    private static IEnumerable&lt;<cyan-code>Client</cyan-code>&gt; GetClientList()<br />
+    {<br/>
+    <openblock>
+        List&lt;<cyan-code>Client</cyan-code>&gt; clients = new List&lt;<cyan-code>Client</cyan-code>&gt;();
+        <br/>
+        clients.Add(new <cyan-code>Client</cyan-code>("Jefrey", "Maltser", 1));
+        <br/>
+        clients.Add(new <cyan-code>Client</cyan-code>("Anna", "Buysen", 2));
+        <br/>
+        clients.Add(new <cyan-code>Client</cyan-code>("Philip", "Raven", 3));
+        <br/>
+        return clients;
+    </openblock>
+    }<br/>
+</code-block>
+
+<code-block>
+    private static IEnumerable&lt;string&gt; GetLocationList()<br />
+    {<br/>
+    <openblock>
+        List&lt;string&gt; locations = new List&lt;string&gt;();
+        <br/>
+        locations.Add(<red-code>"3500;Hasselt"</red-code>);
+        <br/>
+        locations.Add(<red-code>"3600;Genk"</red-code>);
+        <br/>
+        locations.Add(<red-code>"3510;Kermt"</red-code>);<br/>
+        <br/>
+        return locations;<br />
+    </openblock>
+    }<br/>
+</code-block>
+
+<h4>2. Ensure Database is Populated</h4>
+<p>
+    Next, create a method in the <code>SeedData</code> class that checks if the database is already populated and, if not, seeds the initial data:
+</p>
+
+<code-block>
+    public static void EnsurePopulated(WebApplication app)<br />
+    {<br/>
+    <openblock>
+        using (var scope = app.Services.CreateScope())<br />
+        {<br/>
+        <openblock>
+            var context = scope.ServiceProvider.GetRequiredService&lt;<tw><vc:o-name vm="dbModel" /></tw>&gt;();<br />
+            <br/>
+            <br/>
+            <p><green-code>// Jobs</green-code></p>
+            <blue-code>if</blue-code> (!context.Jobs.Any())<br />
+            {<br/>
+            <openblock>
+                <blue-code>foreach</blue-code> (<cyan-code>Job</cyan-code> job in Jobs)<br />
+                {<br/>
+                <openblock>
+                    context.Jobs.Add(job);<br />
+                </openblock>
+                }<br/>
+                context.SaveChanges();<br />
+            </openblock>
+            }<br/>
+            <p><green-code>// Locations</green-code></p>
+                    <blue-code>if</blue-code> (!context.Locations.Any())<br />
+            {<br/>
+            <openblock>
+                        <blue-code>foreach</blue-code> (var locationString in Locations)<br />
+                {<br/>
+                <openblock>
+                    var location = new Location(locationString.Split(<red-code>';'</red-code>));<br/>
+                    context.Locations.Add(location);<br/>
+                </openblock>
+                            }<br />
+                        context.SaveChanges();<br />
+            </openblock>
+                    }<br />
+            <p><green-code>// Clients</green-code></p>
+                    <blue-code>if</blue-code> (!context.Clients.Any())<br />
+                        {<br />
+            <openblock>
+                <blue-code>foreach</blue-code> (<cyan-code>Client</cyan-code> client in Clients)<br />
+                {<br/>
+                <openblock>
+                    context.Clients.Add(client);<br />
+                </openblock>
+                }<br/>
+                <br/>
+                context.SaveChanges();<br />
+            </openblock>
+            }<br/>
+        </openblock>
+        }<br/>
+    </openblock>
+    }<br/>
+</code-block>
+
+<h4>3. Call SeedData in Program.cs</h4>
+<p>
+    To ensure your seed data is applied when the application starts, call the <code>EnsurePopulated</code> method in the <code>Program.cs</code> file:
+</p>
+
+<code-block>
+    var app = builder.Build();
+    <br/>
+    <br/>
+    <p>...</p>
+    <p>...</p>
+    <br/>
+    <cyan-code>SeedData</cyan-code>.EnsurePopulated(app);<br />
+    <br/>
+    <br/>
+    <p>app.Run();</p>
+</code-block>
+
+<h3>Different Ways to Populate Seed Data</h3>
+<p>
+    Seed data can be populated in various ways, including:
+</p>
+<ul>
+    <li>
+        <strong>In-Memory Collections:</strong> As shown above, data can be populated using in-memory collections like <code>List&lt;T&gt;</code>.
+    </li>
+    <li>
+        <strong>From JSON Files:</strong> Seed data can also be loaded from external files such as JSON or XML files.
+    </li>
+    <li>
+        <strong>Using Environment Variables:</strong> For dynamic or environment-specific data, you can seed data using environment variables or configuration settings.
+    </li>
+</ul>
+
+<h3>Conclusion</h3>
+<p>
+    Implementing seed data is an essential practice for ensuring that your application’s database starts with the necessary initial data. By following the steps outlined above, you can effectively populate your database with seed data, making your application ready to use right from the first run.
+</p>

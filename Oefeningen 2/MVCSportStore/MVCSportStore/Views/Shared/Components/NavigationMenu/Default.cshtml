@@ -1,0 +1,13 @@
+﻿@model IEnumerable<string>
+@{
+    string style = "btn btn-outline-secondary btn-block m-2";
+    string styleActive = "btn btn-outline-primary btn-block m-2";
+}
+@foreach (string category in Model)
+{
+    <div class="row">
+        <a class="@((category == ViewBag.SelectedCategory) ? styleActive : style)"
+        asp-controller="Home" asp-action="Index" asp-route-id="1" asp-route-category="@category">@category</a>
+    </div>
+    <br>
+}

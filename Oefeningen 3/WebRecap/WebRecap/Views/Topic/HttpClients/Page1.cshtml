@@ -1,0 +1,149 @@
+﻿<h1>Using an API Controller in your MVC App</h1>
+<h3>Step 1: Add the required packages to your solution</h3>
+<p>
+You need to download and add this package to your solution.
+<a href="@Url.Action("DownloadFile", "Home", new { fileName = "microsoft.aspnet.webapi.client.6.0.0.nupkg" })">
+    WebApi.Client</a>.
+   
+</p>
+<h3>Step 2: Modify Program.cs</h3>
+<p>
+    We need to modify our program.cs class to get the proper redirection for the API URL.
+    In order to do this we first check out the URL in the Properties/launchSettings.json file
+</p>
+<code-block>
+    "WebRecap": {<br/>
+        <openblock>
+        "commandName": "Project",<br/>
+        "dotnetRunMessages": true,<br />
+        "launchBrowser": true,<br />
+        "applicationUrl": "<blue-code>https://localhost:7129</blue-code>;http://localhost:5161",<br />
+        </openblock>
+</code-block>
+<p>
+    We need to use the URL that is in the applicationUrl property. In this case, it is https://localhost:7129.
+    We will use this URL in our program.cs file.
+</p>
+<code-block>
+    builder.Services.AddHttpClient(<red-code>"FundApiClient"</red-code>, client => <br/>
+    {<br/>
+        client.BaseAddress = new Uri(<blue-code>"https://localhost:7129"</blue-code>);<br/>
+    });<br/>
+</code-block>
+<h3>Step 3: Create a new API Controller</h3>
+<p>Create a folder named 'Api' inside the Controllers folder. Right click here and add an
+    API controller. Be carefull not to add an MVC controller.
+</p>
+<p style="font-weight:bolder;">We're using a ViewModel please mind this.</p>
+
+<code-block>
+    using Microsoft.AspNetCore.Http;
+    <br />
+    using Microsoft.AspNetCore.Mvc;
+    <br />
+    using Microsoft.EntityFrameworkCore;
+    <br />
+    using <tw><vc:o-name vm="solutionModel2" /></tw>.Data;
+    <br />
+    using <tw><vc:o-name vm="solutionModel2" /></tw>.Models;
+    <br />
+    using <tw><vc:o-name vm="solutionModel2" /></tw>.Models.ViewModels;
+    <br />
+
+    <br />
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Controllers.api
+    <br />
+    {
+    <br />
+    <openblock>
+        [<red-code>Route("api/[controller]")</red-code>]<br />
+        [<red-code>ApiController</red-code>]<br />
+        public class <cyan-code>FundApi</cyan-code> : ControllerBase<br />
+        {<br />
+        <openblock>
+            private readonly <tw><vc:o-name vm="dbModel" /></tw> _context;<br />
+            public <cyan-code>FundApi</cyan-code>(<tw><vc:o-name vm="dbModel" /></tw> context)<br />
+            {<br />
+            <openblock>
+                _context = context;<br />
+            </openblock>
+            }<br />
+
+            <br />
+            [HttpGet]<br />
+            [<red-code>Route("FundInfo")</red-code>]<br />
+            public IActionResult <cyan-code>FundInfo</cyan-code>()<br />
+            {<br />
+            <openblock>
+                var fondsenList = _context.Fondsen.Include(f => f.Bank).ToList();<br />
+                List&lt;<cyan-code>ApiViewModel</cyan-code>&gt; list = new List&lt;<cyan-code>ApiViewModel</cyan-code>&gt;();<br />
+
+                <br />
+                <blue-code>foreach</blue-code> (var bankmodellen <blue-code>in</blue-code> fondsenList)<br />
+                {<br />
+                <openblock>
+                    <blue-code>if</blue-code> (bankmodellen.Bank != null)<br />
+                    {<br />
+                    <openblock>
+                        <cyan-code>ApiViewModel</cyan-code> model = new <cyan-code>ApiViewModel</cyan-code><br />
+                        {<br />
+                        <openblock>
+                            BankName = bankmodellen.Bank.BankName,<br />
+                            FundName = bankmodellen.FundName,<br />
+                            FundValue = bankmodellen.FundValue.ToString(),<br />
+                        </openblock>
+                        };<br />
+                        list.Add(model);<br />
+                    </openblock>
+                    }<br />
+                </openblock>
+                }<br />
+                return Ok(list);<br />
+            </openblock>
+            }<br />
+
+            <br />
+            [HttpPost]<br />
+            [<red-code>Route("Fund")</red-code>]<br />
+            public IActionResult <cyan-code>Fund</cyan-code>(<cyan-code>ApiViewModel</cyan-code> model)<br />
+            {<br />
+            <openblock>
+                try<br />
+                {<br />
+                <openblock>
+                    <cyan-code>Bank</cyan-code> bank = _context.Banken.FirstOrDefault(b => b.BankName == model.BankName);<br />
+                    <blue-code>if</blue-code> (bank == null)<br />
+                    {<br />
+                    <openblock>
+                        return NotFound(<red-code>"Bank not found"</red-code>);<br />
+                    </openblock>
+                    }<br />
+                    <cyan-code>Fund</cyan-code> fund = new <cyan-code>Fund</cyan-code><br />
+                    {<br />
+                    <openblock>
+                        BankId = bank.BankId,<br />
+                        FundName = model.FundName,<br />
+                        FundValue = Convert.ToDecimal(model.FundValue),<br />
+                    </openblock>
+                    };<br />
+                    _context.Fondsen.Add(fund);<br />
+                    _context.SaveChanges();<br />
+                    return Ok(<red-code>"Fund added"</red-code>);<br />
+                </openblock>
+                }<br />
+                catch (Exception e)<br />
+                {<br />
+                <openblock>
+                    return StatusCode(StatusCodes.Status500InternalServerError, e.Message);<br />
+                </openblock>
+                }<br />
+            </openblock>
+            }<br />
+        </openblock>
+        }<br />
+    </openblock>
+    }
+    <br />
+
+
+</code-block>

@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "Hash": "wp4o9LjhUXp/z6nlN9kKlL6CKFUu2aVD+bhO11g9EfU=",
+  "Source": "Slide1",
+  "BasePath": "_content/Slide1",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "Slide1\\wwwroot",
+      "Source": "Slide1",
+      "ContentRoot": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\Oefeningen 3\\Slide1\\Slide1\\wwwroot\\",
+      "BasePath": "_content/Slide1",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\Oefeningen 3\\Slide1\\Slide1\\wwwroot\\default.html",
+      "SourceId": "Slide1",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\C\\Web\\Oefeningen 3\\Slide1\\Slide1\\wwwroot\\",
+      "BasePath": "_content/Slide1",
+      "RelativePath": "default.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\default.html"
+    }
+  ]
+}

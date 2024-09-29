@@ -1,0 +1,155 @@
+﻿
+<h1>ViewModels</h1>
+<table>
+    <thead>
+        <tr>
+            <h3>Page 1: Understanding ViewModels</h3>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                ViewModels are a design pattern used in ASP.NET Core MVC to provide data to the view. They act as a bridge between the domain models and the views, helping to format or structure data in a way that is most useful for rendering the view.
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>What are ViewModels?</h3>
+<p>
+    In ASP.NET Core, the role of the ViewModel is to contain the data that will be displayed in the view. A ViewModel is often a combination of one or more domain models and other data that is specific to the view's needs.
+</p>
+<p>
+    ViewModels allow us to decouple the presentation layer from the business logic, keeping our views clean and focused solely on displaying data, while the controller or other classes handle the logic of fetching and preparing that data.
+</p>
+
+<h3>Creating a ViewModel</h3>
+<p>
+    To create a ViewModel, simply create a new class in your project, typically in a folder named <code>ViewModels</code>. Below is an example of a simple ViewModel:
+</p>
+
+<code-block>
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Models.ViewModels
+    <p>{</p>
+    <openblock>
+        public class ProductViewModel
+        <p>{</p>
+        <openblock>
+            public int ProductId { get; set; }
+            <br />
+            public string ProductName { get; set; }
+            <br />
+            public decimal Price { get; set; }
+            <br />
+            public string Description { get; set; }
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<h3>Using a ViewModel in a Controller</h3>
+<p>
+    Once you have your ViewModel, you can use it in your controller action to prepare data for the view. Here’s an example:
+</p>
+
+<code-block>
+    public IActionResult ProductDetails(int id)
+    <p>{</p>
+    <openblock>
+        var product = _context.Products.FirstOrDefault(p => p.ProductId == id);
+        <br />
+        <blue-code>if</blue-code> (product == null)
+        <br />
+        <openblock>
+            return NotFound();
+        </openblock>
+        <br />
+        var viewModel = new ProductViewModel
+        <p>{</p>
+        <openblock>
+            ProductId = product.ProductId,
+            <br />
+            ProductName = product.ProductName,
+            <br />
+            Price = product.Price,
+            <br />
+            Description = product.Description
+        </openblock>
+        <p>};</p>
+        <br />
+        return View(viewModel);
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<h3>Combining Multiple Models in a ViewModel</h3>
+<p>
+    Sometimes, you may need to combine data from multiple models into a single ViewModel. For example, if you have a <code>Product</code> model and a <code>Category</code> model, and you want to display information from both in a view, you can create a ViewModel that contains both.
+</p>
+
+<p>Here's an example of such a ViewModel:</p>
+
+<code-block>
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Models.ViewModels
+    <p>{</p>
+    <openblock>
+        public class <cyan-code>ProductCategoryViewModel</cyan-code>
+        <p>{</p>
+        <openblock>
+            public <cyan-code>Product</cyan-code> Product { get; set; }
+            <br />
+            public <cyan-code>Category</cyan-code> Category { get; set; }
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>In the controller, you can populate this ViewModel like this:</p>
+
+<code-block>
+    public IActionResult ProductCategoryDetails(int id)
+    <p>{</p>
+    <openblock>
+        var product = _context.Products.FirstOrDefault(p => p.ProductId == id);
+        <br />
+        <blue-code>var category</blue-code> = _context.Categories.FirstOrDefault(c => c.CategoryId == product.CategoryId);
+        <br />
+        <blue-code>if (product == null || category == null)</blue-code>
+        <br />
+        <openblock>
+            <blue-code>return NotFound();</blue-code>
+        </openblock>
+        <br />
+        var viewModel = new ProductCategoryViewModel
+        <p>{</p>
+        <openblock>
+            Product = product,
+            <br />
+            Category = category
+        </openblock>
+        <p>};</p>
+        <br />
+        <blue-code>return View(viewModel);</blue-code>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<h3>Using a Combined ViewModel in a View</h3>
+<p>
+    In your view, you can now display data from both the <code>Product</code> and <code>Category</code> models:
+</p>
+
+<code-block>
+    @@using <tw><vc:o-name vm="solutionModel2" /></tw>.Models.ViewModels.ProductCategoryViewModel
+    <br />
+    <p>&lt;h1&gt;@@Model.Product.ProductName&lt;/h1&gt;</p>
+    <p>&lt;p&gt;Price: @@Model.Product.Price&lt;/p&gt;</p>
+    <p>&lt;p&gt;Category: @@Model.Category.CategoryName&lt;/p&gt;</p>
+    <p>&lt;p&gt;@@Model.Product.Description&lt;/p&gt;</p>
+</code-block>
+
+<p>
+    This approach enables you to combine multiple models' data into a single view, keeping your views clean and your code organized.
+</p>

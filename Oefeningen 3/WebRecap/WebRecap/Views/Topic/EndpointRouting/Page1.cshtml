@@ -1,0 +1,201 @@
+﻿@*
+<tw><vc:o-name vm="solutionModel" /></tw>
+<tw><vc:o-name vm="solutionModel2" /></tw>
+<tw><vc:o-name vm="dbModel" /></tw>
+<tw><vc:o-name vm="dbModel2" /></tw>
+<tw><vc:o-name vm="razorPageModel" /></tw>
+<tw><vc:o-name vm="razorPageModel2" /></tw>
+<tw><vc:o-name vm="modelModel" /></tw>
+<tw><vc:o-name vm="modelModel2" /></tw>
+*@
+<h1>Creating the Routing Repository Service</h1>
+
+<h3>Step 1: Create the RoutingModel Class</h3>
+<p>
+    Create a class named <code>RoutingModel</code> in the <code>Models</code> folder. This class will represent the data model for routing information. Here is the code:
+</p>
+
+<code-block>
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Models.ViewModels
+    <p>{</p>
+    <openblock>
+        public class <cyan-code>RoutingModel</cyan-code>
+        <p>{</p>
+        <openblock>
+            public string Controller { get; set; }
+            <br />
+            public string ActionName { get; set; }
+            <br />
+            public DateTime Date { get; set; }
+            <br />
+            public Dictionary &lt;string, string&gt; RoutingParameters = new Dictionary&lt;string, string&gt;();
+
+            <br /><br />
+            public string Parameters => string.Join(<red-code>','</red-code>, RoutingParameters.Select(x => string.Format(<red-code>"{0}={1}"</red-code>, x.Key, x.Value)));
+            <br /><br />
+            public <cyan-code>RoutingModel</cyan-code>(string controller)
+            <p>{</p>
+            <openblock>
+                <p>Controller = controller;</p>
+                <p>Date = DateTime.Now;</p>
+            </openblock>
+            <p>}</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>
+    The <code>RoutingModel</code> class contains properties for the controller name, action name, and routing parameters, along with a constructor that initializes the controller and sets the current date and time.
+</p>
+
+
+
+
+
+
+<h3>Step 2: Create the Services and Interfaces Folders</h3>
+<p>
+    First, in the root of your project, create a new folder named <code>Services</code>. Inside this folder, create another folder named <code>Interfaces</code>. These folders will organize the code for the service and its interface.
+</p>
+
+<h4>Step 2.5: Create the IRoutingRepository Interface</h4>
+<p>
+    In the <code>Services/Interfaces</code> folder, create a new interface named <code>IRoutingRepository</code>. This interface will define the methods required for the routing repository. Here is the code for the interface:
+</p>
+
+<code-block>
+    using <tw><vc:o-name vm="solutionModel2" /></tw>.Models.ViewModels;
+    <br />
+    using Microsoft.AspNetCore.Mvc;
+    <br /><br />
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Services.Interfaces
+    <p>{</p>
+    <openblock>
+        public interface <cyan-code>IRoutingRepository</cyan-code>
+        <p>{</p>
+        <openblock>
+            IEnumerable&lt;<cyan-code>RoutingModel</cyan-code>&gt; RoutingModels { get; }
+            <br />
+            void Add(<cyan-code>RoutingModel</cyan-code> routingModel);
+            <br />
+            void GetRouting(string id, <cyan-code>ControllerContext</cyan-code> controllerContext, <blue-code>dynamic</blue-code> viewBag);
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>
+    This interface defines the <code>RoutingModels</code> property, and two methods: <code>Add</code> and <code>GetRouting</code>.
+</p>
+
+<h3>Step 3: Create the RoutingRepository Class</h3>
+<p>
+    Now, create a new class named <code>RoutingRepository</code> in the <code>Services</code> folder. This class will implement the <code>IRoutingRepository</code> interface. Here is the code for the class:
+</p>
+
+<code-block>
+    using <tw><vc:o-name vm="solutionModel2" /></tw>.Models.ViewModels;
+    <br />
+    using <tw><vc:o-name vm="solutionModel2" /></tw>.Services.Interfaces;
+    <br />
+    using Microsoft.AspNetCore.Mvc;
+    <br /><br />
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Services
+    <p>{</p>
+    <openblock>
+        public class <cyan-code>RoutingRepository</cyan-code> : <cyan-code>IRoutingRepository</cyan-code>
+        <p>{</p>
+        <openblock>
+            private List&lt;<cyan-code>RoutingModel</cyan-code>&gt; _routingModels = new List&lt;<cyan-code>RoutingModel</cyan-code>&gt;();
+
+            <br /><br />
+            public IEnumerable&lt;<cyan-code>RoutingModel</cyan-code>&gt; RoutingModels => _routingModels;
+
+            <br /><br />
+            public void Add(<cyan-code>RoutingModel</cyan-code> routingModel)
+            <p>{</p>
+            <openblock>
+                _routingModels.Add(routingModel);
+            </openblock>
+            <p>}</p>
+
+            <br /><br />
+            public void GetRouting(string id, <cyan-code>ControllerContext</cyan-code> controllerContext, <cyan-code>dynamic</cyan-code> viewBag)
+            <p>{</p>
+            <openblock>
+                <p><green-code>// Get the controller and action names using the ControllerContext</green-code></p>
+                <p>string controllerName = controllerContext.ActionDescriptor.ControllerName;</p>
+                <p>string actionName = controllerContext.ActionDescriptor.ActionName;</p>
+
+                <br /><br />
+                <p><cyan-code>RoutingModel</cyan-code> routingModel = new <cyan-code>RoutingModel</cyan-code>(controllerName);</p>
+                <p>routingModel.ActionName = actionName;</p>
+
+                <br /><br />
+                <p><green-code>// Add parameters to the RoutingModel</green-code></p>
+                <p>routingModel.RoutingParameters.Add(<red-code>"id"</red-code>, id);</p>
+
+                <br /><br />
+                <p><green-code>// Set the ViewBag value</green-code></p>
+                <p>viewBag.ValueofId = id ?? <red-code>"Null Value"</red-code>;</p>
+
+                <br /><br />
+                <p><green-code>// Add the routing model to the list</green-code></p>
+                <p>Add(routingModel);</p>
+            </openblock>
+            <p>}</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>
+    The <code>RoutingRepository</code> class implements the methods defined in the <code>IRoutingRepository</code> interface. It stores the routing information and handles the logic for adding routing models and getting routing details.
+</p>
+
+<h3>Step 4: Register the Service in Program.cs</h3>
+<p>
+    Open the <code>Program.cs</code> file. Before the line <code>var app = builder.Build();</code>, register the routing repository service with the following code:
+</p>
+
+<code-block>
+    builder.Services.AddSingleton&lt;<cyan-code>IRoutingRepository</cyan-code>, <cyan-code>RoutingRepository</cyan-code>&gt;();
+</code-block>
+
+<p>
+    This code registers the <code>RoutingRepository</code> as a singleton service, making it available for dependency injection throughout the application.
+</p>
+
+<h3>Step 5: Configure the Routing in Program.cs</h3>
+<p>
+    Finally, below the line <code>app.UseRouting();</code>, configure the default routing pattern by adding the following code:
+</p>
+
+<code-block>
+    <p>app.UseRouting();</p>
+    <p>app.UseEndpoints(endpoints =></p>
+    <p>{</p>
+    <openblock>
+        endpoints.MapControllerRoute(
+        <openblock>
+            <p>name: <red-code>"default"</red-code>,</p>
+            <p>pattern: <red-code>"{controller=Home}/{action=Index}/{id?}"</red-code>);</p>
+        </openblock>
+    </openblock>
+    <p>});</p>
+</code-block>
+
+<p>
+    This sets up the default route for your application, mapping the <code>Home</code> controller to the <code>Index</code> action by default, with an optional <code>id</code> parameter.
+</p>
+
+
+
+<h3>Conclusion</h3>
+<p>
+    By following these steps, you have successfully set up a routing repository service in your ASP.NET Core application. This service can now be used to manage and retrieve routing data throughout your application.
+</p>

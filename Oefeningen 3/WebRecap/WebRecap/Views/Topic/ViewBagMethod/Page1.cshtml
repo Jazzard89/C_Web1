@@ -1,0 +1,60 @@
+﻿@{
+    int teller = (int)ViewBag.RandoInput;
+
+    string numberText = "<p>@numbers</p>";
+    string lettersText = "<p>@letters</p>";
+}
+    <h1>ViewBag</h1>
+<table>
+    <thead>
+        <tr>
+            <h3>Use Case</h3>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                The ViewBag allows the use of passing data from the Controller to the View
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>In the TopicController of this application and in this View located in Views/Topic/ViewBagMethod/Page1.cshtml</p>
+<p>You will find how it is used in action</p>
+<br />
+<p>result of ViewBag: <purple-code><b>@teller</b></purple-code></p>
+<br />
+<h1>In the controller</h1>
+<code-block>
+    <p>public IActionResult MethodName()</p>
+    <p>{</p>
+    <openblock>
+        <p>ViewBag.<red-code>StringNameYouChoose1</red-code> = 3;</p>
+        <p>ViewBag.<red-code>StringNameYouChoose2</red-code> = <red-code>"A random String"</red-code>;</p>
+        <p>return View();</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<h1>In the view</h1>
+<code-block>
+    <p>@@{</p>
+    <openblock>
+        <p>int numbers = (int)ViewBag.<red-code>StringNameYouChose1</red-code>;</p>
+        <p>string letters = (int)ViewBag.<red-code>StringNameYouChose2</red-code>;</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+<br />
+<code-block>
+    <p>@lettersText 
+        <green-code>//this will then display the content of this tag</green-code></p>
+    <p>@numberText</p>
+</code-block>
+<br />
+
+<h1>On the page</h1>
+<code-block>
+    <p>3</p>
+    <p>A random String</p>
+</code-block>

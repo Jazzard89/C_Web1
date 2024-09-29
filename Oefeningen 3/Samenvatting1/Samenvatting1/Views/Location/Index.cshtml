@@ -1,0 +1,8 @@
+﻿@model IEnumerable<Location>
+
+    @foreach (var location in Model){
+        <div>
+            <h3>@location.City</h3>
+            <h4>@location.PostalCode</h4>
+        </div>
+    }

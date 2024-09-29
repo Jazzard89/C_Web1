@@ -1,0 +1,157 @@
+﻿
+<h1>Seeding Data with ASP.NET Core Identity</h1>
+
+<h3>Introduction</h3>
+<p>
+    Seeding data in an ASP.NET Core Identity application involves adding default roles, users, and other initial data to the database when the application starts. This is useful for ensuring that your application has the necessary roles and users available from the beginning. In this guide, we'll walk through the process of setting up seed data in an ASP.NET Core application.
+</p>
+
+<h3>1. Creating the Seed Data Class</h3>
+<p>
+    First, we need to create a <code>SeedData</code> class that will handle the creation of roles, users, and other initial data. The class is placed in the <code>Data/DefaultData/</code> folder. Here is an example implementation:
+</p>
+
+<code-block>
+    <p>using Microsoft.AspNetCore.Identity;</p>
+    <p>using <tw><vc:o-name vm="solutionModel2" /></tw>.Models;</p>
+
+    <p>namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Data.DefaultData</p>
+    <p>{</p>
+    <openblock>
+        <p>public class SeedData</p>
+        <p>{</p>
+        <openblock>
+            <p><green-code>// Ensures the database is populated with default data.</green-code></p>
+            <p>public static async void EnsurePopulated(WebApplication app)</p>
+            <p>{</p>
+            <openblock>
+                <p>using (var scope = app.<cyan-code>Services</cyan-code>.CreateScope())</p>
+                <p>{</p>
+                <openblock>
+                    <p>var _context = scope.ServiceProvider.GetRequiredService< <tw><vc:o-name vm="dbModel" /></tw> >();</p>
+                    <p>var _roleManager = scope.ServiceProvider.GetRequiredService&lt;RoleManager&lt;IdentityRole&gt;&gt;();</p>
+                    <p>var _userManager = scope.ServiceProvider.GetRequiredService&lt;UserManager&lt;IdentityUser&gt;&gt;();</p>
+
+                    <p><green-code>// Add roles and default user</green-code></p>
+                    <p>await VoegRollenToeAsync(_context, _roleManager);</p>
+                    <p>await CreateIdentityRecordAsync(<red-code>"Aankoper"</red-code>, <red-code>"aankoper@pxl.be"</red-code>, <red-code>"Aankoper00!"</red-code>, <red-code>"Aankoper"</red-code>, _userManager);</p>
+
+                    <p><green-code>// Add additional seed data if necessary</green-code></p>
+                    <p><blue-code>if</blue-code> (!_context.Orderlijns.Any())</p>
+                    <p>{</p>
+                    <openblock>
+                        <p>var artikel = new Artikel { ArtikelNaam = <red-code>"Romatomaat"</red-code>, ArtikelId = 0 };</p>
+                        <p>_context.Artikels.Add(artikel);</p>
+                        <p>_context.SaveChanges();</p>
+
+                        <p>var user = await _userManager.FindByEmailAsync(<red-code>"aankoper@pxl.be"</red-code>);</p>
+                        <p>var aankoopOrder = new AankoopOrder { AankoopDatum = <red-code>"2023/12/21"</red-code>, IdentityUserId = user.Id, Status = 0 };</p>
+                        <p>_context.AankoopOrders.Add(aankoopOrder);</p>
+                        <p>_context.SaveChanges();</p>
+
+                        <p>var orderlijn = new Orderlijn { ArtikelId = artikel.ArtikelId, Aantal = 5, AankoopOrderId = aankoopOrder.AankoopOrderId };</p>
+                        <p>_context.Orderlijns.Add(orderlijn);</p>
+                        <p>_context.SaveChanges();</p>
+                    </openblock>
+                    <p>}</p>
+                </openblock>
+                <p>}</p>
+            </openblock>
+            <p>}</p>
+
+            <p><green-code>// Helper method to create an identity user and assign a role</green-code></p>
+            <p>private static async Task CreateIdentityRecordAsync(string userName, string email, string pwd, string role, UserManager&lt;<blue-code>IdentityUser</blue-code>&gt; _userManager)</p>
+            <p>{</p>
+            <openblock>
+                <p><blue-code>if</blue-code> (_userManager != null && await _userManager.FindByEmailAsync(email) == null &&</p>
+                <p>await _userManager.FindByNameAsync(userName) == null)</p>
+                <p>{</p>
+                <openblock>
+                    <p>var identityUser = new IdentityUser() { Email = email, UserName = userName };</p>
+                    <p>var result = await _userManager.CreateAsync(identityUser, pwd);</p>
+                    <p><blue-code>if</blue-code> (result.Succeeded)</p>
+                    <p>{</p>
+                    <openblock>
+                        <p>await _userManager.AddToRoleAsync(identityUser, role);</p>
+                    </openblock>
+                    <p>}</p>
+                </openblock>
+                <p>}</p>
+            </openblock>
+            <p>}</p>
+
+            <p><green-code>// Helper method to create a role if it does not exist</green-code></p>
+            <p>private static async Task VoegRolToeAsync(RoleManager&lt;IdentityRole&gt; _roleManager, string roleName)</p>
+            <p>{</p>
+            <openblock>
+                <p><blue-code>if</blue-code> (!await _roleManager.RoleExistsAsync(roleName))</p>
+                <p>{</p>
+                <openblock>
+                    <p>var role = new IdentityRole(roleName);</p>
+                    <p>await _roleManager.CreateAsync(role);</p>
+                </openblock>
+                <p>}</p>
+            </openblock>
+            <p>}</p>
+
+            <p><green-code>// Helper method to add multiple roles</green-code></p>
+            <p><blue-code>private static async Task VoegRollenToeAsync(<tw><vc:o-name vm="dbModel" /></tw> _context, RoleManager<IdentityRole> _roleManager)</blue-code></p>
+            <p>{</p>
+            <openblock>
+                <p><blue-code>if</blue-code> (!_context.Roles.Any())</p>
+                <p>{</p>
+                <openblock>
+                    <p>await VoegRolToeAsync(_roleManager, <cyan-code>Roles</cyan-code>.Aankoper);</p>
+                    <p>await VoegRolToeAsync(_roleManager, <cyan-code>Roles</cyan-code>.Gast);</p>
+                </openblock>
+                <p>}</p>
+            </openblock>
+            <p>}</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<h3>2. Creating the Roles Class</h3>
+<p>
+    The <code>Roles</code> class is a static class that contains the constant string values for the role names. This class can be placed in the <code>Data/DefaultData/</code> folder:
+</p>
+
+<code-block>
+    <p>namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Data.DefaultData</p>
+    <p>{</p>
+    <openblock>
+        <p>public static class <cyan-code>Roles</cyan-code> </p>
+        <p>{</p>
+        <openblock>
+            <p>public const string Aankoper = <cyan-code>"Aankoper"</cyan-code>;</p>
+            <p>public const string Gast = <cyan-code>"Gast"</cyan-code>;</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<h3>3. Integrating Seed Data in Program.cs</h3>
+<p>
+    Finally, we need to ensure that the seed data method is called when the application starts. This is done by adding a call to <code>SeedData.EnsurePopulated(app);</code> in the <code>Program.cs</code> file:
+</p>
+
+<code-block>
+    <p>var app = builder.Build();</p>
+    <br />
+    <p><green-code>// Seed the database with default data</green-code></p>
+    <p>SeedData.EnsurePopulated(app);</p>
+</code-block>
+
+<h3>4. Running the Application</h3>
+<p>
+    Once you've added the seed data and updated the <code>Program.cs</code> file, run the application. The seed data method will create the roles and default user if they don't already exist, ensuring that your application has the necessary data to function.
+</p>
+
+<h3>Conclusion</h3>
+<p>
+    By following these steps, you can successfully seed your ASP.NET Core Identity database with roles, users, and additional data. This setup ensures that your application starts with the required roles and users, making it easier to manage permissions and user access from the beginning.
+</p>
+

@@ -1,0 +1,26 @@
+﻿@model MVCTagHelper.ViewModels.OverviewCard
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">TagHelper</h1>
+    <div style="display: flex; flex-direction:row;">
+        <div style="display:flex; flex-direction:column; width:20%;">
+            @foreach (var afdeling in Model.Afdelingen)
+            {
+                <a class="btn btn-secondary m-3">@afdeling.AfdelingNaam</a>
+            }
+        </div>
+
+        <div style="display:flex; flex-direction:row; width:80%;">
+            @foreach (var medewerkerCard in Model.MedewerkerCards)
+            {
+                <medewerker-tag-helper medewerker-card-view-model="@medewerkerCard"></medewerker-tag-helper>
+            }
+        </div>
+
+    </div>
+
+</div>

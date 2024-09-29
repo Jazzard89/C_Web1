@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Slide7.props" />
+</Project>

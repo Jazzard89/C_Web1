@@ -1,0 +1,325 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\WebRecap.bundle.scp.css",
+      "PackagePath": "staticwebassets\\WebRecap.bundle.scp.css"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\downloads\\DuendeIdentityServer.zip",
+      "PackagePath": "staticwebassets\\downloads\\DuendeIdentityServer.zip"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\downloads\\microsoft.aspnet.webapi.client.6.0.0.nupkg",
+      "PackagePath": "staticwebassets\\downloads\\microsoft.aspnet.webapi.client.6.0.0.nupkg"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\downloads\\microsoft.aspnetcore.authentication.facebook.6.0.33.nupkg",
+      "PackagePath": "staticwebassets\\downloads\\microsoft.aspnetcore.authentication.facebook.6.0.33.nupkg"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\downloads\\microsoft.aspnetcore.authentication.google.6.0.33.nupkg",
+      "PackagePath": "staticwebassets\\downloads\\microsoft.aspnetcore.authentication.google.6.0.33.nupkg"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\downloads\\microsoft.aspnetcore.authentication.jwtbearer.6.0.33.nupkg",
+      "PackagePath": "staticwebassets\\downloads\\microsoft.aspnetcore.authentication.jwtbearer.6.0.33.nupkg"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\downloads\\microsoft.aspnetcore.authentication.openidconnect.6.0.33.nupkg",
+      "PackagePath": "staticwebassets\\downloads\\microsoft.aspnetcore.authentication.openidconnect.6.0.33.nupkg"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\downloads\\microsoft.aspnetcore.identity.entityframeworkcore.6.0.33.nupkg",
+      "PackagePath": "staticwebassets\\downloads\\microsoft.aspnetcore.identity.entityframeworkcore.6.0.33.nupkg"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\downloads\\microsoft.aspnetcore.identity.ui.6.0.33.nupkg",
+      "PackagePath": "staticwebassets\\downloads\\microsoft.aspnetcore.identity.ui.6.0.33.nupkg"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\downloads\\microsoft.entityframeworkcore.6.0.33.nupkg",
+      "PackagePath": "staticwebassets\\downloads\\microsoft.entityframeworkcore.6.0.33.nupkg"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\downloads\\microsoft.entityframeworkcore.design.6.0.33.nupkg",
+      "PackagePath": "staticwebassets\\downloads\\microsoft.entityframeworkcore.design.6.0.33.nupkg"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\downloads\\microsoft.entityframeworkcore.sqlserver.6.0.33.nupkg",
+      "PackagePath": "staticwebassets\\downloads\\microsoft.entityframeworkcore.sqlserver.6.0.33.nupkg"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\downloads\\microsoft.entityframeworkcore.tools.6.0.33.nupkg",
+      "PackagePath": "staticwebassets\\downloads\\microsoft.entityframeworkcore.tools.6.0.33.nupkg"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\downloads\\microsoft.visualstudio.web.codegeneration.design.6.0.17.nupkg",
+      "PackagePath": "staticwebassets\\downloads\\microsoft.visualstudio.web.codegeneration.design.6.0.17.nupkg"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\downloads\\newtonsoft.json.6.0.8.nupkg",
+      "PackagePath": "staticwebassets\\downloads\\newtonsoft.json.6.0.8.nupkg"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\images\\TagHelperClass.png",
+      "PackagePath": "staticwebassets\\images\\TagHelperClass.png"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "D:\\JASPER\\WORK\\Opleidingen\\PXL\\Graduaat\\C\\Web\\Oefeningen 3\\WebRecap\\WebRecap\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.WebRecap.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.WebRecap.props",
+      "PackagePath": "build\\WebRecap.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.WebRecap.props",
+      "PackagePath": "buildMultiTargeting\\WebRecap.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.WebRecap.props",
+      "PackagePath": "buildTransitive\\WebRecap.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -1,0 +1,137 @@
+﻿@{
+    string usingString = "@using";
+    string injectString = "@inject";
+}
+<h1>Using RoleManager in ASP.NET Core</h1>
+
+<h3>Introduction</h3>
+<p>
+    `RoleManager` is a key component in ASP.NET Core Identity that handles roles in your application. This guide will walk you through using `RoleManager` in a controller to manage roles, implementing a TagHelper for role-based display, and using it in a Razor view to display role-based content.
+</p>
+
+<h3>1. Using RoleManager in a Controller</h3>
+<p>
+    `RoleManager` allows you to manage roles, such as creating, deleting, and assigning roles to users. Below is an example of how you might use `RoleManager` in a controller to create a new role and assign it to a user.
+</p>
+
+<code-block>
+    using Microsoft.AspNetCore.Identity;
+    <p>using Microsoft.AspNetCore.Mvc;</p>
+    <p>using <tw><vc:o-name vm="solutionModel2" /></tw>.Models;</p>
+    <p>namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Controllers</p>
+    <p>{</p>
+    <openblock>
+        public class <cyan-code>RoleController</cyan-code> : Controller
+        <p>{</p>
+        <openblock>
+            private readonly RoleManager&lt;IdentityRole&gt; _roleManager;
+            <p>public <cyan-code>RoleController</cyan-code>(RoleManager&lt;IdentityRole&gt; roleManager)</p>
+            <p>{</p>
+            <p>_roleManager = roleManager;</p>
+            <p>}</p>
+            <br/>
+            <p>public async Task&lt;IActionResult&gt; CreateRole(string roleName)</p>
+            <p>{</p>
+            <openblock>
+                <blue-code>if</blue-code> (string.IsNullOrEmpty(roleName))
+                <p>{</p>
+                <openblock>
+                    <p>ModelState.AddModelError(string.Empty, <red-code>"Role name cannot be empty."</red-code>);</p>
+                    <p>return View();</p>
+                </openblock>
+                <p>}</p>
+                <br/>
+                <p>var roleExist = await _roleManager.RoleExistsAsync(roleName);</p>
+                <p><blue-code>if</blue-code> (!roleExist)</p>
+                <p>{</p>
+                <openblock>
+                    <p>await _roleManager.CreateAsync(new IdentityRole(roleName));</p>
+                    <p>return RedirectToAction(<red-code>"Index"</red-code>);</p>
+                </openblock>
+                <p>}</p>
+                <p>ModelState.AddModelError(string.Empty, <red-code>"Role already exists."</red-code>);</p>
+                <p>return View();</p>
+            </openblock>
+            <p>}</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<h3>2. Implementing a TagHelper for Role-Based Display</h3>
+<p>
+    You can use TagHelpers to dynamically display content based on the user's roles. Below is an example of a TagHelper that shows content only if the user belongs to a specific role.
+</p>
+
+<code-block>
+    using Microsoft.AspNetCore.Identity;<br/>
+    using Microsoft.AspNetCore.Razor.TagHelpers;<br />
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.TagHelpers<br />
+    {<br />
+    <openblock>
+        public class <cyan-code>RoleTagHelper</cyan-code> : TagHelper<br />
+        {<br />
+        <openblock>
+            private readonly UserManager&lt;IdentityUser&gt; _userManager;<br />
+            public RoleTagHelper(UserManager&lt;IdentityUser&gt; userManager)<br />
+            {<br />
+            _userManager = userManager;<br />
+            }<br />
+            <br/>
+            public string RoleName { get; set; }<br />
+            public override async Task&lt;Task&gt; ProcessAsync(TagHelperContext context, TagHelperOutput output)<br />
+            {<br />
+            <openblock>
+                <p>var user = await _userManager.GetUserAsync(HttpContext.User);</p>
+                <p><blue-code>if</blue-code> (user != null && await _userManager.IsInRoleAsync(user, RoleName))</p>
+                <p>{</p>
+                <openblock>
+                    <p>output.TagName = <red-code>"div"</red-code>;</p>
+                    <p>output.Content.SetContent(<red-code>"User is in role: "</red-code> + RoleName);</p>
+                </openblock>
+                <p>}</p>
+                <p>else</p>
+                <p>{</p>
+                <openblock>
+                    <p>output.SuppressOutput();</p>
+                </openblock>
+                <p>}</p>
+            </openblock>
+            <p>}</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<h3>3. Using RoleManager in a Razor View</h3>
+<p>
+    In Razor views, you can check the user's roles to display role-specific content. Here’s how you might use `RoleManager` to show different content based on the user’s roles.
+</p>
+
+<code-block>
+    <blue-code>@usingString</blue-code> Microsoft.AspNetCore.Identity<br/>
+    <blue-code>@injectString</blue-code> RoleManager&lt;IdentityRole&gt; RoleManager<br/>
+    <blue-code>@injectString</blue-code> UserManager&lt;IdentityUser&gt; UserManager<br/>
+    <p>&lt;div&gt;</p>
+    <p>&lt;!-- Check if the user is in a specific role --&gt;</p>
+    <p><blue-code>if</blue-code> (UserManager.IsInRoleAsync(User, <red-code>"Admin"</red-code>).Result)</p>
+    <p>{</p>
+    <openblock>
+        <p>&lt;p&gt;Welcome, Admin!&lt;/p&gt;</p>
+    </openblock>
+    <p>}</p>
+    <p>else</p>
+    <p>{</p>
+    <openblock>
+        <p>&lt;p&gt;Welcome, User!&lt;/p&gt;</p>
+    </openblock>
+    <p>}</p>
+    <p>&lt;/div&gt;</p>
+</code-block>
+
+<h3>Conclusion</h3>
+<p>
+    This guide demonstrated how to use `RoleManager` to manage roles within an ASP.NET Core application. We covered how to integrate `RoleManager` into a controller for role management, create a TagHelper to display content based on roles, and utilize `RoleManager` in Razor views to provide role-based content. By following these steps, you can effectively handle roles and permissions in your ASP.NET Core application.
+</p>

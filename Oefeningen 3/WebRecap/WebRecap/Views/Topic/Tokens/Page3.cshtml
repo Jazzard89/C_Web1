@@ -1,0 +1,86 @@
+﻿<h1>Setting Up Token based Authentication</h1>
+
+<h3>Step 5: Create the model TokenModel class</h3>
+<p>
+    This class is required to store the token and the refresh token for use in the
+    AccountController.
+</p>
+<code-block>
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Models<br />
+    {<br />
+    <openblock>
+        public class <cyan-code>TokenModel</cyan-code><br />
+        {<br />
+        <openblock>
+            public string? Token { get; set; }<br />
+            public string? RefreshToken { get; set; }<br />
+        </openblock>
+        }<br />
+    </openblock>
+    }<br />
+</code-block>
+
+
+<h3>Step 6: Create the SeedData class</h3>
+<p>
+    Inside our main solution we have a Data folder (if not create this) and in here we have
+    our DefaultData folder. This is where we create our SeedData class
+</p>
+<code-block>
+    using Microsoft.AspNetCore.Identity;<br />
+    using Microsoft.Extensions.DependencyInjection;<br />
+    using <tw><vc:o-name vm="solutionModel2" /></tw>.Models;<br /><br />
+
+    namespace <tw></><vc:o-name vm="solutionModel2" /></tw>.Data.DefaultData<br />
+    {<br />
+    <openblock>
+        public class <cyan-code>SeedData</cyan-code><br />
+        {<br />
+        <openblock>
+            <blue-code>public static async</blue-code> Task EnsurePopulatedAsync(WebApplication app)<br />
+            {<br />
+            <openblock>
+                using (var scope = app.Services.CreateScope())<br />
+                {<br />
+                <openblock>
+                    var context = scope.ServiceProvider.GetRequiredService&lt;<tw><vc:o-name vm="dbModel" /></tw>&gt;();<br />
+                    var userManager = scope.ServiceProvider.GetRequiredService&lt;UserManager&lt;ApplicationUser&gt;&gt;();<br />
+                    var roleManager = scope.ServiceProvider.GetRequiredService&lt;RoleManager&lt;IdentityRole&gt;&gt;();<br />
+                    <br />
+                    context.Database.EnsureCreated();<br />
+                    <br />
+                    await CreateRolesAsync(roleManager);<br />
+                </openblock>
+                }<br />
+        </openblock>
+            }<br/>
+            <br/>
+
+            private static async Task CreateRolesAsync(RoleManager&lt;IdentityRole&gt; roleManager)<br/>
+            {<br/>
+            <openblock>
+                string[] roleNames = { <red-code>"Admin"</red-code>, <red-code>"User"</red-code> };<br/>
+                <br/>
+                <purple-code>foreach</purple-code> (var roleName in roleNames)<br/>
+                {<br/>
+                <openblock>
+                    var roleExists = await roleManager.RoleExistsAsync(roleName);<br/>
+                    if (!roleExists)<br/>
+                    {<br/>
+                        <openblock>
+                            await roleManager.CreateAsync(new IdentityRole(roleName));<br/>
+                        </openblock>
+                    }<br/>
+                </openblock>
+             }<br/>
+            </openblock>
+            }<br/>
+
+        </openblock>
+        }<br />
+    </openblock>
+    }<br />
+
+</code-block>
+
+                    

@@ -1,0 +1,144 @@
+﻿@{
+    string modelText = "@using";
+    string modelText2 = "@Model";
+}
+
+<h1>Seed Identity Data</h1>
+<table>
+    <thead>
+        <tr>
+            <h3>Page 2: Seeding ASP.NET Core Identity Users and Roles</h3>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                In this section, we will cover how to seed initial data for Identity Users and Roles in an ASP.NET Core application. This is particularly useful for setting up default admin accounts and roles.
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Why Seed Identity Data?</h3>
+<p>
+    Seeding identity data is crucial when you need predefined roles and users to be available immediately after deploying your application. This ensures that the application is ready for use with the correct access controls in place.
+</p>
+
+<h3>Setting Up Identity Seed Data</h3>
+<p>
+    To seed identity data, follow these steps:
+</p>
+
+<h4>1. Create a SeedIdentity Class</h4>
+<p>
+    Start by creating a new static class named <code>SeedIdentity</code> in a folder named <code>Data</code> (or any appropriate location in your project). This class will contain methods to seed identity roles and users.
+</p>
+
+<code-block>
+    <blue-code>@modelText </blue-code> Microsoft.AspNetCore.Identity;
+    <br />
+    <blue-code>@modelText </blue-code> <tw><vc:o-name vm="solutionModel2" /></tw>.Data;
+
+    <br />
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Data.SeedData
+    <p>{</p>
+    <openblock>
+        public static class <cyan-code>SeedIdentity</cyan-code>
+        <p>{</p>
+        <openblock>
+            public static async Task SeedAsync(UserManager&lt;IdentityUser&gt; userManager, RoleManager&lt;IdentityRole&gt; roleManager)
+            <p>{</p>
+            <openblock>
+                <green-code><p>// Seed Roles</p></green-code>
+                <blue-code>if</blue-code> (!await roleManager.RoleExistsAsync("Admin"))
+                <p>{</p>
+                <openblock>
+                    await roleManager.CreateAsync(new IdentityRole("Admin"));
+                </openblock>
+                <p>}</p>
+                <br />
+                <blue-code>if</blue-code> (!await roleManager.RoleExistsAsync("User"))
+                <p>{</p>
+                <openblock>
+                    await roleManager.CreateAsync(new IdentityRole("User"));
+                </openblock>
+                <p>}</p>
+
+                <br />
+                <p><green-code>// Seed Default Admin User</green-code></p>
+                var defaultUser = new IdentityUser
+                <p>{</p>
+                <openblock>
+                    UserName = "admin@domain.com",
+                    <br />
+                    Email = "admin@domain.com",
+                    <br />
+                    EmailConfirmed = true
+                </openblock>
+                <p>}</p>;
+
+                <blue-code>if</blue-code> (userManager.Users.All(u => u.UserName != defaultUser.UserName))
+                <p>{</p>
+                <openblock>
+                    var result = await userManager.CreateAsync(defaultUser, "Admin@123");
+                    <br />
+                    <blue-code>if</blue-code> (result.Succeeded)
+                    <p>{</p>
+                    <openblock>
+                        await userManager.AddToRoleAsync(defaultUser, "Admin");
+                    </openblock>
+                    <p>}</p>
+                </openblock>
+                <p>}</p>
+            </openblock>
+            <p>}</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+</code-block>
+
+<h4>2. Ensure Identity Data is Seeded</h4>
+<p>
+    Create a method in the <code>SeedIdentity</code> class that ensures the roles and users are seeded when the application starts:
+</p>
+
+<code-block>
+    public static async Task EnsureSeeded(WebApplication app)
+    <p>{</p>
+    <openblock>
+        using (var scope = app.Services.CreateScope())
+        <p>{</p>
+        <openblock>
+            var userManager = scope.ServiceProvider.GetRequiredService&lt;UserManager&lt;IdentityUser&gt;&gt;();
+            <br />
+            var roleManager = scope.ServiceProvider.GetRequiredService&lt;RoleManager&lt;IdentityRole&gt;&gt;();
+            <br /><br />
+            await SeedIdentity.SeedAsync(userManager, roleManager);
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<h4>3. Call SeedIdentity in Program.cs</h4>
+<p>
+    Ensure that the <code>EnsureSeeded</code> method is called in the <code>Program.cs</code> file to seed the identity data when the application starts:
+</p>
+
+<code-block>
+    var app = builder.Build();
+    <br />
+    <br />
+    <p>...</p>
+    <p>...</p>
+    <br />
+    await <cyan-code>SeedIdentity</cyan-code>.EnsureSeeded(app);
+    <br />
+    <br />
+    <p>app.Run();</p>
+</code-block>
+
+<h3>Conclusion</h3>
+<p>
+    Seeding identity data is an important step in setting up a secure and functional application. By following the steps above, you can ensure that your application starts with predefined roles and users, which can help streamline the setup process and maintain consistency across environments.
+</p>

@@ -1,0 +1,129 @@
+﻿@{
+    string modelText = "@using";
+}
+
+<h1>Custom Model Validations in ASP.NET Core</h1>
+
+<h3>Introduction</h3>
+<p>
+    While data annotations provide a wide range of built-in validation attributes, there are times when you need to implement custom validation logic that is specific to your application. This page will guide you through creating and using custom validation attributes in ASP.NET Core.
+</p>
+
+<h3>1. Creating a Custom Validation Attribute</h3>
+<p>
+    To create a custom validation attribute, you need to create a new class that inherits from <code>ValidationAttribute</code> and override the <code>IsValid</code> method. Here’s an example:
+</p>
+
+<code-block>
+    <blue-code>@modelText </blue-code>System.ComponentModel.DataAnnotations;
+
+    <br /><br />
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Models
+    <p>{</p>
+    <openblock>
+        public class <cyan-code>NoSpecialCharactersAttribute</cyan-code> : ValidationAttribute
+        <p>{</p>
+        <openblock>
+            protected override ValidationResult IsValid(<purple-code>object</purple-code> value, ValidationContext validationContext)
+            <p>{</p>
+            <openblock>
+                <blue-code>if</blue-code> (value != null && value.ToString().Any(ch => !char.IsLetterOrDigit(ch)))
+                <p>{</p>
+                <openblock>
+                    return new ValidationResult(<red-code>"Special characters are not allowed."</red-code>);
+                </openblock>
+                <p>}</p>
+
+                return ValidationResult.Success;
+            </openblock>
+            <p>}</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>
+    In this example, the <code>NoSpecialCharactersAttribute</code> checks if the input contains any special characters. If it does, it returns a validation error message.
+</p>
+
+<h3>2. Using the Custom Validation Attribute</h3>
+<p>
+    Once you’ve created a custom validation attribute, you can use it just like any other data annotation in your model classes. Here’s an example:
+</p>
+
+<code-block>
+    <blue-code>@modelText System.ComponentModel.DataAnnotations;</blue-code>
+
+    <br /><br />
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Models
+    <p>{</p>
+    <openblock>
+        public class <cyan-code>User</cyan-code>
+        <p>{</p>
+        <openblock>
+            <p>[Required]</p>
+            <p>[NoSpecialCharacters]</p>
+            <p>public string Username { get; set; }</p>
+
+            <br /><br />
+            <p>[Required]</p>
+            <p><cyan-code>[EmailAddress]</cyan-code></p>
+            <p>public string Email { get; set; }</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>
+    In this example, the <code>Username</code> property is validated using the <code>NoSpecialCharacters</code> custom validation attribute. If the username contains special characters, an error message will be displayed.
+</p>
+
+<h3>3. Custom Validation with Dependency Injection</h3>
+<p>
+    Sometimes, you may need to perform validation that depends on services like a database context. In such cases, you can inject the required services into the custom validation attribute. Here’s how you can do it:
+</p>
+
+<code-block>
+    <p><blue-code>@modelText</blue-code> System.ComponentModel.DataAnnotations;</p>
+    <p><blue-code>@modelText</blue-code> Microsoft.Extensions.DependencyInjection;</p>
+
+    <br /><br />
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Models
+    <p>{</p>
+    <openblock>
+        <p>public class <cyan-code>UniqueEmailAttribute</cyan-code> : ValidationAttribute </p>
+        <p>{</p>
+        <openblock>
+            <p+>
+                protected override ValidationResult IsValid(<blue-code>object</blue-code> value, <blue-code>ValidationContext</blue-code> validationContext)
+            </p+>
+            <p>{</p>
+            <openblock>
+                <p><blue-code>var</blue-code> _context = validationContext.GetService<<tw><vc:o-name vm="dbModel" /></tw>>();</p>
+
+                <p><blue-code>if</blue-code> (_context.<cyan-code>Users</cyan-code>.Any(u => u.Email == value.ToString()))</p>
+                <p>{</p>
+                <openblock>
+                    <p>return new ValidationResult(<red-code>"Email already exists."</red-code>);</p>
+                </openblock>
+                <p>}</p>
+
+                <p>return ValidationResult.Success;</p>
+            </openblock>
+            <p>}</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>
+    In this example, the <code>UniqueEmailAttribute</code> checks if the email already exists in the database. It does this by retrieving the <code><tw><vc:o-name vm="dbModel" /></tw></code> using dependency injection.
+</p>
+
+<h3>Conclusion</h3>
+<p>
+    Custom model validations provide flexibility when the built-in validation attributes are not enough for your application’s needs. By creating custom validation attributes and leveraging dependency injection, you can implement complex validation logic directly in your models.
+</p>

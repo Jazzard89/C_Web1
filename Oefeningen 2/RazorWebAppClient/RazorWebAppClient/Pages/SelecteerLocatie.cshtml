@@ -1,0 +1,28 @@
+﻿@page
+@model RazorWebAppClient.Pages.SelecteerLocatieModel
+@{
+    var id = Model.LocatieId;
+    var row = Data.Databank.Locaties.Where(x => x.LocatieID == id).FirstOrDefault();
+    var postCode = (row != null) ? row.Postcode : "";
+    var gemeente = (row != null) ? row.Gemeente : "";
+    var locaties = Data.Databank.Locaties;
+    var selectList = locaties.Select(x =>
+        new SelectListItem { Text = x.Gemeente, Value = x.LocatieID.ToString() });
+}
+<div>
+    <h1>Selecteer locatie</h1>
+    <form method="post">
+        <select name="SelectLocatie" asp-items="@selectList"></select>
+        <label>&nbsp;</label>
+        <input type="submit" value="Selecteer locatie" class="submit"/>
+    </form>
+    <div>
+        <h1>Locatie detail</h1>
+        <br/>
+        Id: @id
+        <br/>
+        Postcode: @postCode
+        <br/>
+        Gemeente: @gemeente
+    </div>
+</div>

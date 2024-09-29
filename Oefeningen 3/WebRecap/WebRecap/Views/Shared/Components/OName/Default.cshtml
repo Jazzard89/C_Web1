@@ -1,0 +1,13 @@
+﻿@model StyleObjectViewModel
+
+
+@if (Model.NoStyle == false)
+{
+    <cyan-code><component type="typeof(WebRecap.Blazor.DisplayObjectName)" param-ObjectName="@Model.ObjectName" render-mode="Server" /></cyan-code>
+}
+else if (Model.NoStyle == true)
+{
+    <component type="typeof(WebRecap.Blazor.DisplayObjectName)" param-ObjectName="@Model.ObjectName" render-mode="Server" />
+}
+
+

@@ -1,0 +1,103 @@
+﻿@{
+    string awaitText = "@await";
+    string viewName = "<vc:sample></vc:sample>";
+}
+<h1>ViewComponents</h1>
+
+<h3>What Are ViewComponents?</h3>
+<p>
+    ViewComponents are similar to partial views but are much more powerful. They allow you to encapsulate both the rendering logic and the view into a reusable component that can be used throughout your application. They are perfect for scenarios where you need more control over the HTML that gets rendered and possibly need to include some logic before rendering the view.
+</p>
+
+<h3>Setting Up a ViewComponent</h3>
+<p>
+    To create a ViewComponent, follow these steps:
+</p>
+
+<h4>1. Create a 'Components' Folder</h4>
+<p>
+    First, create a new folder named <code>Components</code> in the root directory of your project. This folder will contain the classes for your ViewComponents.
+</p>
+
+<h4>2. Create a ViewComponent Class</h4>
+<p>
+    Next, create a new class inside the <code>Components</code> folder. This class will inherit from <code>ViewComponent</code> and will define the logic and data required to render the view. Below is an example:
+</p>
+
+<code-block>
+    @@using System.Threading.Tasks;
+    <br/>
+    @@using Microsoft.AspNetCore.Mvc;
+
+    <br/><br/>
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Components
+    <p>{</p>
+    <openblock>
+        public class <cyan-code>SampleViewComponent</cyan-code> : <cyan-code>ViewComponent</cyan-code>
+        <p>{</p>
+        <openblock>
+            <green-code>// You can inject services or data sources here if needed</green-code>
+            <br/>
+            <blue-code>public async</blue-code> <cyan-code>Task</cyan-code>&lt;<blue-code>IViewComponentResult</blue-code>&gt; InvokeAsync()
+            <p>{</p>
+            <openblock>
+                <green-code>// Add any logic or data processing here</green-code>
+                <br/>
+                var model = <red-code>"Hello, this is your ViewComponent!"</red-code>;
+                <br/><br/>
+                return View(model);
+            </openblock>
+            <p>}</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<p>
+    In the above example, a simple ViewComponent named <code>SampleViewComponent</code> is created. It inherits from <code>ViewComponent</code> and has a method <code>InvokeAsync</code> that returns an <code>IViewComponentResult</code>. You can inject services or retrieve data here, and then pass that data to the view.
+</p>
+
+<h4>3. Create a 'Components' Folder in the Views -> Shared Directory</h4>
+<p>
+    Now, navigate to the <code>Views</code> -> <code>Shared</code> directory in your project. Create a new folder here named <code>Components</code>.
+</p>
+
+<h4>4. Create a Folder with the Same Name as the ViewComponent Class</h4>
+<p>
+    Inside the <code>Components</code> folder (in the <code>Views</code> -> <code>Shared</code> directory), create another folder named <code>SampleViewComponent</code> (or whatever the name of your ViewComponent class is). This folder will contain the view file for your ViewComponent.
+</p>
+
+<h4>5. Create the Default.cshtml View</h4>
+<p>
+    Inside the <code>SampleViewComponent</code> folder, create a new Razor view file named <code>Default.cshtml</code>. This view will be rendered by the ViewComponent. Below is an example:
+</p>
+
+<code-block>
+    <blue-code>@@model string</blue-code>
+
+    <br/><br/>
+    <p><purple-code>@@Model</purple-code></p>
+</code-block>
+
+<p>
+    In this example, the <code>Default.cshtml</code> view simply displays the string passed from the ViewComponent's <code>InvokeAsync</code> method.
+</p>
+
+<h3>Using a ViewComponent in a View</h3>
+<p>
+    To use the ViewComponent in a view, you can invoke it using the <code>@awaitText Component.InvokeAsync()</code> method. Here’s an example of how to do this in a Razor view:
+</p>
+
+<code-block>
+    <purple-code>@(viewName)</purple-code>)
+</code-block>
+
+<p>
+    This will render the <code>Default.cshtml</code> view of the <code>SampleViewComponent</code>.
+</p>
+
+<h3>Conclusion</h3>
+<p>
+    ViewComponents are a powerful feature in ASP.NET Core, allowing you to encapsulate logic and rendering into reusable components. By following the steps outlined above, you can create and use ViewComponents effectively in your application.
+</p>

@@ -1,0 +1,91 @@
+﻿
+<h1>TagHelpers</h1>
+<table>
+    <thead>
+        <tr>
+            <h3>Page 4: Using a TagBuilder to add multiple html tags in one</h3>
+        </tr>
+    </thead>
+</table>
+<p>Sometimes one TagBuilder needs to contain a lot of content and styles, like a table.</p>
+<p>In most cases we need to use a View Model Component for this, but sometimes it's more conviniant to</p>
+<p>use a large Tagbuilder for this.</p>
+
+
+<code-block>
+    <p>namespece <tw><vc:o-name vm="solutionModel2" /></tw>.TagHelpers</p>
+    <p>{</p>
+    <openblock>
+        [HtmlTargetElement("<red-code>save-api-card</red-code>")]
+        <p><green-code>  //this is the name you give the tag</green-code></p>
+        public class <cyan-code>ApiTagHelper</cyan-code> : TagHelper <green-code>//Be sure to check if it has the TagHelper inheritance</green-code>
+        <p>{</p>
+        <openblock>
+            public override void Process("TagHelperContext <blue-code>context</blue-code>, TagHelperOutput <blue-code>output</blue-code>")
+            <p>{</p>
+            <openblock>
+                <green-code>// Change the tag to a < div > tag</green-code>
+                <p><blue-code>output</blue-code>.TagName = "div";</p>
+                <blue-code>output</blue-code>.Attributes.SetAttribute("style", "position: relative; width: 400px; height: 250px; margin: 10px; padding: 0;");
+
+
+
+
+                <p>TagBuilder container = new TagBuilder(<red-code>"div"</red-code>);</p>
+                <p>container.Attributes[<red-code>"class"</red-code>] = <red-code>"card"</red-code>;</p>
+                <p>container.Attributes[<red-code>"style"</red-code>] = <red-code>"height: 100%; width: 400px;</red-code> " +</p>
+                <p><red-code>"background: #b091d3; border-radius: 20px; </red-code>" +</p>
+                <p><red-code>"display: flex; flex-direction: row; padding: 10px;"</red-code>;</p>
+                <br />
+                <p>TagBuilder image = new TagBuilder("img");</p>
+                <p>image.Attributes[<red-code>"src"</red-code>] = Product.ImagePath;</p>
+                <p>image.Attributes[<red-code>"alt"</red-code>] = Product.ImagePath;</p>
+                <p>image.Attributes[<red-code>"style"</red-code>] = <red-code>"display: flex; width: 170px"</red-code>;</p>
+                <p>image.Attributes[<red-code>"class"</red-code>] = <red-code>"card-img-top"</red-code>;</p>
+                <br />
+                <p>TagBuilder innerContainer = new TagBuilder(<red-code>"div"</red-code>);</p>
+                <p>innerContainer.Attributes[<red-code>"class"</red-code>] = <red-code>"card-body"</red-code>;</p>
+                <br />
+                <p><green-code>// Product Name field</green-code></p>
+                <p>TagBuilder cardTitle = new TagBuilder(<red-code>"h5"</red-code>);</p>
+                <p>cardTitle.Attributes[<red-code>"class"</red-code>] = <red-code>"card-title"</red-code>;</p>
+                <p>cardTitle.InnerHtml.Append(Product.ProductName);</p>
+                <br />
+                <p><green-code>// Stock Amount display field</green-code></p>
+                <p>TagBuilder stockDisplay = new TagBuilder(<red-code>"p"</red-code>);</p>
+                <p>stockDisplay.Attributes[<red-code>"class"</red-code>] = <red-code>"card-text"</red-code>;</p>
+                <p>stockDisplay.InnerHtml.Append($<red-code>"Current Stock:</red-code> {StockAmount}");</p>
+                <br />
+                <p><green-code>// New Stock Amount input field</green-code></p>
+                <p>TagBuilder stockInput = new TagBuilder("input");</p>
+                <p>stockInput.Attributes[<red-code>"type"</red-code>] = <red-code>"number"</red-code>;</p>
+                <p>stockInput.Attributes[<red-code>"class"</red-code>] = <red-code>"form-control"</red-code>;</p>
+                <p>stockInput.Attributes[<red-code>"placeholder"</red-code>] = <red-code>"New stock"</red-code>;</p>
+                <p>stockInput.Attributes[<red-code>"id"</red-code>] = $<red-code>"stockAmount-{Product.ProductId}"</red-code>;</p>
+                <br />
+                <p><green-code>// Edit Button</green-code></p>
+                <p>TagBuilder editButton = new TagBuilder("button");</p>
+                <p>editButton.Attributes[<red-code>"class"</red-code>] = <red-code>"btn btn-primary"</red-code>;</p>
+                <p>editButton.Attributes[<red-code>"style"</red-code>] = <red-code>"background: #4d3c8c;"</red-code>;</p>
+                <p>editButton.Attributes[<red-code>"type"</red-code>] = <red-code>"button"</red-code>;</p>
+                <p>editButton.Attributes[<red-code>"onclick"</red-code>] = $<red-code>"updateStock({Product.ProductId});"</red-code>;</p>
+                <p>editButton.InnerHtml.Append(<red-code>"Update Stock"</red-code>);</p>
+                <br />
+                <p>innerContainer.InnerHtml.AppendHtml(cardTitle);</p>
+                <p>innerContainer.InnerHtml.AppendHtml(stockDisplay); </p>
+                <p><green-code>// Add the stock display field</green-code></p>
+                <p>innerContainer.InnerHtml.AppendHtml(stockInput);</p>
+                <p>innerContainer.InnerHtml.AppendHtml(editButton);</p>
+                <br />
+                <p>container.InnerHtml.AppendHtml(image);</p>
+                <p>container.InnerHtml.AppendHtml(innerContainer);</p>
+                <br />
+                <p><blue-code>output</blue-code>.Content.AppendHtml(container);</p>
+
+            </openblock>
+            <p>}</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>

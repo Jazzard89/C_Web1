@@ -1,0 +1,18 @@
+﻿@model Slide12.ViewModels.ProductModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<div>
+    <a asp-action="Create" class="btn border border-secondary m-1" asp-controller="Product">Create product</a>
+</div>
+@foreach (var p in Model.Products)
+{
+    <partial name="ProductSummary" model="p" />
+}
+<br />
+<page-link paging-info="@Model.PagingInfo"></page-link>

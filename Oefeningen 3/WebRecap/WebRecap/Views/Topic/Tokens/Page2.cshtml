@@ -1,0 +1,78 @@
+﻿<h1>Setting Up Token based Authentication</h1>
+
+<h3>Step 4: Configure Program.cs</h3>
+<p>
+    We will need to add the DbContext, Identity, Authentication and JWT Bearer to the Program.cs class
+</p>
+<code-block>
+    using Microsoft.AspNetCore.Authentication.JwtBearer;<br />
+    using Microsoft.AspNetCore.Identity;<br />
+    using Microsoft.EntityFrameworkCore;<br />
+    using Microsoft.IdentityModel.Tokens;<br />
+    using System.Text;<br /><br /><br />
+    <p><green-code>//...</green-code></p><br /><br /><br />
+
+
+
+    <p><green-code>//Add DbContext</green-code></p>
+    builder.Services.AddDbContext&lt;<tw><vc:o-name vm="dbModel" /></tw>&gt;<br/>
+    (options => <br/>
+    {<br/>
+    <openblock>
+        options.UseSqlServer(builder.Configuration.GetConnectionString(<red-code>"DefaultConnection"</red-code>));<br/>
+    </openblock>
+    <p>});</p>
+    <p><green-code>//Add Identity</green-code></p>
+    builder.Services.AddIdentity&lt;ApplicationUser, IdentityRole&gt;()<br/>
+    <openblock>
+    .AddEntityFrameworkStores&lt;<tw><vc:o-name vm="dbModel" /></tw>&gt()<br/>
+    .AddDefaultTokenProviders();<br/>
+    </openblock>
+    <p><green-code>//Add Authentication</green-code></p>
+    builder.Services.AddAuthentication(options =><br/>
+    {<br/>
+        <openblock>
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;<br/>
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;<br/>
+        options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;<br/>
+        </openblock>
+    <p>})</p>
+
+    <openblock>
+        .AddJwtBearer(options => <br/>
+        {<br/>
+        <openblock>
+            options.SaveToken = true;<br />
+            options.RequireHttpsMetadata = false;<br />
+            options.TokenValidationParameters = new <cyan-code>TokenValidationParameters</cyan-code>()
+            {<br />
+            <openblock>
+                ValidateIssuer = true,<br />
+                ValidateAudience = true,<br />
+                ValidateLifetime = true,<br />
+                ValidateIssuerSigningKey = true,<br />
+                ClockSkew = TimeSpan.Zero,<br/><br/>
+                ValidAudience = builder.Configuration[<red-code>"JWT:ValidAudience"</red-code>],<br/>
+                ValidIssuer = builder.Configuration[<red-code>"JWT:ValidIssuer"</red-code>],<br />
+                IssuerSigningKey = new SymmetricSecurityKey(<cyan-code>Encoding</cyan-code>.UTF8.GetBytes(builder.Configuration[<red-code>"JWT:Secret"</red-code>]))<br/>
+            </openblock>
+            };<br/>
+        </openblock>
+        });
+        <br /><br /><br />
+        <p><green-code>//...</green-code></p>
+        <br /><br /><br />
+        <p><green-code>//...</green-code></p>
+        <br /><br /><br />
+    </openblock>
+
+    <p><green-code>//Add Authentication</green-code></p>
+    app.UseAuthentication();<br />
+    app.UseAuthorization();<br /><br/>
+    app.MapControllers();<br /><br/>
+    <p><green-code>//We can also add our Seed Data here</green-code></p>
+    await <cyan-code>SeedData</cyan-code>.EnsurePopulatedAsync(app);<br/>
+    <br/>
+    app.Run();<br/>
+
+</code-block>

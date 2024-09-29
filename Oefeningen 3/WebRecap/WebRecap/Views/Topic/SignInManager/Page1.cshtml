@@ -1,0 +1,149 @@
+﻿
+<h1>Using SignInManager in ASP.NET Core</h1>
+
+<h3>Introduction</h3>
+<p>
+    `SignInManager` is a crucial component of ASP.NET Core Identity that handles user sign-in operations. This guide will walk you through using `SignInManager` in a controller, implementing a TagHelper, and utilizing it in a Razor view.
+</p>
+
+<h3>1. Using SignInManager in a Controller</h3>
+<p>
+    `SignInManager` helps manage user sign-ins and sign-outs. Here’s how you can use it in a controller to handle user login and logout.
+</p>
+
+<code-block>
+    @@using Microsoft.AspNetCore.Identity;
+    <p>@@using Microsoft.AspNetCore.Mvc;</p>
+    <p>@@using <tw><vc:o-name vm="solutionModel2" /></tw>.Models;</p>
+    <p>namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Controllers</p>
+    <p>{</p>
+    <openblock>
+        public class AccountController : Controller
+        <p>{</p>
+        <openblock>
+            private readonly SignInManager&lt;IdentityUser&gt; _signInManager;
+            <p>public AccountController(SignInManager&lt;IdentityUser&gt; signInManager)</p>
+            <p>{</p>
+            <p>_signInManager = signInManager;</p>
+            <p>}</p>
+            <br/>
+            <p>public async Task&lt;IActionResult&gt; Login(LoginViewModel model)</p>
+            <p>{</p>
+            <openblock>
+                <blue-code>if</blue-code> (!ModelState.IsValid)
+                <p>{</p>
+                <openblock>
+                    <p>return View(model);</p>
+                </openblock>
+                <p>}</p>
+                <br/>
+                <p>var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: true);</p>
+                <p><blue-code>if</blue-code> (result.Succeeded)</p>
+                <p>{</p>
+                <openblock>
+                    <p>return RedirectToAction(<red-code>"Index"</red-code>, <red-code>"Home"</red-code>);</p>
+                </openblock>
+                <p>}</p>
+                <p><blue-code>if</blue-code> (result.IsLockedOut)</p>
+                <p>{</p>
+                <openblock>
+                    <p>return RedirectToAction(<red-code>"Lockout"</red-code>);</p>
+                </openblock>
+                <p>}</p>
+                <p>ModelState.AddModelError(string.Empty, <red-code>"Invalid login attempt."</red-code>);</p>
+                <br/>
+                <p>return View(model);</p>
+            </openblock>
+            <p>}</p>
+            <br/>
+            <p><blue-code>public async Task&lt;IActionResult&gt; Logout()</blue-code></p>
+            <p>{</p>
+            <openblock>
+                <p>await _signInManager.SignOutAsync();</p>
+                <p>return RedirectToAction(<red-code>"Index"</red-code>, <red-code>"Home"</red-code>);</p>
+            </openblock>
+            <p>}</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<h3>2. Implementing a TagHelper</h3>
+<p>
+    TagHelpers in ASP.NET Core can be used to create reusable UI components. Below is an example of a TagHelper that uses `SignInManager` to display a login or logout button based on the user's authentication status.
+</p>
+
+<code-block>
+    @@using Microsoft.AspNetCore.Identity;
+    <p>@@using Microsoft.AspNetCore.Razor.TagHelpers;</p>
+    <p>namespace <tw><vc:o-name vm="solutionModel2" /></tw>.TagHelpers</p>
+    <p>{</p>
+    <openblock>
+        public class <cyan-code>SignInStatusTagHelper</cyan-code> : TagHelper
+        <p>{</p>
+        <openblock>
+            private readonly SignInManager&lt;IdentityUser&gt; _signInManager;
+            <p>public SignInStatusTagHelper(SignInManager&lt;IdentityUser&gt; signInManager)</p>
+            <p>{</p>
+            <p>_signInManager = signInManager;</p>
+            <p>}</p>
+            <br/>
+            <p>public override async Task&lt;Task&gt; ProcessAsync(TagHelperContext context, TagHelperOutput output)</p>
+            <p>{</p>
+            <openblock>
+                <p>var user = await _signInManager.UserManager.GetUserAsync(HttpContext.User);</p>
+                <p>if (user != null)</p>
+                <p>{</p>
+                <openblock>
+                    <p>output.TagName = <red-code>"a"</red-code>;</p>
+                    <p>output.Attributes.SetAttribute(<red-code>"href"</red-code>, <red-code>"/Account/Logout"</red-code>);</p>
+                    <p>output.Content.SetContent(<red-code>"Logout"</red-code>);</p>
+                </openblock>
+                <p>}</p>
+                <p>else</p>
+                <p>{</p>
+                <openblock>
+                    <p>output.TagName = <red-code>"a"</red-code>;</p>
+                    <p>output.Attributes.SetAttribute(<red-code>"href"</red-code>, <red-code>"/Account/Login"</red-code>);</p>
+                    <p>output.Content.SetContent(<red-code>"Login"</red-code>);</p>
+                </openblock>
+                <p>}</p>
+            </openblock>
+            <p>}</p>
+        </openblock>
+        <p>}</p>
+    </openblock>
+    <p>}</p>
+</code-block>
+
+<h3>3. Using SignInManager in a Razor View</h3>
+<p>
+    To use `SignInManager` in a Razor view, you typically check the authentication status and display relevant information or actions. Here’s an example of how you might use `SignInManager` in a Razor view to show a login or logout link.
+</p>
+
+<code-block>
+    <blue-code>@@using Microsoft.AspNetCore.Identity</blue-code>
+    <p>@@inject SignInManager&lt;IdentityUser&gt; SignInManager</p>
+    <p>&lt;div&gt;</p>
+    <p>&lt;!-- Check if the user is authenticated --&gt;</p>
+    <p>if (SignInManager.IsSignedIn(User))</p>
+    <p>{</p>
+    <openblock>
+        <p>&lt;a asp-controller="Account" asp-action="Logout"&gt;Logout&lt;/a&gt;</p>
+    </openblock>
+    <p>}</p>
+    <p>else</p>
+    <p>{</p>
+    <openblock>
+        <p>&lt;a asp-controller="Account" asp-action="Login"&gt;Login&lt;/a&gt; |</p>
+        <p>&lt;a asp-controller="Account" asp-action="Register"&gt;Register&lt;/a&gt;</p>
+    </openblock>
+    <p>}</p>
+    <p>&lt;/div&gt;</p>
+</code-block>
+
+<h3>Conclusion</h3>
+<p>
+    This guide demonstrated how to use `SignInManager` in various parts of an ASP.NET Core application. We covered its use in controllers for handling login and logout operations, creating a TagHelper to manage authentication links, and integrating `SignInManager` in Razor views to display login or logout options based on the user's authentication status. By following these steps, you can effectively manage user sign-ins in your application.
+</p>

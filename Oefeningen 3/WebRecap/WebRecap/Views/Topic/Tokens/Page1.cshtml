@@ -1,0 +1,68 @@
+﻿<h1>Setting Up Token based Authentication</h1>
+
+<h3>Step 1: Create the `ApplicationUser` Class</h3>
+<p>
+    This class wil inherinend from `IdentityUser` and will be used to represent the user in the application.
+</p>
+<code-block>
+    using Microsoft.AspNetCore.Identity;<br />
+    <br />
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Models<br />
+    {
+    <openblock>
+        <p>public class ApplicationUser : IdentityUser</p>
+            <p>{</p>
+            <openblock>
+                public string? RefreshToken { get; set; }
+                <br/> public DateTime? RefreshTokenExpiryTime {get; set; }
+            </openblock>
+            <p>}</p>
+    </openblock>
+    }
+</code-block>
+<h3>Step 2: Create the `DbContext` Class</h3>
+<p>
+This will inherent from the IdentityDbContext which will in his turn inherent from the ApplicationUser</p>
+<code-block>
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;<br />
+    using Microsoft.EntityFrameworkCore;<br />
+    using <tw><vc:o-name vm="solutionModel2" /></tw>.Models;
+    <br />
+    namespace <tw><vc:o-name vm="solutionModel2" /></tw>.Data<br />
+    {
+    <openblock>
+        <p>public class <tw><vc:o-name vm="dbModel" /></tw> : <cyan-code>IdentityDbContext</cyan-code>&lt;ApplicationUser&gt;</p>
+            <p>{</p>
+            <openblock>
+            public <tw><vc:o-name vm="dbModel" /></tw>(DbContextOptions&lt;<tw><vc:o-name vm="dbModel" /></tw>&gt; options) : base(options)
+                <p>{</p>
+                <p>}</p>
+            </openblock>
+            <p>}</p>
+    </openblock>
+    }
+</code-block>
+
+
+
+
+<h3>Step 3: Modify the appsettings.json file </h3>
+<p>
+   Add the following configuration to the appsettings.json file for the connectionString and the Token settings
+</p>
+<code-block>
+<openblock>
+        <p><green-code>//...</green-code></p>
+        <p>"ConnectionStrings": {</p>
+        <p>"DefaultConnection": <red-code>"Server=(localdb)\\mssqllocaldb;Database=RESTAuth;Trusted_Connection=True;MultipleActiveResultSets=true"</red-code>},</p>
+        <p>"JWT": {</p>
+        <p><green-code>// JSON Web Token</green-code></p>
+        <p>"ValidAudience": "<blue-code>https://localhost:7032/</blue-code>",</p>
+        <p>"ValidIssuer": "<blue-code>https://localhost:7032</blue-code>",</p>
+        <p><green-code>//Please make sure of the length of your Secret</green-code></p>
+        <p>"Secret": <red-code>"your-very-long-secret-key-of-32-characters-or-more"</red-code>,</p>
+        <p>"TokenValidityInMinutes": 1,</p>
+        <p>"RefreshTokenValidityInDays": 7</p>
+        }
+</openblock>
+</code-block>

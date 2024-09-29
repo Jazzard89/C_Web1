@@ -1,0 +1,19 @@
+﻿<span style="font-family: 'Cascadia Mono'; color: @ComputedColor;">
+    @ChildContent
+</span>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public string Color { get; set; } = "black"; 
+
+    private string ComputedColor => Color.ToLower() switch
+    {
+        "red" => "#af2b2b",
+        "cyan" => "#2b91af",
+        "brown" => "#7f5728",
+        _ => Color 
+    };
+}

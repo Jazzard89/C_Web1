@@ -1,0 +1,22 @@
+﻿@model WebRecap.Models.ViewModels.DisplayPagingInfo
+
+<div class="@(Model.Top == true ? "navHeader2" : "navFooter2")">
+    <div>
+        @if (Model.PagingInfo.PrevVisible)
+        {
+            <a class="blackButton" asp-action="@Model.PagingInfo.TopicName" asp-controller="Topic" asp-route-page="@Model.PagingInfo.PreviousPage">
+                Previous
+            </a>
+        }
+    </div>
+    <p>You are on page @Model.PagingInfo.CurrentPage of @Model.PagingInfo.TotalPages about the @Model.PagingInfo.TopicName topic</p>
+
+    <div>
+        @if (Model.PagingInfo.NextVisible)
+        {
+            <a class="blackButton" asp-action="@Model.PagingInfo.TopicName" asp-controller="Topic" asp-route-page="@Model.PagingInfo.NextPage">
+                Next
+            </a>
+        }
+    </div>
+</div>

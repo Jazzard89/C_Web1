@@ -1,0 +1,113 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = MVCTagHelper
+build_property.RootNamespace = MVCTagHelper
+build_property.ProjectDir = D:\JASPER\WORK\Opleidingen\PXL\C\Web\Oefeningen 2\MVCTagHelper\MVCTagHelper\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\JASPER\WORK\Opleidingen\PXL\C\Web\Oefeningen 2\MVCTagHelper\MVCTagHelper
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 2/MVCTagHelper/MVCTagHelper/Views/Afdeling/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWZkZWxpbmdcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 2/MVCTagHelper/MVCTagHelper/Views/Afdeling/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWZkZWxpbmdcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 2/MVCTagHelper/MVCTagHelper/Views/Afdeling/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWZkZWxpbmdcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 2/MVCTagHelper/MVCTagHelper/Views/Afdeling/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWZkZWxpbmdcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 2/MVCTagHelper/MVCTagHelper/Views/Afdeling/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWZkZWxpbmdcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 2/MVCTagHelper/MVCTagHelper/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 2/MVCTagHelper/MVCTagHelper/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 2/MVCTagHelper/MVCTagHelper/Views/Land/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGFuZFxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 2/MVCTagHelper/MVCTagHelper/Views/Land/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGFuZFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 2/MVCTagHelper/MVCTagHelper/Views/Locatie/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9jYXRpZVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 2/MVCTagHelper/MVCTagHelper/Views/Locatie/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9jYXRpZVxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 2/MVCTagHelper/MVCTagHelper/Views/Locatie/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9jYXRpZVxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 2/MVCTagHelper/MVCTagHelper/Views/Locatie/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9jYXRpZVxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 2/MVCTagHelper/MVCTagHelper/Views/Locatie/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9jYXRpZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 2/MVCTagHelper/MVCTagHelper/Views/Medewerker/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkZXdlcmtlclxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 2/MVCTagHelper/MVCTagHelper/Views/Medewerker/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkZXdlcmtlclxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 2/MVCTagHelper/MVCTagHelper/Views/Medewerker/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkZXdlcmtlclxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 2/MVCTagHelper/MVCTagHelper/Views/Medewerker/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkZXdlcmtlclxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 2/MVCTagHelper/MVCTagHelper/Views/Medewerker/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkZXdlcmtlclxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 2/MVCTagHelper/MVCTagHelper/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 2/MVCTagHelper/MVCTagHelper/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 2/MVCTagHelper/MVCTagHelper/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 2/MVCTagHelper/MVCTagHelper/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JASPER/WORK/Opleidingen/PXL/C/Web/Oefeningen 2/MVCTagHelper/MVCTagHelper/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-04s16v0a69
